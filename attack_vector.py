@@ -35,7 +35,7 @@ def create_attack_scenario_vector_prompt(api_key, model_name, input_file_name, o
                     "attack_model": [	
                         {{
                         "Threat": "Threat name",
-                        "Attacker Objectives: " 1. objective 1, 2. objective 2, ..."
+                        "Attacker Objectives: " 1. objective 1, 2. objective 2, ...",
                         "Attack Scenario": "Attack scenario description",
                         "Attack Vector": "Attack vector (or attack path) description"
                         }}
@@ -142,7 +142,7 @@ def json_to_markdown_attack_model(output_file_name):
 # Example usage
 # base_path = os.getcwd()  
 # input_file_name = os.path.join(base_path, ".files\\threats.json")
-# api_key = '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'
+# api_key = 'api_key'
 # output_file_name = os.path.join(base_path, ".files\\attack-model.json")
 # model_name= "gpt-4o"
 # create_attack_scenario_vector_prompt(api_key, model_name, input_file_name, output_file_name)
