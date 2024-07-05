@@ -40,7 +40,6 @@ def get_input():
 
 
 # ------------------ Streamlit UI Configuration ------------------ #
-
 # Define the configuration content for the theme
 config_content = """
 [theme]
@@ -57,7 +56,7 @@ os.makedirs(".streamlit", exist_ok=True)
 with open(".streamlit/config.toml", "w") as config_file:
     config_file.write(config_content)
 st.set_page_config(
-    page_title="V-GPT",
+    page_title="AutoSecGPT",
     page_icon=":racing_car:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -68,7 +67,7 @@ st.set_page_config(
 st.sidebar.image("logo.png")
 
 # Add instructions on how to use the app to the sidebar
-st.sidebar.header("How to use V-GPT")
+st.sidebar.header("How to use AutoSecGPT")
 
 with st.sidebar:
     # Add model selection input field to the sidebar
@@ -82,10 +81,10 @@ with st.sidebar:
     if model_provider == "OpenAI API":
         st.markdown(
             """
-    1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) and chosen model below 🔑
-    2. Provide details of the application that you would like to threat model  📝
-    3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
-    """
+            1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) and chosen model below 🔑
+            2. Provide details of the application that you would like to threat model  📝
+            3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
+            """
         )
         # Add OpenAI API key input field to the sidebar
         openai_api_key = st.text_input(
@@ -105,10 +104,10 @@ with st.sidebar:
     if model_provider == "Google AI API":
         st.markdown(
             """
-    1. Enter your [Google AI API key](https://makersuite.google.com/app/apikey) and chosen model below 🔑
-    2. Provide details of the application that you would like to threat model  📝
-    3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
-    """
+            1. Enter your [Google AI API key](https://makersuite.google.com/app/apikey) and chosen model below 🔑
+            2. Provide details of the application that you would like to threat model  📝
+            3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
+            """
         )
         # Add OpenAI API key input field to the sidebar
         google_api_key = st.text_input(
@@ -131,10 +130,10 @@ st.sidebar.header("About")
 
 with st.sidebar:
     st.markdown(
-        "Welcome to V-GPT, an AI-powered tool designed to help teams produce better threat models for their applications."
+        "Welcome to AutoSecGPT, an AI-powered tool designed to help teams produce better threat models for their applications."
     )
     st.markdown(
-        "Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. V-GPT aims to help security teams."
+        "Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
     )
     st.markdown(
         "Created by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/)."
