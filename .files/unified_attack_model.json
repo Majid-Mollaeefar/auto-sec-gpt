@@ -1,0 +1,236 @@
+{
+    "assets": [
+        {
+            "name": "Braking System",
+            "threats": [
+                {
+                    "name": "Tampering via V2X Communication",
+                    "objectives": [
+                        "Disable braking system remotely",
+                        "Cause accidents through unauthorized braking system control"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Man-in-the-Middle (MitM) Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker intercepts V2X communication between vehicles and sends false braking commands to the target vehicle, resulting in unauthorized braking system control."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Denial-of-Service (DoS) Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker floods the V2X communication channel with numerous fake messages, overwhelming the system and causing the braking system to be disabled."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized Access via Mobile App Integration",
+                    "objectives": [
+                        "Gain control over the braking system remotely",
+                        "Manipulate braking system data"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Exploiting Vulnerabilities in Mobile App Security",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker identifies a vulnerability in the mobile app used for integration with the braking system and exploits it to gain unauthorized access and control over the system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Phishing Attack Targeting Mobile App Users",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker sends phishing emails or messages to mobile app users tricking them into revealing their credentials, which are then used to gain access to the braking system."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized Access via Mobile App Integration",
+                    "objectives": [
+                        "Gain control of the infotainment system"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Intercepting Communication",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker intercepts the communication between the mobile app and the infotainment system to eavesdrop on sensitive data or inject malicious commands."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Man-in-the-Middle Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker positions themselves between the mobile app and the infotainment system, allowing them to manipulate data or commands exchanged between the two entities."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Malware Injection via USB Ports",
+                    "objectives": [
+                        "Gain unauthorized access to the braking system",
+                        "Disrupt the functionality of the braking system"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Malicious USB Device",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker inserts a USB device with malware into a USB port of the vehicle's system, allowing the malware to execute and gain access to the braking system"
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Loss of control",
+                "Increased risk of accidents",
+                "Physical harm to driver and passengers"
+            ]
+        },
+        {
+            "name": "Infotainment System",
+            "threats": [
+                {
+                    "name": "Data Interception via Bluetooth",
+                    "objectives": [
+                        "Steal sensitive information",
+                        "Eavesdrop on communication"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Bluetooth Hacking",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker uses a Bluetooth sniffer device to intercept data transmitted between the infotainment system and paired devices."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "Attacker exploits Bluetooth vulnerabilities in the infotainment system to establish unauthorized connections and access sensitive data."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized Access via Mobile App Integration",
+                    "objectives": [
+                        "Gain control over the braking system remotely",
+                        "Manipulate braking system data"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Exploiting Vulnerabilities in Mobile App Security",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker identifies a vulnerability in the mobile app used for integration with the braking system and exploits it to gain unauthorized access and control over the system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Phishing Attack Targeting Mobile App Users",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker sends phishing emails or messages to mobile app users tricking them into revealing their credentials, which are then used to gain access to the braking system."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized Access via Mobile App Integration",
+                    "objectives": [
+                        "Gain control of the infotainment system"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Intercepting Communication",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker intercepts the communication between the mobile app and the infotainment system to eavesdrop on sensitive data or inject malicious commands."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Man-in-the-Middle Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker positions themselves between the mobile app and the infotainment system, allowing them to manipulate data or commands exchanged between the two entities."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Malware Injection via USB Ports",
+                    "objectives": [
+                        "Gain unauthorized access to the braking system",
+                        "Disrupt the functionality of the braking system"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Malicious USB Device",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "Attacker inserts a USB device with malware into a USB port of the vehicle's system, allowing the malware to execute and gain access to the braking system"
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Compromise of personal information",
+                "Unauthorized tracking of driving habits",
+                "Intrusion into other vehicle systems"
+            ]
+        }
+    ]
+}

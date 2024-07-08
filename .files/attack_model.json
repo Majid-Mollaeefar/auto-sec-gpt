@@ -1,0 +1,132 @@
+{
+    "attack_model": [
+        {
+            "Threat": "Tampering via V2X Communication",
+            "Attacker Objectives": [
+                "Disable braking system remotely",
+                "Cause accidents through unauthorized braking system control"
+            ],
+            "Attack Vectors": [
+                {
+                    "vector_id": "vector_1",
+                    "vector_name": "Man-in-the-Middle (MitM) Attack",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker intercepts V2X communication between vehicles and sends false braking commands to the target vehicle, resulting in unauthorized braking system control."
+                        }
+                    ]
+                },
+                {
+                    "vector_id": "vector_2",
+                    "vector_name": "Denial-of-Service (DoS) Attack",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker floods the V2X communication channel with numerous fake messages, overwhelming the system and causing the braking system to be disabled."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Threat": "Unauthorized Access via Mobile App Integration",
+            "Attacker Objectives": [
+                "Gain control over the braking system remotely",
+                "Manipulate braking system data"
+            ],
+            "Attack Vectors": [
+                {
+                    "vector_id": "vector_1",
+                    "vector_name": "Exploiting Vulnerabilities in Mobile App Security",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker identifies a vulnerability in the mobile app used for integration with the braking system and exploits it to gain unauthorized access and control over the system."
+                        }
+                    ]
+                },
+                {
+                    "vector_id": "vector_2",
+                    "vector_name": "Phishing Attack Targeting Mobile App Users",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker sends phishing emails or messages to mobile app users tricking them into revealing their credentials, which are then used to gain access to the braking system."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Threat": "Malware Injection via USB Ports",
+            "Attacker Objectives": [
+                "Gain unauthorized access to the braking system",
+                "Disrupt the functionality of the braking system"
+            ],
+            "Attack Vectors": [
+                {
+                    "vector_id": "vector_1",
+                    "vector_name": "Malicious USB Device",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker inserts a USB device with malware into a USB port of the vehicle's system, allowing the malware to execute and gain access to the braking system"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Threat": "Data Interception via Bluetooth",
+            "Attacker Objectives": [
+                "Steal sensitive information",
+                "Eavesdrop on communication"
+            ],
+            "Attack Vectors": [
+                {
+                    "vector_id": "vector_1",
+                    "vector_name": "Bluetooth Hacking",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker uses a Bluetooth sniffer device to intercept data transmitted between the infotainment system and paired devices."
+                        },
+                        {
+                            "scenario_id": "scenario_2",
+                            "scenario_description": "Attacker exploits Bluetooth vulnerabilities in the infotainment system to establish unauthorized connections and access sensitive data."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Threat": "Unauthorized Access via Mobile App Integration",
+            "Attacker Objectives": [
+                "Gain control of the infotainment system"
+            ],
+            "Attack Vectors": [
+                {
+                    "vector_id": "vector_1",
+                    "vector_name": "Intercepting Communication",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker intercepts the communication between the mobile app and the infotainment system to eavesdrop on sensitive data or inject malicious commands."
+                        }
+                    ]
+                },
+                {
+                    "vector_id": "vector_2",
+                    "vector_name": "Man-in-the-Middle Attack",
+                    "Attack Scenarios": [
+                        {
+                            "scenario_id": "scenario_1",
+                            "scenario_description": "Attacker positions themselves between the mobile app and the infotainment system, allowing them to manipulate data or commands exchanged between the two entities."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

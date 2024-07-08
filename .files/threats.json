@@ -1,42 +1,12 @@
 [
     {
-        "Asset": "Autonomous Driving System",
-        "Threats": "Unauthorized Access, Tampering with Sensor Data, Denial of Service",
-        "Potential Consequences": "Loss of Control, Accidents, Malicious Control of Vehicle"
+        "Asset": "Braking System",
+        "Threats": "Tampering via V2X Communication, Unauthorized Access via Mobile App Integration, Malware Injection via USB Ports",
+        "Potential Consequences": "Loss of control, Increased risk of accidents, Physical harm to driver and passengers"
     },
     {
         "Asset": "Infotainment System",
-        "Threats": "Malware Injection, Data Exfiltration, Social Engineering Attacks",
-        "Potential Consequences": "Compromised Personal Data, Privacy Violations, Remote Takeover of System"
-    },
-    {
-        "Asset": "Braking System",
-        "Threats": "Interference with Brake Signals, Malfunction Due to Cyber Attacks, Manipulation of Data Inputs",
-        "Potential Consequences": "Brake Failure, Accidents, Loss of Vehicle Control"
-    },
-    {
-        "Asset": "GPS Data",
-        "Threats": "Location Tracking, Data Spoofing, Eavesdropping",
-        "Potential Consequences": "Privacy Breaches, Unauthorized Monitoring, Misdirection of Vehicle"
-    },
-    {
-        "Asset": "Mobile Apps Integration",
-        "Threats": "App Security Vulnerabilities, Data Breaches, Account Hijacking",
-        "Potential Consequences": "Compromised User Data, Unauthorized Access to Vehicle Functions, Identity Theft"
-    },
-    {
-        "Asset": "Charging Stations Communication",
-        "Threats": "Man-in-the-Middle Attacks, Malicious Firmware Updates, Power Grid Attacks",
-        "Potential Consequences": "Unauthorized Access to Vehicle Systems, Bricking of Vehicle, Power Grid Disruptions"
-    },
-    {
-        "Asset": "USB Ports",
-        "Threats": "Malware Infection, Data Theft, Unauthorized Device Connection",
-        "Potential Consequences": "Compromised System Integrity, Data Loss, Injection of Malicious Code"
-    },
-    {
-        "Asset": "In-Vehicle Storage",
-        "Threats": "Data Theft, Unauthorized Access, Physical Theft of Information",
-        "Potential Consequences": "Loss of Confidential Data, Privacy Violations, Data Breaches"
+        "Threats": "Data Interception via Bluetooth, Unauthorized Access via Mobile App Integration, Malware Injection via USB Ports",
+        "Potential Consequences": "Compromise of personal information, Unauthorized tracking of driving habits, Intrusion into other vehicle systems"
     }
 ]

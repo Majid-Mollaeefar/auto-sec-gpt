@@ -3,10 +3,10 @@ import os
 import streamlit as st
 import streamlit.components.v1 as components
 
-from attack_vector import (
-    create_attack_scenario_vector_prompt,
-    json_to_markdown_attack_model,
-)
+# from attack_vector import (
+#     create_attack_scenario_vector_prompt,
+#     json_to_markdown_attack_model,
+# )
 from mitigations import (
     create_mitigations_prompt,
     get_mitigations,
@@ -20,7 +20,7 @@ from threat_model import (
     json_to_markdown,
     save_json_to_file,
 )
-
+from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_attack_model
 # ------------------ Helper Functions ------------------ #
 
 
@@ -331,12 +331,12 @@ with tab1:
 if threat_model_submit_button and not st.session_state.get("app_input"):
     st.error("Please enter your application details before submitting.")
 
+# ------------------ Attack Model ------------------- #
 
-# ------------------ Attack Vector ------------------ #
 with tab2:
     st.markdown(
         """
-        This tab provide attack vectors for each identified asset and investigate how the attacks might happen in the system.
+        This tab provides attack vectors for each identified asset and investigates how the attacks might happen in the system.
         """
     )
     st.markdown("""---""")
@@ -348,17 +348,17 @@ with tab2:
     if attack_model_submit_button or st.session_state.attack_model_generated:
         base_path = os.getcwd()
         input_file_name = os.path.join(base_path, ".files\\threats.json")
-        api_key = openai_api_key
-        output_file_name = os.path.join(base_path, ".files\\attack-model.json")
-        model_name = selected_model
+        api_key = openai_api_key  # Make sure this variable is defined somewhere in your code
+        output_file_name = os.path.join(base_path, ".files\\attack_model.json")
+        model_name = selected_model  # Make sure this variable is defined somewhere in your code
 
         if not os.path.exists(output_file_name):
-            with st.spinner("Analysing potential attacks..."):
+            with st.spinner("Analyzing potential attacks..."):
                 max_retries = 5
                 retry_count = 0
                 while retry_count < max_retries:
                     try:
-                        create_attack_scenario_vector_prompt(
+                        create_attack_model_prompt(
                             api_key, model_name, input_file_name, output_file_name
                         )
                         break
@@ -375,11 +375,61 @@ with tab2:
                             )
 
         st.session_state.attack_model_generated = True
-
+        unified_output_file_name= os.path.join(base_path, ".files\\unified_attack_model.json")
+        create_unified_attack_model(input_file_name, output_file_name, unified_output_file_name)
         # Convert the threat model JSON to Markdown
-        markdown_output_attack_model = json_to_markdown_attack_model(output_file_name)
+        markdown_output_attack_model = json_to_markdown_model(output_file_name)
         # Display the attack model in Markdown
-        st.markdown(markdown_output_attack_model)
+        st.markdown(markdown_output_attack_model, unsafe_allow_html=True)
+
+# ------------------ Attack Vector ------------------ #
+# with tab2:
+#     st.markdown(
+#         """
+#         This tab provide attack vectors for each identified asset and investigate how the attacks might happen in the system.
+#         """
+#     )
+#     st.markdown("""---""")
+
+#     if "attack_model_generated" not in st.session_state:
+#         st.session_state.attack_model_generated = False
+
+#     attack_model_submit_button = st.button(label="Generate Attack Model")
+#     if attack_model_submit_button or st.session_state.attack_model_generated:
+#         base_path = os.getcwd()
+#         input_file_name = os.path.join(base_path, ".files\\threats.json")
+#         api_key = openai_api_key
+#         output_file_name = os.path.join(base_path, ".files\\attack-model.json")
+#         model_name = selected_model
+
+#         if not os.path.exists(output_file_name):
+#             with st.spinner("Analysing potential attacks..."):
+#                 max_retries = 5
+#                 retry_count = 0
+#                 while retry_count < max_retries:
+#                     try:
+#                         create_attack_scenario_vector_prompt(
+#                             api_key, model_name, input_file_name, output_file_name
+#                         )
+#                         break
+#                     except Exception as e:
+#                         retry_count += 1
+#                         if retry_count == max_retries:
+#                             st.error(
+#                                 f"Error generating attack model after {max_retries} attempts: {e}"
+#                             )
+#                             break
+#                         else:
+#                             st.warning(
+#                                 f"Error generating attack model. Retrying attempt {retry_count}/{max_retries}..."
+#                             )
+
+#         st.session_state.attack_model_generated = True
+
+#         # Convert the threat model JSON to Markdown
+#         markdown_output_attack_model = json_to_markdown_attack_model(output_file_name)
+#         # Display the attack model in Markdown
+#         st.markdown(markdown_output_attack_model)
 
 
 # ------------------ Attack Tree Generation ------------------ #
