@@ -22,8 +22,6 @@ def json_to_markdown(threat_model):
     return markdown_output
 
 # Function to create a prompt for generating a threat model
-# def create_threat_model_prompt(app_type, authentication, internet_facing, sensitive_data, app_input):
-
 def create_threat_model_prompt(app_input, vehicle_class, autonomous_level, connectivity_features, critical_systems, external_interfaces, data_types, storage_locations):
     prompt = f"""
 
