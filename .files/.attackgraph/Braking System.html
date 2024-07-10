@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="graph-legend-container"><div id="graph-container">
+    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
+        <h4>Legend</h4>
+        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
+        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
+        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
+        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
+    </div>
+    </div>
+    <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#0000ff", "font": {"color": "white"}, "id": "Braking System", "label": "Braking System", "shape": "box"}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Tampering via V2X Communication", "label": "Tampering via V2X Communication", "shape": "diamond", "title": "Attacker Objectives:\n- Disrupt vehicle operation\n- Cause accidents or vehicle malfunctions\n- Gain unauthorized control of vehicle braking system"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_1", "label": "Spoofed Messages", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_2", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sends spoofed emergency braking commands through V2X communication channels to induce sudden braking."}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_3", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker sends falsified traffic signal states causing the vehicle to brake unnecessarily."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_4", "label": "Man-in-the-Middle (MITM) Attack", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_5", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker intercepts and alters V2X messages between the vehicle and infrastructure, leading to erroneous braking commands."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_6", "label": "Malware Injection", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_7", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker injects malware into the vehicle\u2019s V2X communication module to take control of braking commands."}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_8", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker uses malware to send manipulated information, causing the vehicle to misinterpret traffic conditions and brake inappropriately."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Unauthorized Access via Mobile App Integration", "label": "Unauthorized Access via Mobile App Integration", "shape": "diamond", "title": "Attacker Objectives:\n- Manipulate braking system\n- Cause vehicle malfunction\n- Exfiltrate sensitive data"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_9", "label": "Mobile App Spoofing", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_10", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle\u0027s braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_11", "label": "Man-in-the-Middle (MitM) Attack", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_12", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker intercepts the communication between the mobile app and the vehicle\u0027s braking system, modifying commands or injecting malicious code to control the braking functionality."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_13", "label": "Exploiting App Vulnerabilities", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_14", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the mobile app\u0027s code or its communication protocol to gain unauthorized access to the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_15", "label": "Social Engineering", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_16", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Malware Injection via USB Ports", "label": "Malware Injection via USB Ports", "shape": "diamond", "title": "Attacker Objectives:\n- Disrupt vehicle operations\n- Gain unauthorized control of the braking system\n- Extract sensitive data from the vehicle\u0027s system\n- Install persistent malware for future attacks"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_17", "label": "Physical Access to USB Ports", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_18", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_19", "label": "Maintenance or Service Compromise", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_20", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs."}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_21", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update."}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#ffff00", "from": "Braking System", "hidden": true, "title": "Threat", "to": "Tampering via V2X Communication"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Tampering via V2X Communication", "hidden": true, "label": "Attack Vector 1", "to": "vector_1"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_2"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_3"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Tampering via V2X Communication", "hidden": true, "label": "Attack Vector 2", "to": "vector_4"}, {"arrows": "to", "color": "#ffa500", "from": "vector_4", "hidden": true, "title": "Leads to", "to": "scenario_5"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Tampering via V2X Communication", "hidden": true, "label": "Attack Vector 3", "to": "vector_6"}, {"arrows": "to", "color": "#ffa500", "from": "vector_6", "hidden": true, "title": "Leads to", "to": "scenario_7"}, {"arrows": "to", "color": "#ffa500", "from": "vector_6", "hidden": true, "title": "Leads to", "to": "scenario_8"}, {"arrows": "to", "color": "#ffff00", "from": "Braking System", "hidden": true, "title": "Threat", "to": "Unauthorized Access via Mobile App Integration"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 1", "to": "vector_9"}, {"arrows": "to", "color": "#ffa500", "from": "vector_9", "hidden": true, "title": "Leads to", "to": "scenario_10"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 2", "to": "vector_11"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_12"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 3", "to": "vector_13"}, {"arrows": "to", "color": "#ffa500", "from": "vector_13", "hidden": true, "title": "Leads to", "to": "scenario_14"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 4", "to": "vector_15"}, {"arrows": "to", "color": "#ffa500", "from": "vector_15", "hidden": true, "title": "Leads to", "to": "scenario_16"}, {"arrows": "to", "color": "#ffff00", "from": "Braking System", "hidden": true, "title": "Threat", "to": "Malware Injection via USB Ports"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 1", "to": "vector_17"}, {"arrows": "to", "color": "#ffa500", "from": "vector_17", "hidden": true, "title": "Leads to", "to": "scenario_18"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 2", "to": "vector_19"}, {"arrows": "to", "color": "#ffa500", "from": "vector_19", "hidden": true, "title": "Leads to", "to": "scenario_20"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 3", "to": "vector_15"}, {"arrows": "to", "color": "#ffa500", "from": "vector_15", "hidden": true, "title": "Leads to", "to": "scenario_21"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    
+    <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+        <button onclick="zoomIn()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom In</button>
+        <button onclick="zoomOut()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom Out</button>
+        <button onclick="maximize()" style="background-color: #444; color: white; border: none; padding: 10px;">Maximize</button>
+        <button onclick="saveAsPNG()" style="background-color: #444; color: white; border: none; padding: 10px;">Save as PNG</button>
+    </div>
+    </body>
+</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+    network.on("dragEnd", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            network.body.data.nodes.update({id: nodeId, fixed: {x: true, y: true}});
+        }
+    });
+    network.on("click", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            var connectedEdges = network.getConnectedEdges(nodeId);
+
+            connectedEdges.forEach(function (edgeId) {
+                network.body.data.edges.update({id: edgeId, hidden: false});
+                
+                var connectedNodeId = network.getConnectedNodes(edgeId);
+                for (var i = 0; i < connectedNodeId.length; i++){
+                    if(connectedNodeId[i] != nodeId){
+                        network.body.data.nodes.update({id: connectedNodeId[i], hidden: false});
+                    }
+                }
+            });
+        }
+    });
+
+    function zoomIn() {
+        var scale = network.getScale();
+        network.moveTo({ scale: scale + 0.1 });
+    }
+
+    function zoomOut() {
+        var scale = network.getScale();
+        network.moveTo({ scale: scale - 0.1 });
+    }
+
+    function maximize() {
+        var container = document.getElementById('graph-legend-container');
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+        } else if (container.msRequestFullscreen) { 
+            container.msRequestFullscreen();
+        }
+    }
+
+    function saveAsPNG() {
+        html2canvas(document.getElementById('graph-legend-container')).then(canvas => {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'Braking System-Attack-graph.png';
+            link.click();
+        });
+    }
+    </script>
+    

@@ -2,6 +2,7 @@
 import os
 import streamlit as st
 import streamlit.components.v1 as components
+import json
 
 # from attack_vector import (
 #     create_attack_scenario_vector_prompt,
@@ -20,7 +21,8 @@ from threat_model import (
     json_to_markdown,
     save_json_to_file,
 )
-from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_attack_model
+from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_threat_model
+from attack_graph import create_attack_graph, display_attackgraph_html_files
 # ------------------ Helper Functions ------------------ #
 
 
@@ -154,7 +156,7 @@ with st.sidebar:
 
 # ------------------ Main App UI ------------------ #
 
-tab1, tab2, tab3 = st.tabs(["Threat Model", "Attack Model", "Test Cases"])
+tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph","Test Cases"])
 
 with tab1:
     st.markdown(
@@ -376,11 +378,86 @@ with tab2:
 
         st.session_state.attack_model_generated = True
         unified_output_file_name= os.path.join(base_path, ".files\\unified_attack_model.json")
-        create_unified_attack_model(input_file_name, output_file_name, unified_output_file_name)
+        create_unified_threat_model(input_file_name, output_file_name, unified_output_file_name)
         # Convert the threat model JSON to Markdown
         markdown_output_attack_model = json_to_markdown_model(output_file_name)
         # Display the attack model in Markdown
         st.markdown(markdown_output_attack_model, unsafe_allow_html=True)
+
+# ------------------ Attack Graph ------------------- #
+with tab3:
+    st.markdown(
+        """
+        This tab provides attack graphs based on the asset.
+        """
+    )
+    st.markdown("""---""")
+
+    # Specify the path to your attack_model JSON file (unified version of attack_model)
+    base_path = os.getcwd()
+    unified_attack_model_path = os.path.join(base_path, ".files\\unified_attack_model.json")
+
+    generate_graphs_button = st.button("Generate Attack Graphs")
+
+    if generate_graphs_button:
+        if not os.path.exists(unified_attack_model_path):
+            st.error("Unified attack model JSON file does not exist. Please generate the attack model first in the 'Attack Model' tab.")
+        else:
+            # Load data directly from the JSON file
+            try:
+                with open(unified_attack_model_path, "r") as file:
+                    data = json.load(file)
+            except Exception as e:
+                st.error(f"Error loading unified attack model JSON file: {e}")
+                st.stop()
+
+            # Create the output directory if it doesn't exist where the HTML data will be saved
+            output_dir = os.path.join(base_path, ".files\\.attackgraph")
+            os.makedirs(output_dir, exist_ok=True)
+
+            # Create attack graphs for each asset in the JSON file
+            try:
+                with st.spinner("Generating attack graphs..."):
+                    for asset in data["assets"]:
+                        create_attack_graph(asset, output_dir)
+                st.success("Attack graphs generated successfully.")
+            except Exception as e:
+                st.error(f"Error creating attack graphs: {e}")
+                st.stop()
+
+            # Display HTML files from the directory where the generated HTML files are stored
+            display_attackgraph_html_files(output_dir)
+
+
+
+# with tab3:
+#     st.markdown(
+#         """
+#         This tab provide attack graphs can be seen based on the asset.
+#         """
+#     )
+#     st.markdown("""---""")
+
+#     # Specify the path to your attack_model JSON file (unified version of attack_model)
+#     base_path = os.getcwd() 
+#     asset = os.path.join(base_path, ".files\\unified_attack_model.json")
+
+#     # Load data directly from the JSON file (no directory listing needed)
+#     with open(asset, "r") as file:
+#         data = json.load(file)
+
+
+#     # Create the output directory if it doesn't exist where the html data will save
+#     output_dir =  os.path.join(base_path, ".files\\.attackgraph")
+#     os.makedirs(output_dir, exist_ok=True)
+
+#     # Create attack graphs for each asset in the JSON file
+#     for asset in data["assets"]:
+#         create_attack_graph(asset, output_dir)
+    
+#     #display HTML files from directory the generated HTML files are stored
+#     display_attackgraph_html_files(output_dir)
+
 
 # ------------------ Attack Vector ------------------ #
 # with tab2:
