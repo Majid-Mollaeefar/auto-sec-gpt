@@ -1,4 +1,5 @@
-import json
+# attack_graph.py
+
 import streamlit as st
 import os
 from pyvis.network import Network

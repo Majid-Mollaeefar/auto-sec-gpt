@@ -1,11 +1,10 @@
-#threat_model.py
+# threat_model.py
 
 import json
-import requests
 import google.generativeai as genai
 from openai import OpenAI
 import streamlit as st
-import os
+
 
 # Function to convert JSON to Markdown for display.    
 def json_to_markdown(threat_model):

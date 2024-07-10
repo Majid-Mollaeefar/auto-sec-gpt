@@ -1,7 +1,8 @@
+# attack_model.py
+
 import json
-import os
 from openai import OpenAI
-import re
+
 
 def create_attack_model_prompt(api_key, model_name, input_file_name, output_file_name):
     client = OpenAI(api_key=api_key)
