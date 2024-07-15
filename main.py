@@ -3,7 +3,7 @@ import os
 import streamlit as st
 import streamlit.components.v1 as components
 import json
-
+from sidebar import configure_sidebar, render_header
 # from attack_vector import (
 #     create_attack_scenario_vector_prompt,
 #     json_to_markdown_attack_model,
@@ -68,10 +68,17 @@ st.set_page_config(
 
 st.sidebar.image("logo.png")
 
-# Add instructions on how to use the app to the sidebar
-st.sidebar.header("How to use AutoSecGPT")
+headers = [
+    ("How to use AutoSecGPT", "#f56b6b"),
+    ("About", "#f56b6b"),
+    ("Example of Application Description", "#f56b6b")
+]
+configure_sidebar(headers)
 
+# Add instructions on how to use the app to the sidebar
+render_header(0)
 with st.sidebar:
+   
     # Add model selection input field to the sidebar
     model_provider = st.selectbox(
         "Select your preferred model provider:",
@@ -84,8 +91,8 @@ with st.sidebar:
         st.markdown(
             """
             1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) and chosen model below 🔑
-            2. Provide details of the application that you would like to threat model  📝
-            3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
+            2. Provide details of the application that you would like to model together with additional determined information  📝
+            3. Generate a threat list, model attacks, generate and visualize asset-based attack graphs for your application 🚀
             """
         )
         # Add OpenAI API key input field to the sidebar
@@ -107,8 +114,8 @@ with st.sidebar:
         st.markdown(
             """
             1. Enter your [Google AI API key](https://makersuite.google.com/app/apikey) and chosen model below 🔑
-            2. Provide details of the application that you would like to threat model  📝
-            3. Generate a threat list, attack tree and/or mitigating controls for your application 🚀
+            2. Provide details of the application that you would like to model together with additional determined information  📝
+            3. Generate a threat list, model attacks, generate and visualize asset-based attack graphs for your application 🚀
             """
         )
         # Add OpenAI API key input field to the sidebar
@@ -128,14 +135,16 @@ with st.sidebar:
     st.markdown("""---""")
 
 # Add "About" section to the sidebar
-st.sidebar.header("About")
-
+render_header(1)
 with st.sidebar:
     st.markdown(
         "Welcome to AutoSecGPT, an AI-powered tool designed to help teams produce better threat models for their applications."
     )
     st.markdown(
-        "Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
+        "The ISO/SAE 21434 Road Vehicles—Cybersecurity Engineering standard defines the responsibilities for various groups during different stages of automotive product development. The standard requires a commitment from executive management to product development with a focus on cybersecurity engineering"            
+    )
+    st.markdown(
+        "ISO 21434 emphasizes identifying and assessing cybersecurity risks, helping to anticipate and prepare for potential attack scenarios. Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
     )
     st.markdown(
         "Created by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/)."
@@ -144,15 +153,14 @@ with st.sidebar:
 
 
 # Add "Example Application Description" section to the sidebar
-st.sidebar.header("Example of Application Description")
-
+render_header(2)
 with st.sidebar:
     st.markdown(
         "Below is an example application description that you can use to test AutoSecGPT tool:"
     )
     st.code(
             """
-            A new electric car model, features advanced autonomous 
+            A new electric car model, features advanced autonomous
             driving capabilities and an integrated infotainment system. 
             The vehicle connects to various external networks, 
             such as GPS, mobile apps, and charging stations.
@@ -167,7 +175,7 @@ with st.sidebar:
 
 # ------------------ Main App UI ------------------ #
 
-tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph","Test Cases"])
+tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph", "Test Cases"])
 
 with tab1:
     st.markdown(
@@ -349,7 +357,7 @@ if threat_model_submit_button and not st.session_state.get("app_input"):
 with tab2:
     st.markdown(
         """
-        This tab provides attack vectors for each identified asset and investigates how the attacks might happen in the system.
+        This tab provides an attack model based on identified threats for each asset and investigates scenarios of how the attacks might happen in the system. The structure of the attack model includes a detailed breakdown of each threat, specifying the attack vectors and scenarios. Each identified threat lists the attacker objectives, followed by various attack vectors.
         """
     )
     st.markdown("""---""")
@@ -399,8 +407,7 @@ with tab2:
 with tab3:
     st.markdown(
         """
-        This tab provides attack graphs based on the asset.
-        """
+        This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls, enabling a comprehensive analysis of potential attack paths.        """
     )
     st.markdown("""---""")
 
