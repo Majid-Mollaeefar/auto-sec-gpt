@@ -31,7 +31,7 @@ def get_input():
     input_text = st.text_area(
         label="Describe the application to be modelled",
         placeholder="Enter your application details...",
-        height=150,
+        height=280,
         key="app_desc",
         help="Please provide a detailed description of the application, including the purpose of the application, the technologies used, and any other relevant information.",
     )
@@ -140,19 +140,30 @@ with st.sidebar:
     st.markdown(
         "Created by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/)."
     )
+    st.markdown("""---""")
 
 
 # Add "Example Application Description" section to the sidebar
-st.sidebar.header("Example Application Description")
+st.sidebar.header("Example of Application Description")
 
 with st.sidebar:
     st.markdown(
-        "Below is an example application description that you can use to test V-GPT:"
+        "Below is an example application description that you can use to test AutoSecGPT tool:"
     )
-    st.markdown(
-        "> A new electric car model, features advanced autonomous driving capabilities and an integrated infotainment system. The vehicle connects to various external networks, such as GPS, mobile apps, and charging stations."
+    st.code(
+            """
+            A new electric car model, features advanced autonomous 
+            driving capabilities and an integrated infotainment system. 
+            The vehicle connects to various external networks, 
+            such as GPS, mobile apps, and charging stations.
+            """,
+            language="md"
     )
-    st.markdown("""---""")
+    # st.markdown(
+    #     "> A new electric car model, features advanced autonomous driving capabilities and an integrated infotainment system. The vehicle connects to various external networks, such as GPS, mobile apps, and charging stations."
+    # )
+
+    # st.markdown("""---""")
 
 # ------------------ Main App UI ------------------ #
 
@@ -350,9 +361,9 @@ with tab2:
     if attack_model_submit_button or st.session_state.attack_model_generated:
         base_path = os.getcwd()
         input_file_name = os.path.join(base_path, ".files\\threats.json")
-        api_key = openai_api_key  # Make sure this variable is defined somewhere in your code
+        api_key = openai_api_key  
         output_file_name = os.path.join(base_path, ".files\\attack_model.json")
-        model_name = selected_model  # Make sure this variable is defined somewhere in your code
+        model_name = selected_model  
 
         if not os.path.exists(output_file_name):
             with st.spinner("Analyzing potential attacks..."):
@@ -429,36 +440,6 @@ with tab3:
             display_attackgraph_html_files(output_dir)
 
 
-
-# with tab3:
-#     st.markdown(
-#         """
-#         This tab provide attack graphs can be seen based on the asset.
-#         """
-#     )
-#     st.markdown("""---""")
-
-#     # Specify the path to your attack_model JSON file (unified version of attack_model)
-#     base_path = os.getcwd() 
-#     asset = os.path.join(base_path, ".files\\unified_attack_model.json")
-
-#     # Load data directly from the JSON file (no directory listing needed)
-#     with open(asset, "r") as file:
-#         data = json.load(file)
-
-
-#     # Create the output directory if it doesn't exist where the html data will save
-#     output_dir =  os.path.join(base_path, ".files\\.attackgraph")
-#     os.makedirs(output_dir, exist_ok=True)
-
-#     # Create attack graphs for each asset in the JSON file
-#     for asset in data["assets"]:
-#         create_attack_graph(asset, output_dir)
-    
-#     #display HTML files from directory the generated HTML files are stored
-#     display_attackgraph_html_files(output_dir)
-
-
 # ------------------ Attack Vector ------------------ #
 # with tab2:
 #     st.markdown(
@@ -507,79 +488,6 @@ with tab3:
 #         markdown_output_attack_model = json_to_markdown_attack_model(output_file_name)
 #         # Display the attack model in Markdown
 #         st.markdown(markdown_output_attack_model)
-
-
-# ------------------ Attack Tree Generation ------------------ #
-
-# with tab2:
-#     st.markdown("""
-# Attack trees are a structured way to analyse the security of a system. They represent potential attack scenarios in a hierarchical format,
-# with the ultimate goal of an attacker at the root and various paths to achieve that goal as branches. This helps in understanding system
-# vulnerabilities and prioritising mitigation efforts.
-# """)
-#     st.markdown("""---""")
-#     if model_provider == "Google AI API":
-#         st.warning("⚠️ Google's safety filters prevent the reliable generation of attack trees. Please use a different model provider.")
-#     else:
-#         if model_provider == "Mistral API" and mistral_model == "mistral-small-latest":
-#             st.warning("⚠️ Mistral Small doesn't reliably generate syntactically correct Mermaid code. Please use the Mistral Large model for generating attack trees, or select a different model provider.")
-
-#         # Create a submit button for Attack Tree
-#         attack_tree_submit_button = st.button(label="Generate Attack Tree")
-
-#         # If the Generate Attack Tree button is clicked and the user has provided an application description
-#         if attack_tree_submit_button and st.session_state.get('app_input'):
-#             app_input = st.session_state.get('app_input')
-#             # Generate the prompt using the create_attack_tree_prompt function
-#             attack_tree_prompt = create_attack_tree_prompt(app_type, authentication, internet_facing, sensitive_data, app_input)
-
-#             # Show a spinner while generating the attack tree
-#             with st.spinner("Generating attack tree..."):
-#                 try:
-#                     # Call the relevant get_attack_tree function with the generated prompt
-#                     if model_provider == "Azure OpenAI Service":
-#                         mermaid_code = get_attack_tree_azure(azure_api_endpoint, azure_api_key, azure_api_version, azure_deployment_name, attack_tree_prompt)
-#                     elif model_provider == "OpenAI API":
-#                         mermaid_code = get_attack_tree(openai_api_key, selected_model, attack_tree_prompt)
-
-#                     # Display the generated attack tree code
-#                     st.write("Attack Tree Code:")
-#                     st.code(mermaid_code)
-
-#                     # Visualise the attack tree using the Mermaid custom component
-#                     st.write("Attack Tree Diagram Preview:")
-#                     mermaid(mermaid_code)
-
-#                     col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
-
-#                     with col1:
-#                         # Add a button to allow the user to download the Mermaid code
-#                         st.download_button(
-#                             label="Download Diagram Code",
-#                             data=mermaid_code,
-#                             file_name="attack_tree.md",
-#                             mime="text/plain",
-#                             help="Download the Mermaid code for the attack tree diagram."
-#                         )
-
-#                     with col2:
-#                         # Add a button to allow the user to open the Mermaid Live editor
-#                         mermaid_live_button = st.link_button("Open Mermaid Live", "https://mermaid.live")
-
-#                     with col3:
-#                         # Blank placeholder
-#                         st.write("")
-
-#                     with col4:
-#                         # Blank placeholder
-#                         st.write("")
-
-#                     with col5:
-#                         # Blank placeholder
-#                         st.write("")
-
-#                 except Exception as e:
-#                     st.error(f"Error generating attack tree: {e}")
 
 
 # ------------------ Mitigations Generation ------------------ #
