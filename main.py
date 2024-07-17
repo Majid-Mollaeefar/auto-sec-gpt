@@ -453,57 +453,6 @@ with tab3:
     if 'graph_paths' in st.session_state:
         display_attackgraph_html_files(os.path.join(base_path, ".files\\.attackgraph"))
 
-
-# ------------------ Attack Vector ------------------ #
-# with tab2:
-#     st.markdown(
-#         """
-#         This tab provide attack vectors for each identified asset and investigate how the attacks might happen in the system.
-#         """
-#     )
-#     st.markdown("""---""")
-
-#     if "attack_model_generated" not in st.session_state:
-#         st.session_state.attack_model_generated = False
-
-#     attack_model_submit_button = st.button(label="Generate Attack Model")
-#     if attack_model_submit_button or st.session_state.attack_model_generated:
-#         base_path = os.getcwd()
-#         input_file_name = os.path.join(base_path, ".files\\threats.json")
-#         api_key = openai_api_key
-#         output_file_name = os.path.join(base_path, ".files\\attack-model.json")
-#         model_name = selected_model
-
-#         if not os.path.exists(output_file_name):
-#             with st.spinner("Analysing potential attacks..."):
-#                 max_retries = 5
-#                 retry_count = 0
-#                 while retry_count < max_retries:
-#                     try:
-#                         create_attack_scenario_vector_prompt(
-#                             api_key, model_name, input_file_name, output_file_name
-#                         )
-#                         break
-#                     except Exception as e:
-#                         retry_count += 1
-#                         if retry_count == max_retries:
-#                             st.error(
-#                                 f"Error generating attack model after {max_retries} attempts: {e}"
-#                             )
-#                             break
-#                         else:
-#                             st.warning(
-#                                 f"Error generating attack model. Retrying attempt {retry_count}/{max_retries}..."
-#                             )
-
-#         st.session_state.attack_model_generated = True
-
-#         # Convert the threat model JSON to Markdown
-#         markdown_output_attack_model = json_to_markdown_attack_model(output_file_name)
-#         # Display the attack model in Markdown
-#         st.markdown(markdown_output_attack_model)
-
-
 # ------------------ Mitigations Generation ------------------ #
 
 # with tab3:
