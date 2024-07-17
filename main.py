@@ -407,7 +407,8 @@ with tab2:
 with tab3:
     st.markdown(
         """
-        This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls, enabling a comprehensive analysis of potential attack paths.        """
+        This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls, enabling a comprehensive analysis of potential attack paths.
+        """
     )
     st.markdown("""---""")
 
@@ -436,15 +437,21 @@ with tab3:
             # Create attack graphs for each asset in the JSON file
             try:
                 with st.spinner("Generating attack graphs..."):
+                    graph_paths = []
                     for asset in data["assets"]:
-                        create_attack_graph(asset, output_dir)
+                        output_path = create_attack_graph(asset, output_dir)
+                        graph_paths.append(output_path)
+                    
+                    # Save graph paths to session state
+                    st.session_state['graph_paths'] = graph_paths
                 st.success("Attack graphs generated successfully.")
             except Exception as e:
                 st.error(f"Error creating attack graphs: {e}")
                 st.stop()
 
-            # Display HTML files from the directory where the generated HTML files are stored
-            display_attackgraph_html_files(output_dir)
+    # If graphs have been generated, display the assets dropdown and graphs
+    if 'graph_paths' in st.session_state:
+        display_attackgraph_html_files(os.path.join(base_path, ".files\\.attackgraph"))
 
 
 # ------------------ Attack Vector ------------------ #
