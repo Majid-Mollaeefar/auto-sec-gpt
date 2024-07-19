@@ -105,7 +105,7 @@ with st.sidebar:
         # Add model selection input field to the sidebar
         selected_model = st.selectbox(
             "Select the model you would like to use:",
-            ["gpt-4o", "gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"],
+            ["gpt-4o-mini","gpt-4o", "gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"],
             key="selected_model",
             help="OpenAI have moved to continuous model upgrades so `gpt-3.5-turbo`, `gpt-4` and `gpt-4-turbo` point to the latest available version of each model.",
         )
@@ -144,7 +144,7 @@ with st.sidebar:
         "The ISO/SAE 21434 Road Vehicles—Cybersecurity Engineering standard defines the responsibilities for various groups during different stages of automotive product development. The standard requires a commitment from executive management to product development with a focus on cybersecurity engineering"            
     )
     st.markdown(
-        "ISO 21434 emphasizes identifying and assessing cybersecurity risks, helping to anticipate and prepare for potential attack scenarios. Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
+        "ISO ISO/SAE emphasizes identifying and assessing cybersecurity risks, helping to anticipate and prepare for potential attack scenarios. Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
     )
     st.markdown(
         "Created by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/)."
