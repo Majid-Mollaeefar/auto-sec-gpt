@@ -66,6 +66,7 @@ def create_attack_graph(asset_data, output_dir):
                     color="#ffa500",
                     shape="ellipse",
                     hidden=True,
+                    data={"asset": asset_name, "threat": threat_name, "vector": vector_name, "scenario_desc": scenario["scenario_description"]}
                 )
                 net.add_edge(
                     vector_id,
@@ -88,63 +89,112 @@ def create_attack_graph(asset_data, output_dir):
     output_path = f"{output_dir}/{asset_name}.html"
     net.save_graph(output_path)
 
-    # Add custom interaction JavaScript manually
+    legend_html = """
+    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
+        <h4>Legend</h4>
+        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
+        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
+        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
+        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
+    </div>
+    <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
+        <h4>Scenario Details</h4>
+        <p id="scenario-asset"><strong>Asset:</strong> N/A</p>
+        <p id="scenario-threat"><strong>Threat:</strong> N/A</p>
+        <p id="scenario-vector"><strong>Attack Vector:</strong> N/A</p>
+        <p id="scenario-desc"><strong>Scenario Description:</strong> N/A</p>
+    </div>
+    """
+
     interaction_script = f"""
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript">
+    var lastClickedNode = null;
+    var asset_name = '{asset_name}';
+
+    console.log("Interaction script loaded");
+
     network.on("dragEnd", function (params) {{
         var nodeId = params.nodes[0];
         if (nodeId) {{
+            console.log("Node dragged and fixed:", nodeId);
             network.body.data.nodes.update({{id: nodeId, fixed: {{x: true, y: true}}}});
         }}
     }});
+
     network.on("click", function (params) {{
         var nodeId = params.nodes[0];
         if (nodeId) {{
+            console.log("Node clicked:", nodeId);
+            lastClickedNode = nodeId;
             var connectedEdges = network.getConnectedEdges(nodeId);
 
             connectedEdges.forEach(function (edgeId) {{
+                console.log("Connected edge shown:", edgeId);
                 network.body.data.edges.update({{id: edgeId, hidden: false}});
-                
+            
                 var connectedNodeId = network.getConnectedNodes(edgeId);
                 for (var i = 0; i < connectedNodeId.length; i++){{
                     if(connectedNodeId[i] != nodeId){{
+                        console.log("Connected node shown:", connectedNodeId[i]);
                         network.body.data.nodes.update({{id: connectedNodeId[i], hidden: false}});
                     }}
                 }}
             }});
+
+            var nodeData = network.body.data.nodes.get(nodeId);
+            console.log("Node data:", nodeData);
+            if (nodeData.data) {{
+                const scenarioDetails = nodeData.data;
+                document.getElementById("scenario-asset").innerText = "Asset: " + scenarioDetails.asset;
+                document.getElementById("scenario-threat").innerText = "Threat: " + scenarioDetails.threat;
+                document.getElementById("scenario-vector").innerText = "Attack Vector: " + scenarioDetails.vector;
+                document.getElementById("scenario-desc").innerText = "Scenario Description: " + scenarioDetails.scenario_desc;
+                document.getElementById("scenario-details").style.display = "block";
+            }}
         }}
     }});
 
     function zoomIn() {{
         var scale = network.getScale();
+        console.log("Zooming in, scale:", scale);
         network.moveTo({{ scale: scale + 0.1 }});
     }}
 
     function zoomOut() {{
         var scale = network.getScale();
+        console.log("Zooming out, scale:", scale);
         network.moveTo({{ scale: scale - 0.1 }});
     }}
 
     function maximize() {{
         var container = document.getElementById('graph-legend-container');
         if (container.requestFullscreen) {{
+            console.log("Maximizing");
             container.requestFullscreen();
         }} else if (container.mozRequestFullScreen) {{
+            console.log("Maximizing with mozRequestFullScreen");
             container.mozRequestFullScreen();
         }} else if (container.webkitRequestFullscreen) {{
+            console.log("Maximizing with webkitRequestFullscreen");
             container.webkitRequestFullscreen();
-        }} else if (container.msRequestFullscreen) {{ 
+        }} else if (container.msRequestFullscreen) {{
+            console.log("Maximizing with msRequestFullscreen");
             container.msRequestFullscreen();
         }}
     }}
 
     function saveAsPNG() {{
+        var buttons = document.getElementById('buttons-container');
+        buttons.style.display = 'none';
         html2canvas(document.getElementById('graph-legend-container')).then(canvas => {{
             var link = document.createElement('a');
             link.href = canvas.toDataURL();
             link.download = '{asset_name}-Attack-graph.png';
+            console.log("Saving as PNG");
             link.click();
+            buttons.style.display = 'block';
         }});
     }}
     </script>
@@ -153,9 +203,8 @@ def create_attack_graph(asset_data, output_dir):
     with open(output_path, "a") as file:
         file.write(interaction_script)
 
-    # Add buttons for zooming, maximizing, and saving as PNG
     buttons_html = """
-    <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+    <div id="buttons-container" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
         <button onclick="zoomIn()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom In</button>
         <button onclick="zoomOut()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom Out</button>
         <button onclick="maximize()" style="background-color: #444; color: white; border: none; padding: 10px;">Maximize</button>
@@ -167,29 +216,7 @@ def create_attack_graph(asset_data, output_dir):
         filedata = file.read()
 
     filedata = filedata.replace('<div id="mynetwork"', '<div id="graph-legend-container"><div id="graph-container"><div id="mynetwork"')
-
-    filedata = filedata.replace('</body>', buttons_html + '</body>')
-
-    with open(output_path, "w") as file:
-        file.write(filedata)
-
-    # Add legend box
-    legend_html = """
-    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
-        <h4>Legend</h4>
-        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
-        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
-        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
-        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
-        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
-    </div>
-    </div>
-    """
-
-    with open(output_path, "r") as file:
-        filedata = file.read()
-
-    filedata = filedata.replace('<div id="graph-container">', '<div id="graph-container">' + legend_html)
+    filedata = filedata.replace('</body>', buttons_html + legend_html + '</body>')
 
     with open(output_path, "w") as file:
         file.write(filedata)

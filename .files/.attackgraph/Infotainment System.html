@@ -53,17 +53,7 @@
         <div class="card" style="width: 100%">
             
             
-            <div id="graph-legend-container"><div id="graph-container">
-    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
-        <h4>Legend</h4>
-        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
-        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
-        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
-        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
-        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
-    </div>
-    </div>
-    <div id="mynetwork" class="card-body"></div>
+            <div id="graph-legend-container"><div id="graph-container"><div id="mynetwork" class="card-body"></div>
         </div>
 
         
@@ -98,7 +88,7 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#0000ff", "font": {"color": "white"}, "id": "Infotainment System", "label": "Infotainment System", "shape": "box"}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Data Interception via Bluetooth", "label": "Data Interception via Bluetooth", "shape": "diamond", "title": "Attacker Objectives:\n- Steal sensitive user data\n- Inject malicious code\n- Eavesdrop on communication\n- Gain unauthorized access to the infotainment system"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_1", "label": "Man-in-the-Middle Attack", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_2", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker creates a rogue Bluetooth device that intercepts communication between the user\u0027s device and the infotainment system, capturing sensitive data being transmitted."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_3", "label": "Bluesnarfing", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_4", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the Bluetooth protocol to connect to the infotainment system unnoticed and extracts sensitive information like contact lists, messages, or navigation history."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_5", "label": "Bluejacking", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_6", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sends unsolicited messages or files to the user\u0027s device over Bluetooth, which when accepted, can lead to data interception or social engineering attacks."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_7", "label": "Bluetooth Spoofing", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_8", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker disguises their device as a trusted device to make the infotainment system connect to it, allowing interception and manipulation of data."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Unauthorized Access via Mobile App Integration", "label": "Unauthorized Access via Mobile App Integration", "shape": "diamond", "title": "Attacker Objectives:\n- Manipulate braking system\n- Cause vehicle malfunction\n- Exfiltrate sensitive data"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_9", "label": "Mobile App Spoofing", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_10", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle\u0027s braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_11", "label": "Man-in-the-Middle (MitM) Attack", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_12", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker intercepts the communication between the mobile app and the vehicle\u0027s braking system, modifying commands or injecting malicious code to control the braking functionality."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_13", "label": "Exploiting App Vulnerabilities", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_14", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the mobile app\u0027s code or its communication protocol to gain unauthorized access to the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_15", "label": "Social Engineering", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_16", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Malware Injection via USB Ports", "label": "Malware Injection via USB Ports", "shape": "diamond", "title": "Attacker Objectives:\n- Disrupt vehicle operations\n- Gain unauthorized control of the braking system\n- Extract sensitive data from the vehicle\u0027s system\n- Install persistent malware for future attacks"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_17", "label": "Physical Access to USB Ports", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_18", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_19", "label": "Maintenance or Service Compromise", "shape": "dot"}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_20", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs."}, {"color": "#ffa500", "font": {"color": "white"}, "hidden": true, "id": "scenario_21", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update."}]);
+                  nodes = new vis.DataSet([{"color": "#0000ff", "font": {"color": "white"}, "id": "Infotainment System", "label": "Infotainment System", "shape": "box"}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Data Interception via Bluetooth", "label": "Data Interception via Bluetooth", "shape": "diamond", "title": "Attacker Objectives:\n- Steal sensitive user data\n- Inject malicious code\n- Eavesdrop on communication\n- Gain unauthorized access to the infotainment system"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_1", "label": "Man-in-the-Middle Attack", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker creates a rogue Bluetooth device that intercepts communication between the user\u0027s device and the infotainment system, capturing sensitive data being transmitted.", "threat": "Data Interception via Bluetooth", "vector": "Man-in-the-Middle Attack"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_2", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker creates a rogue Bluetooth device that intercepts communication between the user\u0027s device and the infotainment system, capturing sensitive data being transmitted."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_3", "label": "Bluesnarfing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker exploits a vulnerability in the Bluetooth protocol to connect to the infotainment system unnoticed and extracts sensitive information like contact lists, messages, or navigation history.", "threat": "Data Interception via Bluetooth", "vector": "Bluesnarfing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_4", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the Bluetooth protocol to connect to the infotainment system unnoticed and extracts sensitive information like contact lists, messages, or navigation history."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_5", "label": "Bluejacking", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker sends unsolicited messages or files to the user\u0027s device over Bluetooth, which when accepted, can lead to data interception or social engineering attacks.", "threat": "Data Interception via Bluetooth", "vector": "Bluejacking"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_6", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sends unsolicited messages or files to the user\u0027s device over Bluetooth, which when accepted, can lead to data interception or social engineering attacks."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_7", "label": "Bluetooth Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker disguises their device as a trusted device to make the infotainment system connect to it, allowing interception and manipulation of data.", "threat": "Data Interception via Bluetooth", "vector": "Bluetooth Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_8", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker disguises their device as a trusted device to make the infotainment system connect to it, allowing interception and manipulation of data."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Unauthorized Access via Mobile App Integration", "label": "Unauthorized Access via Mobile App Integration", "shape": "diamond", "title": "Attacker Objectives:\n- Manipulate braking system\n- Cause vehicle malfunction\n- Exfiltrate sensitive data"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_9", "label": "Mobile App Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle\u0027s braking system.", "threat": "Unauthorized Access via Mobile App Integration", "vector": "Mobile App Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_10", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle\u0027s braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_11", "label": "Man-in-the-Middle (MitM) Attack", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker intercepts the communication between the mobile app and the vehicle\u0027s braking system, modifying commands or injecting malicious code to control the braking functionality.", "threat": "Unauthorized Access via Mobile App Integration", "vector": "Man-in-the-Middle (MitM) Attack"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_12", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker intercepts the communication between the mobile app and the vehicle\u0027s braking system, modifying commands or injecting malicious code to control the braking functionality."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_13", "label": "Exploiting App Vulnerabilities", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker exploits a vulnerability in the mobile app\u0027s code or its communication protocol to gain unauthorized access to the braking system.", "threat": "Unauthorized Access via Mobile App Integration", "vector": "Exploiting App Vulnerabilities"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_14", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the mobile app\u0027s code or its communication protocol to gain unauthorized access to the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_15", "label": "Social Engineering", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app.", "threat": "Unauthorized Access via Mobile App Integration", "vector": "Social Engineering"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_16", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Malware Injection via USB Ports", "label": "Malware Injection via USB Ports", "shape": "diamond", "title": "Attacker Objectives:\n- Disrupt vehicle operations\n- Gain unauthorized control of the braking system\n- Extract sensitive data from the vehicle\u0027s system\n- Install persistent malware for future attacks"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_17", "label": "Physical Access to USB Ports", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system.", "threat": "Malware Injection via USB Ports", "vector": "Physical Access to USB Ports"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_18", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_19", "label": "Maintenance or Service Compromise", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs.", "threat": "Malware Injection via USB Ports", "vector": "Maintenance or Service Compromise"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_20", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs."}, {"color": "#ffa500", "data": {"asset": "Infotainment System", "scenario_desc": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update.", "threat": "Malware Injection via USB Ports", "vector": "Social Engineering"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_21", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update."}]);
                   edges = new vis.DataSet([{"arrows": "to", "color": "#ffff00", "from": "Infotainment System", "hidden": true, "title": "Threat", "to": "Data Interception via Bluetooth"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception via Bluetooth", "hidden": true, "label": "Attack Vector 1", "to": "vector_1"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_2"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception via Bluetooth", "hidden": true, "label": "Attack Vector 2", "to": "vector_3"}, {"arrows": "to", "color": "#ffa500", "from": "vector_3", "hidden": true, "title": "Leads to", "to": "scenario_4"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception via Bluetooth", "hidden": true, "label": "Attack Vector 3", "to": "vector_5"}, {"arrows": "to", "color": "#ffa500", "from": "vector_5", "hidden": true, "title": "Leads to", "to": "scenario_6"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception via Bluetooth", "hidden": true, "label": "Attack Vector 4", "to": "vector_7"}, {"arrows": "to", "color": "#ffa500", "from": "vector_7", "hidden": true, "title": "Leads to", "to": "scenario_8"}, {"arrows": "to", "color": "#ffff00", "from": "Infotainment System", "hidden": true, "title": "Threat", "to": "Unauthorized Access via Mobile App Integration"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 1", "to": "vector_9"}, {"arrows": "to", "color": "#ffa500", "from": "vector_9", "hidden": true, "title": "Leads to", "to": "scenario_10"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 2", "to": "vector_11"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_12"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 3", "to": "vector_13"}, {"arrows": "to", "color": "#ffa500", "from": "vector_13", "hidden": true, "title": "Leads to", "to": "scenario_14"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Access via Mobile App Integration", "hidden": true, "label": "Attack Vector 4", "to": "vector_15"}, {"arrows": "to", "color": "#ffa500", "from": "vector_15", "hidden": true, "title": "Leads to", "to": "scenario_16"}, {"arrows": "to", "color": "#ffff00", "from": "Infotainment System", "hidden": true, "title": "Threat", "to": "Malware Injection via USB Ports"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 1", "to": "vector_17"}, {"arrows": "to", "color": "#ffa500", "from": "vector_17", "hidden": true, "title": "Leads to", "to": "scenario_18"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 2", "to": "vector_19"}, {"arrows": "to", "color": "#ffa500", "from": "vector_19", "hidden": true, "title": "Leads to", "to": "scenario_20"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware Injection via USB Ports", "hidden": true, "label": "Attack Vector 3", "to": "vector_15"}, {"arrows": "to", "color": "#ffa500", "from": "vector_15", "hidden": true, "title": "Leads to", "to": "scenario_21"}]);
 
                   nodeColors = {};
@@ -162,69 +152,117 @@
               drawGraph();
         </script>
     
-    <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+    <div id="buttons-container" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
         <button onclick="zoomIn()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom In</button>
         <button onclick="zoomOut()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom Out</button>
         <button onclick="maximize()" style="background-color: #444; color: white; border: none; padding: 10px;">Maximize</button>
         <button onclick="saveAsPNG()" style="background-color: #444; color: white; border: none; padding: 10px;">Save as PNG</button>
     </div>
+    
+    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
+        <h4>Legend</h4>
+        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
+        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
+        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
+        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
+    </div>
+    <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
+        <h4>Scenario Details</h4>
+        <p id="scenario-asset"><strong>Asset:</strong> N/A</p>
+        <p id="scenario-threat"><strong>Threat:</strong> N/A</p>
+        <p id="scenario-vector"><strong>Attack Vector:</strong> N/A</p>
+        <p id="scenario-desc"><strong>Scenario Description:</strong> N/A</p>
+    </div>
     </body>
 </html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript">
+    var lastClickedNode = null;
+    var asset_name = 'Infotainment System';
+
+    console.log("Interaction script loaded");
+
     network.on("dragEnd", function (params) {
         var nodeId = params.nodes[0];
         if (nodeId) {
+            console.log("Node dragged and fixed:", nodeId);
             network.body.data.nodes.update({id: nodeId, fixed: {x: true, y: true}});
         }
     });
+
     network.on("click", function (params) {
         var nodeId = params.nodes[0];
         if (nodeId) {
+            console.log("Node clicked:", nodeId);
+            lastClickedNode = nodeId;
             var connectedEdges = network.getConnectedEdges(nodeId);
 
             connectedEdges.forEach(function (edgeId) {
+                console.log("Connected edge shown:", edgeId);
                 network.body.data.edges.update({id: edgeId, hidden: false});
-                
+            
                 var connectedNodeId = network.getConnectedNodes(edgeId);
                 for (var i = 0; i < connectedNodeId.length; i++){
                     if(connectedNodeId[i] != nodeId){
+                        console.log("Connected node shown:", connectedNodeId[i]);
                         network.body.data.nodes.update({id: connectedNodeId[i], hidden: false});
                     }
                 }
             });
+
+            var nodeData = network.body.data.nodes.get(nodeId);
+            console.log("Node data:", nodeData);
+            if (nodeData.data) {
+                const scenarioDetails = nodeData.data;
+                document.getElementById("scenario-asset").innerText = "Asset: " + scenarioDetails.asset;
+                document.getElementById("scenario-threat").innerText = "Threat: " + scenarioDetails.threat;
+                document.getElementById("scenario-vector").innerText = "Attack Vector: " + scenarioDetails.vector;
+                document.getElementById("scenario-desc").innerText = "Scenario Description: " + scenarioDetails.scenario_desc;
+                document.getElementById("scenario-details").style.display = "block";
+            }
         }
     });
 
     function zoomIn() {
         var scale = network.getScale();
+        console.log("Zooming in, scale:", scale);
         network.moveTo({ scale: scale + 0.1 });
     }
 
     function zoomOut() {
         var scale = network.getScale();
+        console.log("Zooming out, scale:", scale);
         network.moveTo({ scale: scale - 0.1 });
     }
 
     function maximize() {
         var container = document.getElementById('graph-legend-container');
         if (container.requestFullscreen) {
+            console.log("Maximizing");
             container.requestFullscreen();
         } else if (container.mozRequestFullScreen) {
+            console.log("Maximizing with mozRequestFullScreen");
             container.mozRequestFullScreen();
         } else if (container.webkitRequestFullscreen) {
+            console.log("Maximizing with webkitRequestFullscreen");
             container.webkitRequestFullscreen();
-        } else if (container.msRequestFullscreen) { 
+        } else if (container.msRequestFullscreen) {
+            console.log("Maximizing with msRequestFullscreen");
             container.msRequestFullscreen();
         }
     }
 
     function saveAsPNG() {
+        var buttons = document.getElementById('buttons-container');
+        buttons.style.display = 'none';
         html2canvas(document.getElementById('graph-legend-container')).then(canvas => {
             var link = document.createElement('a');
             link.href = canvas.toDataURL();
             link.download = 'Infotainment System-Attack-graph.png';
+            console.log("Saving as PNG");
             link.click();
+            buttons.style.display = 'block';
         });
     }
     </script>
