@@ -1,0 +1,269 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="graph-legend-container"><div id="graph-container"><div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#0000ff", "font": {"color": "white"}, "id": "Location Data", "label": "Location Data", "shape": "box"}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Data Interception", "label": "Data Interception", "shape": "diamond", "title": "Attacker Objectives:\n- Steal sensitive location data\n- Manipulate navigation or tracking systems\n- Monitor user movements for malicious purposes"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_1", "label": "Network Sniffing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker uses packet sniffing tools on an unsecured Wi-Fi network to intercept location data transmitted between the vehicle and the cloud.", "threat": "Data Interception", "vector": "Network Sniffing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_2", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses packet sniffing tools on an unsecured Wi-Fi network to intercept location data transmitted between the vehicle and the cloud."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_3", "label": "Man-in-the-Middle (MitM) Attack", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker sets up a rogue hotspot that the vehicle connects to, allowing them to intercept and potentially alter the location data being transmitted.", "threat": "Data Interception", "vector": "Man-in-the-Middle (MitM) Attack"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_4", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sets up a rogue hotspot that the vehicle connects to, allowing them to intercept and potentially alter the location data being transmitted."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_5", "label": "Compromised Service Provider", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker compromises an external service provider\u0027s database and harvests location data from multiple vehicles connected to that service.", "threat": "Data Interception", "vector": "Compromised Service Provider"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_6", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker compromises an external service provider\u0027s database and harvests location data from multiple vehicles connected to that service."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Spoofing", "label": "Spoofing", "shape": "diamond", "title": "Attacker Objectives:\n- Gain unauthorized access to the vehicle\u0027s navigation system\n- Manipulate the vehicle\u0027s location data\n- Create false traffic patterns for malicious purposes\n- Track the vehicle\u0027s movements without the owner\u0027s consent"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_7", "label": "GPS Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker uses a device to send false GPS signals to the vehicle, causing it to believe it is in a different location.", "threat": "Spoofing", "vector": "GPS Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_8", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses a device to send false GPS signals to the vehicle, causing it to believe it is in a different location."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_9", "label": "Wi-Fi Network Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker sets up a rogue Wi-Fi hotspot that the vehicle connects to, sending manipulated location data through the compromised connection.", "threat": "Spoofing", "vector": "Wi-Fi Network Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_10", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sets up a rogue Wi-Fi hotspot that the vehicle connects to, sending manipulated location data through the compromised connection."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_11", "label": "Bluetooth Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker exploits a vulnerability in the vehicle\u0027s Bluetooth system to connect and inject false GPS data.", "threat": "Spoofing", "vector": "Bluetooth Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_12", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits a vulnerability in the vehicle\u0027s Bluetooth system to connect and inject false GPS data."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Unauthorized Tracking", "label": "Unauthorized Tracking", "shape": "diamond", "title": "Attacker Objectives:\n- Gain real-time location data of the vehicle\n- Monitor user behavior and patterns\n- Enable targeted phishing or social engineering attacks\n- Facilitate physical theft of the vehicle"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_13", "label": "Malicious Software Installation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker installs spyware onto the vehicle\u0027s infotainment system through a compromised app that grants access to location data.", "threat": "Unauthorized Tracking", "vector": "Malicious Software Installation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_14", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker installs spyware onto the vehicle\u0027s infotainment system through a compromised app that grants access to location data."}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker exploits an unsecured Wi-Fi network to intercept location data being transmitted from the vehicle to the cloud.", "threat": "Unauthorized Tracking", "vector": "Network Sniffing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_15", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker exploits an unsecured Wi-Fi network to intercept location data being transmitted from the vehicle to the cloud."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_16", "label": "SIM Card Exploitation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker clones the SIM card used for telematics, allowing them to access the location data without being detected.", "threat": "Unauthorized Tracking", "vector": "SIM Card Exploitation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_17", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker clones the SIM card used for telematics, allowing them to access the location data without being detected."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_18", "label": "Social Engineering", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker poses as a service provider to trick the vehicle owner into revealing their account credentials, facilitating unauthorized access to location services.", "threat": "Unauthorized Tracking", "vector": "Social Engineering"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_19", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker poses as a service provider to trick the vehicle owner into revealing their account credentials, facilitating unauthorized access to location services."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Misuse of Location Information", "label": "Misuse of Location Information", "shape": "diamond", "title": "Attacker Objectives:\n- Steal personal data\n- Conduct surveillance on individuals\n- Engage in stalking or harassment\n- Commit fraud by exploiting location data\n- Manipulate or disrupt navigation systems"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_20", "label": "Unauthorized Access to Location Data", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker breaches a vehicle\u0027s telematics system through exploiting weak authentication protocols, gaining unauthorized access to real-time location data of users.", "threat": "Misuse of Location Information", "vector": "Unauthorized Access to Location Data"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_21", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker breaches a vehicle\u0027s telematics system through exploiting weak authentication protocols, gaining unauthorized access to real-time location data of users."}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "Phishing attacks are conducted on users to obtain their login credentials for mobile apps that provide location tracking, allowing the attacker access to stored location history.", "threat": "Misuse of Location Information", "vector": "Unauthorized Access to Location Data"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_22", "label": "Scenario 2", "shape": "ellipse", "title": "Phishing attacks are conducted on users to obtain their login credentials for mobile apps that provide location tracking, allowing the attacker access to stored location history."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_23", "label": "Location Spoofing", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker fakes GPS signals to mislead a vehicle\u0027s navigation system into thinking it is in a different location, potentially causing routing errors or fraudulent behavior.", "threat": "Misuse of Location Information", "vector": "Location Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_24", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker fakes GPS signals to mislead a vehicle\u0027s navigation system into thinking it is in a different location, potentially causing routing errors or fraudulent behavior."}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "Using compromised GPS hardware, an attacker injects false location data into vehicular systems, causing the vehicle to respond incorrectly to navigation commands.", "threat": "Misuse of Location Information", "vector": "Location Spoofing"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_25", "label": "Scenario 2", "shape": "ellipse", "title": "Using compromised GPS hardware, an attacker injects false location data into vehicular systems, causing the vehicle to respond incorrectly to navigation commands."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_26", "label": "Data Interception and Eavesdropping", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "An attacker sets up a rogue access point near a vehicle, capturing sensitive communications that include location data sent from the vehicle to cloud services.", "threat": "Misuse of Location Information", "vector": "Data Interception and Eavesdropping"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_27", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sets up a rogue access point near a vehicle, capturing sensitive communications that include location data sent from the vehicle to cloud services."}, {"color": "#ffa500", "data": {"asset": "Location Data", "scenario_desc": "Through the use of radio frequency scanners, an attacker intercepts data packets transmitted between the car\u0027s GPS and associated mobile applications, extracting sensitive location information.", "threat": "Misuse of Location Information", "vector": "Data Interception and Eavesdropping"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_28", "label": "Scenario 2", "shape": "ellipse", "title": "Through the use of radio frequency scanners, an attacker intercepts data packets transmitted between the car\u0027s GPS and associated mobile applications, extracting sensitive location information."}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#ffff00", "from": "Location Data", "hidden": true, "title": "Threat", "to": "Data Interception"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception", "hidden": true, "label": "Attack Vector 1", "to": "vector_1"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_2"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception", "hidden": true, "label": "Attack Vector 2", "to": "vector_3"}, {"arrows": "to", "color": "#ffa500", "from": "vector_3", "hidden": true, "title": "Leads to", "to": "scenario_4"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Data Interception", "hidden": true, "label": "Attack Vector 3", "to": "vector_5"}, {"arrows": "to", "color": "#ffa500", "from": "vector_5", "hidden": true, "title": "Leads to", "to": "scenario_6"}, {"arrows": "to", "color": "#ffff00", "from": "Location Data", "hidden": true, "title": "Threat", "to": "Spoofing"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Spoofing", "hidden": true, "label": "Attack Vector 1", "to": "vector_7"}, {"arrows": "to", "color": "#ffa500", "from": "vector_7", "hidden": true, "title": "Leads to", "to": "scenario_8"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Spoofing", "hidden": true, "label": "Attack Vector 2", "to": "vector_9"}, {"arrows": "to", "color": "#ffa500", "from": "vector_9", "hidden": true, "title": "Leads to", "to": "scenario_10"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Spoofing", "hidden": true, "label": "Attack Vector 3", "to": "vector_11"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_12"}, {"arrows": "to", "color": "#ffff00", "from": "Location Data", "hidden": true, "title": "Threat", "to": "Unauthorized Tracking"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Tracking", "hidden": true, "label": "Attack Vector 1", "to": "vector_13"}, {"arrows": "to", "color": "#ffa500", "from": "vector_13", "hidden": true, "title": "Leads to", "to": "scenario_14"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Tracking", "hidden": true, "label": "Attack Vector 2", "to": "vector_1"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_15"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Tracking", "hidden": true, "label": "Attack Vector 3", "to": "vector_16"}, {"arrows": "to", "color": "#ffa500", "from": "vector_16", "hidden": true, "title": "Leads to", "to": "scenario_17"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized Tracking", "hidden": true, "label": "Attack Vector 4", "to": "vector_18"}, {"arrows": "to", "color": "#ffa500", "from": "vector_18", "hidden": true, "title": "Leads to", "to": "scenario_19"}, {"arrows": "to", "color": "#ffff00", "from": "Location Data", "hidden": true, "title": "Threat", "to": "Misuse of Location Information"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Misuse of Location Information", "hidden": true, "label": "Attack Vector 1", "to": "vector_20"}, {"arrows": "to", "color": "#ffa500", "from": "vector_20", "hidden": true, "title": "Leads to", "to": "scenario_21"}, {"arrows": "to", "color": "#ffa500", "from": "vector_20", "hidden": true, "title": "Leads to", "to": "scenario_22"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Misuse of Location Information", "hidden": true, "label": "Attack Vector 2", "to": "vector_23"}, {"arrows": "to", "color": "#ffa500", "from": "vector_23", "hidden": true, "title": "Leads to", "to": "scenario_24"}, {"arrows": "to", "color": "#ffa500", "from": "vector_23", "hidden": true, "title": "Leads to", "to": "scenario_25"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Misuse of Location Information", "hidden": true, "label": "Attack Vector 3", "to": "vector_26"}, {"arrows": "to", "color": "#ffa500", "from": "vector_26", "hidden": true, "title": "Leads to", "to": "scenario_27"}, {"arrows": "to", "color": "#ffa500", "from": "vector_26", "hidden": true, "title": "Leads to", "to": "scenario_28"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    
+    <div id="buttons-container" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+        <button onclick="zoomIn()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom In</button>
+        <button onclick="zoomOut()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom Out</button>
+        <button onclick="maximize()" style="background-color: #444; color: white; border: none; padding: 10px;">Maximize</button>
+        <button onclick="saveAsPNG()" style="background-color: #444; color: white; border: none; padding: 10px;">Save as PNG</button>
+    </div>
+    
+    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
+        <h4>Legend</h4>
+        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
+        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
+        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
+        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
+    </div>
+    <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
+        <h4>Scenario Details</h4>
+        <p id="scenario-asset"><strong>Asset:</strong> N/A</p>
+        <p id="scenario-threat"><strong>Threat:</strong> N/A</p>
+        <p id="scenario-vector"><strong>Attack Vector:</strong> N/A</p>
+        <p id="scenario-desc"><strong>Scenario Description:</strong> N/A</p>
+    </div>
+    </body>
+</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+    var lastClickedNode = null;
+    var asset_name = 'Location Data';
+
+    console.log("Interaction script loaded");
+
+    network.on("dragEnd", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            console.log("Node dragged and fixed:", nodeId);
+            network.body.data.nodes.update({id: nodeId, fixed: {x: true, y: true}});
+        }
+    });
+
+    network.on("click", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            console.log("Node clicked:", nodeId);
+            lastClickedNode = nodeId;
+            var connectedEdges = network.getConnectedEdges(nodeId);
+
+            connectedEdges.forEach(function (edgeId) {
+                console.log("Connected edge shown:", edgeId);
+                network.body.data.edges.update({id: edgeId, hidden: false});
+            
+                var connectedNodeId = network.getConnectedNodes(edgeId);
+                for (var i = 0; i < connectedNodeId.length; i++){
+                    if(connectedNodeId[i] != nodeId){
+                        console.log("Connected node shown:", connectedNodeId[i]);
+                        network.body.data.nodes.update({id: connectedNodeId[i], hidden: false});
+                    }
+                }
+            });
+
+            var nodeData = network.body.data.nodes.get(nodeId);
+            console.log("Node data:", nodeData);
+            if (nodeData.data) {
+                const scenarioDetails = nodeData.data;
+                document.getElementById("scenario-asset").innerText = "Asset: " + scenarioDetails.asset;
+                document.getElementById("scenario-threat").innerText = "Threat: " + scenarioDetails.threat;
+                document.getElementById("scenario-vector").innerText = "Attack Vector: " + scenarioDetails.vector;
+                document.getElementById("scenario-desc").innerText = "Scenario Description: " + scenarioDetails.scenario_desc;
+                document.getElementById("scenario-details").style.display = "block";
+            }
+        }
+    });
+
+    function zoomIn() {
+        var scale = network.getScale();
+        console.log("Zooming in, scale:", scale);
+        network.moveTo({ scale: scale + 0.1 });
+    }
+
+    function zoomOut() {
+        var scale = network.getScale();
+        console.log("Zooming out, scale:", scale);
+        network.moveTo({ scale: scale - 0.1 });
+    }
+
+    function maximize() {
+        var container = document.getElementById('graph-legend-container');
+        if (container.requestFullscreen) {
+            console.log("Maximizing");
+            container.requestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            console.log("Maximizing with mozRequestFullScreen");
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            console.log("Maximizing with webkitRequestFullscreen");
+            container.webkitRequestFullscreen();
+        } else if (container.msRequestFullscreen) {
+            console.log("Maximizing with msRequestFullscreen");
+            container.msRequestFullscreen();
+        }
+    }
+
+    function saveAsPNG() {
+        var buttons = document.getElementById('buttons-container');
+        buttons.style.display = 'none';
+        html2canvas(document.getElementById('graph-legend-container')).then(canvas => {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'Location Data-Attack-graph.png';
+            console.log("Saving as PNG");
+            link.click();
+            buttons.style.display = 'block';
+        });
+    }
+    </script>
+    

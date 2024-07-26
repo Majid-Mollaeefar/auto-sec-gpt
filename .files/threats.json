@@ -1,12 +1,32 @@
 [
     {
         "Asset": "Braking System",
-        "Threats": "Tampering via V2X Communication, Unauthorized Access via Mobile App Integration, Malware Injection via USB Ports",
-        "Potential Consequences": "Loss of control, Increased risk of accidents, Physical harm to driver and passengers"
+        "Threats": "Unauthorized Access, Sensor Manipulation, Software Vulnerabilities, Denial of Service (DoS)",
+        "Potential Consequences": "Loss of Vehicle Control, Accidents/Injuries, Increased Liability, Damage to Vehicle"
     },
     {
         "Asset": "Infotainment System",
-        "Threats": "Data Interception via Bluetooth, Unauthorized Access via Mobile App Integration, Malware Injection via USB Ports",
-        "Potential Consequences": "Compromise of personal information, Unauthorized tracking of driving habits, Intrusion into other vehicle systems"
+        "Threats": "Malware Infections, Data Breaches, Phishing Attacks, Unauthorized Data Access",
+        "Potential Consequences": "Privacy Violations, Theft of Personal Information, Disruption of Services, Potential Cyber Attacks on Other Systems"
+    },
+    {
+        "Asset": "Location Data",
+        "Threats": "Data Interception, Spoofing, Unauthorized Tracking, Misuse of Location Information",
+        "Potential Consequences": "Privacy Breaches, Stalking or Harassment, Increased Vulnerability to Physical Attacks, Erosion of Trust with Customers"
+    },
+    {
+        "Asset": "V2X Communication",
+        "Threats": "Message Tampering, Replay Attacks, Eavesdropping, Firmware Attacks",
+        "Potential Consequences": "Miscommunication with Other Vehicles, Traffic Accidents, Compromised Traffic Efficiency, Loss of Critical Data Integrity"
+    },
+    {
+        "Asset": "Cloud Services",
+        "Threats": "Data Breaches, Misconfiguration, Insider Threats, Distributed Denial of Service (DDoS)",
+        "Potential Consequences": "Loss of Sensitive Data, Service Downtime, Reputational Damage, Financial Loss"
+    },
+    {
+        "Asset": "In-Vehicle Storage",
+        "Threats": "Data Theft, Physical Tampering, Logical Attacks, Malware Installation",
+        "Potential Consequences": "Loss of Critical Vehicle Data, Compromise of User Privacy, Data Integrity Issues, Unauthorized Vehicle Control"
     }
 ]

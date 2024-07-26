@@ -1,14 +1,16 @@
-# attack_graph.py
-
-import streamlit as st
+import json
 import os
+from streamlit.components.v1 import html
+import streamlit as st
 from pyvis.network import Network
+from streamlit.web import allow_cross_origin
 
+allow_cross_origin()
 def create_attack_graph(asset_data, output_dir):
     asset_name = asset_data["name"]
     net = Network(height="750px", width="100%", bgcolor="#222222", font_color="white", directed=True)
     net.add_node(asset_name, label=asset_name, color="#0000ff", shape="box")  # Blue box for the asset
-    
+
     # Dictionary to store unique vectors and scenarios
     unique_nodes = {}
 
@@ -26,7 +28,7 @@ def create_attack_graph(asset_data, output_dir):
         net.add_node(
             threat_name,
             label=threat_name,
-            title=f"Attacker Objectives:\n- {objectives_text}", 
+            title=f"Attacker Objectives:\n- {objectives_text}",
             color="#ff0000",
             shape="diamond",
             hidden=True,
@@ -107,7 +109,6 @@ def create_attack_graph(asset_data, output_dir):
         <button id="add-scenario-button" onclick="addScenario()" style="background-color: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer;">+</button>
         <button id="remove-scenario-button" onclick="removeScenario()" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer;">-</button>
         <button id="selection-completed-button" onclick="saveSelection()" style="background-color: #17a2b8; color: white; border: none; padding: 5px 10px; cursor: pointer; margin-left: 10px;">Selection Completed</button>
-
     </div>
     """
 
@@ -121,7 +122,7 @@ def create_attack_graph(asset_data, output_dir):
 
     toast_css = """
     <style>
-    .toast {{
+    .toast {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -134,11 +135,11 @@ def create_attack_graph(asset_data, output_dir):
         z-index: 100;
         opacity: 0;
         transition: opacity 0.05s ease-in-out;
-    }}
+    }
 
-    .toast.show {{
+    .toast.show {
         opacity: 1;
-    }}
+    }
     </style>
     """
     legend_html = f"{toast_css}{legend_html}{toast_html}"
@@ -169,7 +170,7 @@ def create_attack_graph(asset_data, output_dir):
             connectedEdges.forEach(function (edgeId) {{
                 console.log("Connected edge shown:", edgeId);
                 network.body.data.edges.update({{id: edgeId, hidden: false}});
-            
+
                 var connectedNodeId = network.getConnectedNodes(edgeId);
                 for (var i = 0; i < connectedNodeId.length; i++){{
                     if(connectedNodeId[i] != nodeId){{
@@ -234,7 +235,7 @@ def create_attack_graph(asset_data, output_dir):
         }});
     }}
 
-    //add toast message
+    // Add toast message
     function showToast(message) {{
         var toast = document.getElementById("toast-message");
         var toastBody = toast.querySelector(".toast-body");
@@ -263,59 +264,45 @@ def create_attack_graph(asset_data, output_dir):
         }}
     }}
 
-    function saveSelection() {{ 
+    function saveSelection() {{
         if (selected_scenarios.length === 0) {{
             showToast("No scenarios selected.");
-        return;
+            return;
         }}
         var scenarios_data = [];
         selected_scenarios.forEach(function (scenario_id) {{
             var scenario_data = network.body.data.nodes.get(scenario_id).data;
             scenarios_data.push(scenario_data);
         }});
-        
-        var threats = [];
-        var vectors = [];
-        
-        scenarios_data.forEach(function (scenario) {{
-            var threat = threats.find(t => t.name === scenario.threat);
-            if (!threat) {{
-                threat = {{
-                    name: scenario.threat,
-                    vectors: []
-                }};
-                threats.push(threat);
-            }}
-            
-            var vector = vectors[scenario.vector];
-            if (!vector) {{
-                vector = {{
-                    vector_name: scenario.vector,
-                    scenarios: []
-                }};
-                vectors[scenario.vector] = vector;
-                threat.vectors.push(vector);
-            }}
-            
-            vector.scenarios.push({{
-                scenario_id: scenario.scenario_id,
-                scenario_description: scenario.scenario_desc
-            }});
-        }});
+        var json_data = JSON.stringify(scenarios_data, null, 2);
 
-        var selected_asset = {{
-            name: asset_name,
-            threats: threats
-        }};
-        
-        var json_data = JSON.stringify(selected_asset, null, 2);
-        var blob = new Blob([json_data], {{ type: "application/json" }});
-        var url = URL.createObjectURL(blob);
-        var link = document.createElement("a");
-        link.href = url;
-        link.download = "{asset_name}_selected_scenarios.json";
-        link.click();
-        showToast("Scenarios saved.");
+        // Use fetch to send data to Streamlit
+        fetch('/save_scenarios', {{
+            method: 'POST',
+            headers: {{
+                'Content-Type': 'application/json',
+            }},
+            body: JSON.stringify({{asset_name: asset_name, scenarios: json_data}}),
+        }})
+        .then(response => {{
+            if (!response.ok) {{
+                throw new Error(`HTTP error! status: ${{response.status}}`);
+            }}
+            return response.json();
+        }})
+        .then(data => {{
+            if (data.status === 'success') {{
+                console.log('Success:', data.message);
+                showToast(data.message); 
+            }} else {{
+                console.error('Error:', data.message);
+                showToast(data.message);
+            }} 
+        }})
+        .catch((error) => {{
+            console.error('Fetch Error:', error);
+            showToast('Error saving scenarios. See console for details.');
+        }});
     }}
     </script>
     """
@@ -341,12 +328,10 @@ def create_attack_graph(asset_data, output_dir):
     with open(output_path, "w") as file:
         file.write(filedata)
 
-
-
 def display_attackgraph_html_files(html_dir):
     """
     Function to display HTML files from a specified directory in a Streamlit app.
-    
+
     Parameters:
     html_dir (str): Directory where the generated HTML files are stored.
     """
@@ -378,19 +363,94 @@ def display_attackgraph_html_files(html_dir):
         html_content = get_html_content(html_path)
         st.components.v1.html(html_content, height=760, scrolling=True)
 
-#  Example Usage
+st.markdown(
+    """
+    This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls, enabling a comprehensive analysis of potential attack paths.
+    """
+)
+st.markdown("""---""")
 
-# # Specify the path to your attack_model JSON file (unified version of attack_model) 
-# json_file_path = "C:\\Users\\mmoll\\Desktop\\Py\\Threat-Model\\random-coding\\attackgraph-codes\\unified_attack_model.json"
+# Path to your unified attack model JSON file
+base_path = os.getcwd()
+unified_attack_model_path = os.path.join(base_path, "unified_attack_model.json")
 
-# # Load data directly from the JSON file (no directory listing needed)
-# with open(json_file_path, "r") as file:
-#     data = json.load(file)
+generate_graphs_button = st.button("Generate Attack Graphs")
+if generate_graphs_button:
+    if not os.path.exists(unified_attack_model_path):
+        st.error("Unified attack model JSON file does not exist. Please generate the attack model first in the 'Attack Model' tab.")
+    else:
+        try:
+            with open(unified_attack_model_path, "r") as file:
+                data = json.load(file)
+        except Exception as e:
+            st.error(f"Error loading unified attack model JSON file: {e}")
+            st.stop()
 
-# # Create the output directory if it doesn't exist where the html data will save
-# output_dir = "C:\\Users\\mmoll\\Desktop\\Py\\Threat-Model\\random-coding\\attackgraph-codes\\.attack-g"
-# os.makedirs(output_dir, exist_ok=True)
+        output_dir = os.path.join(base_path, "attackgraph-codes\\.attack-g")
+        os.makedirs(output_dir, exist_ok=True)
 
-# # Create attack graphs for each asset in the JSON file
-# for asset in data["assets"]:
-#     create_attack_graph(asset, output_dir)
+        try:
+            with st.spinner("Generating attack graphs..."):
+                for asset in data["assets"]:
+                    create_attack_graph(asset, output_dir)
+            st.success("Attack graphs generated successfully.")
+        except Exception as e:
+            st.error(f"Error creating attack graphs: {e}")
+            st.stop()
+
+        display_attackgraph_html_files(output_dir)
+
+
+def allow_cors(func):
+    """Decorator to wrap Streamlit functions and allow CORS."""
+    def wrapper(*args, **kwargs):
+        html(
+            """
+            <script>
+            const originalFetch = window.fetch;
+            window.fetch = async (...args) => {
+                const response = await originalFetch(...args);
+                if (!response.headers.has('Access-Control-Allow-Origin')) {
+                    response.headers.set('Access-Control-Allow-Origin', '*'); // Allow all origins
+                }
+                return response;
+            };
+            </script>
+            """
+        )
+        return func(*args, **kwargs)
+    return wrapper
+
+@allow_cors  
+@st.cache_resource
+def save_scenarios(asset_name, scenarios_data):
+    try:
+        scenarios_data = json.loads(scenarios_data)
+        output_dir = os.path.join(os.getcwd(), "attackgraph-codes", ".attack-g")
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, f"{asset_name}_selected_scenarios.json")
+        with open(output_path, "w") as file:
+            json.dump(scenarios_data, file, indent=2)
+        return "Scenarios saved successfully."
+    except (json.JSONDecodeError, Exception) as e:
+        return f"Error saving scenarios: {e}"
+
+# # Simulate a Streamlit form submission endpoint
+# if st.query_params:
+#     query_params = st.query_params
+#     if "json_data" in query_params and "asset_name" in query_params:
+#         try:
+#             # Decode the JSON data and asset name
+#             json_data = json.loads(query_params["json_data"][0])
+#             asset_name = query_params["asset_name"][0]
+
+#             # Define the output directory
+#             output_dir = os.path.join(os.getcwd(), "attackgraph-codes\\.attack-g")
+
+#             # Save the JSON data to a file
+#             save_scenarios(json_data, asset_name, output_dir)
+#         except json.JSONDecodeError as e:
+#             st.error(f"Error decoding JSON data: {e}")
+#             st.write(f"Received JSON data: {query_params['json_data'][0]}")
+#         except Exception as e:
+#             st.error(f"Error: {e}")

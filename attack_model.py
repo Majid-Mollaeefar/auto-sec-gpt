@@ -84,7 +84,11 @@ def create_attack_model_prompt(api_key, model_name, input_file_name, output_file
                 
                 # Ensure the response is valid JSON
                 response_json = json.loads(response_content)
-                attack_model.append(response_json['attack_model'][0])
+                # Clean the JSON content by replacing \u2019 with the correct character
+                json_str = json.dumps(response_json)
+                cleaned_json_str = json_str.replace("\\u2019", "'")
+                cleaned_json = json.loads(cleaned_json_str)
+                attack_model.append(cleaned_json['attack_model'][0])
 
             except json.JSONDecodeError as e:
                 print(f"Failed to decode JSON response for threat: {threat}. Error: {e}")
