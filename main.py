@@ -407,7 +407,12 @@ with tab2:
 with tab3:
     st.markdown(
         """
-        This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls, enabling a comprehensive analysis of potential attack paths.
+        This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls. This enables a comprehensive analysis of potential attack paths.
+    To use this tab:
+    1) Select an asset from the dropdown list.
+    2) Click on each node to generate and view related threats, attack vectors, and scenarios.
+    3) In the Scenario Detail box, you can add or remove scenarios for further risk assessment.
+    4) After selecting scenarios for each asset, click on 'Selection Completed'. A JSON file will be downloaded, which can be used for the Risk Assessment process.
         """
     )
     st.markdown("""---""")

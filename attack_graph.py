@@ -96,7 +96,6 @@ def create_attack_graph(asset_data, output_dir):
         <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
         <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
         <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
-        <p><span style="color: #00ff00;">&#x25A0;</span> Control</p>
     </div>
     <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
         <h4>Scenario Details</h4>
