@@ -1,0 +1,277 @@
+{
+    "Scenarios": [
+        {
+            "asset": "Braking System",
+            "threat": "Unauthorized Access via Mobile App Integration",
+            "vector": "Mobile App Spoofing",
+            "scenario_id": "scenario_1",
+            "scenario_desc": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle's braking system.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Layman",
+                    "Value": 0,
+                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Public",
+                    "Value": 0,
+                    "Comment": "e.g. as gained from the Internet"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "Unnecessary/unlimited",
+                    "Value": 0,
+                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Standard",
+                    "Value": 0,
+                    "Comment": "Readily available to the attacker"
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Unauthorized Access via Mobile App Integration",
+            "vector": "Man-in-the-Middle (MitM) Attack",
+            "scenario_id": "scenario_2",
+            "scenario_desc": "An attacker intercepts the communication between the mobile app and the vehicle's braking system, modifying commands or injecting malicious code to control the braking functionality.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Layman",
+                    "Value": 0,
+                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Public",
+                    "Value": 0,
+                    "Comment": "e.g. as gained from the Internet"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "Unnecessary/unlimited",
+                    "Value": 0,
+                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Standard",
+                    "Value": 0,
+                    "Comment": "Readily available to the attacker"
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Unauthorized Access via Mobile App Integration",
+            "vector": "Exploiting App Vulnerabilities",
+            "scenario_id": "scenario_3",
+            "scenario_desc": "An attacker exploits a vulnerability in the mobile app's code or its communication protocol to gain unauthorized access to the braking system.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Layman",
+                    "Value": 0,
+                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Public",
+                    "Value": 0,
+                    "Comment": "e.g. as gained from the Internet"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "Unnecessary/unlimited",
+                    "Value": 0,
+                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Standard",
+                    "Value": 0,
+                    "Comment": "Readily available to the attacker"
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Unauthorized Access via Mobile App Integration",
+            "vector": "Social Engineering",
+            "scenario_id": "scenario_4",
+            "scenario_desc": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Multiple experts",
+                    "Value": 8,
+                    "Comment": "Different fields of expertise are required at an Expert level for distinct steps of an attack."
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Critical",
+                    "Value": 11,
+                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "None",
+                    "Value": -1,
+                    "Comment": "The opportunity window is not sufficient to perform the attack (the access to the target is too short to perform the attack, or a sufficient number of targets is not accessible to the attacker)."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Multiple bespoke",
+                    "Value": 9,
+                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Malware Injection via USB Ports",
+            "vector": "Physical Access to USB Ports",
+            "scenario_id": "scenario_1",
+            "scenario_desc": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Multiple experts",
+                    "Value": 8,
+                    "Comment": "Different fields of expertise are required at an Expert level for distinct steps of an attack."
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Critical",
+                    "Value": 11,
+                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "None",
+                    "Value": -1,
+                    "Comment": "The opportunity window is not sufficient to perform the attack (the access to the target is too short to perform the attack, or a sufficient number of targets is not accessible to the attacker)."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Multiple bespoke",
+                    "Value": 9,
+                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Malware Injection via USB Ports",
+            "vector": "Maintenance or Service Compromise",
+            "scenario_id": "scenario_2",
+            "scenario_desc": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Multiple experts",
+                    "Value": 8,
+                    "Comment": "Different fields of expertise are required at an Expert level for distinct steps of an attack."
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Critical",
+                    "Value": 11,
+                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "None",
+                    "Value": -1,
+                    "Comment": "The opportunity window is not sufficient to perform the attack (the access to the target is too short to perform the attack, or a sufficient number of targets is not accessible to the attacker)."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Multiple bespoke",
+                    "Value": 9,
+                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                }
+            ]
+        },
+        {
+            "asset": "Braking System",
+            "threat": "Malware Injection via USB Ports",
+            "vector": "Social Engineering",
+            "scenario_id": "scenario_3",
+            "scenario_desc": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update.",
+            "Likelihood": [
+                {
+                    "Factor": "Elapsed Time",
+                    "Level": "less than 1 day",
+                    "Value": 0,
+                    "Comment": "no comment"
+                },
+                {
+                    "Factor": "Expertise",
+                    "Level": "Multiple experts",
+                    "Value": 8,
+                    "Comment": "Different fields of expertise are required at an Expert level for distinct steps of an attack."
+                },
+                {
+                    "Factor": "Knowledge of system",
+                    "Level": "Critical",
+                    "Value": 11,
+                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
+                },
+                {
+                    "Factor": "Window of Opportunity",
+                    "Level": "None",
+                    "Value": -1,
+                    "Comment": "The opportunity window is not sufficient to perform the attack (the access to the target is too short to perform the attack, or a sufficient number of targets is not accessible to the attacker)."
+                },
+                {
+                    "Factor": "Equipment",
+                    "Level": "Multiple bespoke",
+                    "Value": 9,
+                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                }
+            ]
+        }
+    ]
+}

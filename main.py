@@ -23,6 +23,9 @@ from threat_model import (
 )
 from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_threat_model
 from attack_graph import create_attack_graph, display_attackgraph_html_files
+import risk_assessment_customized as customized
+import risk_assessment_full as full
+from util import reset_risk_assessment_state
 # ------------------ Helper Functions ------------------ #
 
 
@@ -174,8 +177,13 @@ with st.sidebar:
     # st.markdown("""---""")
 
 # ------------------ Main App UI ------------------ #
+# Define a function to set the tab state
+# def set_tab_state(tab_name):
+#     st.session_state.tab = tab_name
 
-tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph", "Test Cases"])
+
+
+tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph", "Risk Assessment"])
 
 with tab1:
     st.markdown(
@@ -458,6 +466,34 @@ with tab3:
     if 'graph_paths' in st.session_state:
         display_attackgraph_html_files(os.path.join(base_path, ".files\\.attackgraph"))
 
+# ------------------ Risk Assessment ------------------- #
+with tab4:
+    st.markdown(
+        """
+        This tab performs a risk assessment. Choose one of the options below to proceed.
+        """
+    )
+
+    st.markdown("---")
+    
+    if "risk_assessment_tab" not in st.session_state:
+        st.session_state.risk_assessment_tab = False
+
+    # Add a key to the radio button
+    risk_assessment_option = st.radio("Select Risk Assessment Option:", ["Customized Scenario Selection", "Full Scenario"], key="risk_assessment_radio")  
+
+    if risk_assessment_option == "Customized Scenario Selection":
+        customized.risk_assessment_customized(key="customized")
+        st.session_state.risk_assessment_tab = True
+    elif risk_assessment_option == "Full Scenario":
+        full.risk_assessment_full()
+        st.session_state.risk_assessment_tab = True
+    
+    st.session_state.risk_assessment_tab = False
+
+if st.session_state.risk_assessment_tab:
+    st.session_state.query_params = {"tab": "Risk Assessment", "#": "risk-assessment"}
+    
 # ------------------ Mitigations Generation ------------------ #
 
 # with tab3:
