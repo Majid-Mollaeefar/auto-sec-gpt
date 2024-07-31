@@ -23,9 +23,11 @@ from threat_model import (
 )
 from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_threat_model
 from attack_graph import create_attack_graph, display_attackgraph_html_files
-import risk_assessment_customized as customized
-import risk_assessment_full as full
-from util import reset_risk_assessment_state
+import likelihood_assessment_customized as customized
+import likelihood_assessment_full as full
+# from impact_assessment import impact_assessment, load_likelihood_assessment, likelihood_assessment_file_exists
+import impact_assessment
+from impact_assessment import likelihood_assessment_file_exists
 # ------------------ Helper Functions ------------------ #
 
 
@@ -466,34 +468,180 @@ with tab3:
     if 'graph_paths' in st.session_state:
         display_attackgraph_html_files(os.path.join(base_path, ".files\\.attackgraph"))
 
+
+
 # ------------------ Risk Assessment ------------------- #
+
+# Initialize session state for tabs and assessments
+if "likelihood_assessment_complete" not in st.session_state:
+    st.session_state.likelihood_assessment_complete = False
+if "impact_assessment_ready" not in st.session_state:
+    st.session_state.impact_assessment_ready = False
+
+def check_likelihood_assessment_complete():
+    if impact_assessment.likelihood_assessment_file_exists():
+        st.session_state.impact_assessment_ready = True
+    else:
+        st.session_state.impact_assessment_ready = False
+
 with tab4:
     st.markdown(
         """
-        This tab performs a risk assessment. Choose one of the options below to proceed.
+        This tab performs a risk assessment. You must first complete the likelihood assessment, and then proceed to the impact assessment.
         """
     )
 
-    st.markdown("---")
-    
-    if "risk_assessment_tab" not in st.session_state:
-        st.session_state.risk_assessment_tab = False
 
-    # Add a key to the radio button
-    risk_assessment_option = st.radio("Select Risk Assessment Option:", ["Customized Scenario Selection", "Full Scenario"], key="risk_assessment_radio")  
+    tabs = st.tabs(["Likelihood Assessment", "Impact Assessment", "Risk Evaluation"])
 
-    if risk_assessment_option == "Customized Scenario Selection":
-        customized.risk_assessment_customized(key="customized")
-        st.session_state.risk_assessment_tab = True
-    elif risk_assessment_option == "Full Scenario":
-        full.risk_assessment_full()
-        st.session_state.risk_assessment_tab = True
-    
-    st.session_state.risk_assessment_tab = False
+    # Likelihood Assessment Tab
+    with tabs[0]:
+        st.markdown(
+        """
+        First step of our risk assessment is to detemine the likelihood level of each attack scenario, based on defined a set of likelihood factors.
+        """
+         )
 
-if st.session_state.risk_assessment_tab:
-    st.session_state.query_params = {"tab": "Risk Assessment", "#": "risk-assessment"}
+        st.markdown("---")
+
+        likelihood_assessment_option = st.radio(
+            "Select Likelihood Assessment Option:",
+            ["Customized Scenario Selection", "Full Scenario"],
+            key="likelihood_assessment_radio"
+        )
+
+        if likelihood_assessment_option == "Customized Scenario Selection":
+            customized.likelihood_assessment_customized(key="customized")
+        elif likelihood_assessment_option == "Full Scenario":
+            full.likelihood_assessment_full()
+
+        if st.session_state.likelihood_assessment_complete:
+            st.success("Likelihood Assessment is complete. You can now proceed to Impact Assessment.")
+            check_likelihood_assessment_complete()
+
+    # Impact Assessment Tab
+    with tabs[1]:
+        st.markdown(
+        """
+        Second step is to detemine the impact level of each attack scenario, based on defined a set of impact factors.
+        """
+         )
+
+        st.markdown("---")
+        if st.session_state.impact_assessment_ready:
+            impact_assessment.impact_assessment()
+        else:
+            st.write("Complete the Likelihood Assessment first.")
+
+    # Risk Evaluation Tab
+    with tabs[2]:
+        st.header("Risk Evaluation")
+        if st.session_state.impact_assessment_ready:
+            st.write("You can now perform the Risk Evaluation based on the completed assessments.")
+            # Risk Evaluation code goes here
+        else:
+            st.write("Complete the Likelihood and Impact Assessments first.")
+
+
+
+
+
+
+
+
+
+# # Initialize session state for the tabs and assessments
+# if "likelihood_assessment_complete" not in st.session_state:
+#     st.session_state.likelihood_assessment_complete = False
+# if "impact_assessment_ready" not in st.session_state:
+#     st.session_state.impact_assessment_ready = False
+# if "impact_assessment_complete" not in st.session_state:
+#     st.session_state.impact_assessment_complete = False
+
+
+# with tab4:
+#     st.markdown(
+#         """
+#         This tab performs a risk assessment. You must first complete the likelihood assessment, and then proceed to the impact assessment.
+#         """
+#     )
+
+#     st.markdown("---")
+
+#     sub_tabs = st.tabs(["Likelihood Assessment", "Impact Assessment", "Risk Evaluation"])
+
+#    # Likelihood Assessment Tab
+#     with sub_tabs[0]:
+#         st.markdown("### Likelihood Assessment")
+#         likelihood_assessment_option = st.radio(
+#             "Select Likelihood Assessment Option:",
+#             ["Customized Scenario Selection", "Full Scenario"],
+#             key="likelihood_assessment_radio"
+#         )
+
+#         if likelihood_assessment_option == "Customized Scenario Selection":
+#             customized.likelihood_assessment_customized(key="customized")
+#         elif likelihood_assessment_option == "Full Scenario":
+#             full.likelihood_assessment_full()
+
+#         if st.session_state.likelihood_assessment_complete:
+#             st.success("Likelihood Assessment is complete. You can now proceed to Impact Assessment.")
+
+#     # Impact Assessment Tab
+#     with sub_tabs[1]:
+#         st.markdown("### Impact Assessment")
+#         if st.session_state.likelihood_assessment_complete:
+#             st.session_state.impact_assessment_ready = impact_assessment.likelihood_assessment_file_exists()
+#             if st.session_state.impact_assessment_ready:
+#                 impact_assessment.impact_assessment()
+#             else:
+#                 st.write("No Likelihood Assessment data found. Complete the Likelihood Assessment first.")
+#         else:
+#             st.write("Complete the Likelihood Assessment first.")
+
+#     # Risk Evaluation Tab
+#     with sub_tabs[2]:
+#         st.markdown("### Risk Evaluation")
+#         if st.session_state.impact_assessment_complete:
+#             st.write("You can now perform the Risk Evaluation based on the completed assessments.")
+#             # Risk Evaluation code goes here
+#         else:
+#             st.write("Complete the Likelihood and Impact Assessments first.")
+
+
+
+
+# # ------------------ Risk Assessment old------------------- #
+# with tab4:
+#     st.markdown(
+#         """
+#         This tab performs a risk assessment. Choose one of the options below to proceed.
+#         """
+#     )
+
+#     st.markdown("---")
     
+#     if "likelihood_assessment_tab" not in st.session_state:
+#         st.session_state.likelihood_assessment_tab = False
+
+#     # Add a key to the radio button
+#     likelihood_assessment_option = st.radio("Select Risk Assessment Option:", ["Customized Scenario Selection", "Full Scenario"], key="likelihood_assessment_radio")  
+
+#     if likelihood_assessment_option == "Customized Scenario Selection":
+#         customized.likelihood_assessment_customized(key="customized")
+#         st.session_state.likelihood_assessment_tab = True
+#     elif likelihood_assessment_option == "Full Scenario":
+#         full.likelihood_assessment_full()
+#         st.session_state.likelihood_assessment_tab = True
+    
+#     st.session_state.likelihood_assessment_tab = False
+
+# if st.session_state.likelihood_assessment_tab:
+#     st.session_state.query_params = {"tab": "Risk Assessment", "#": "risk-assessment"}
+
+
+
+
 # ------------------ Mitigations Generation ------------------ #
 
 # with tab3:

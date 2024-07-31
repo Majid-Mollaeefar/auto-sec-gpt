@@ -1,0 +1,383 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="graph-legend-container"><div id="graph-container"><div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#0000ff", "font": {"color": "white"}, "id": "OBD-II Port", "label": "OBD-II Port", "shape": "box"}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Unauthorized access", "label": "Unauthorized access", "shape": "diamond", "title": "Attacker Objectives:\n- Gain control of infotainment system features\n- Access sensitive vehicle data\n- Inject malicious software\n- Spy on users through installed applications"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_1", "label": "Wi-Fi network intrusion", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker connects to the vehicle\u0027s Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system.", "threat": "Unauthorized access", "vector": "Wi-Fi network intrusion"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_2", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker connects to the vehicle\u0027s Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_3", "label": "Bluetooth exploitation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access.", "threat": "Unauthorized access", "vector": "Bluetooth exploitation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_4", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_5", "label": "Malicious app installation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access.", "threat": "Unauthorized access", "vector": "Malicious app installation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_6", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_7", "label": "Physical access manipulation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system.", "threat": "Unauthorized access", "vector": "Physical access manipulation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_8", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_9", "label": "Insider Threats", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties.", "threat": "Unauthorized access", "vector": "Insider Threats"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_10", "label": "Scenario 1", "shape": "ellipse", "title": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Exploitation of vulnerabilities", "label": "Exploitation of vulnerabilities", "shape": "diamond", "title": "Attacker Objectives:\n- Gain unauthorized access to vehicle systems\n- Steal sensitive vehicle data\n- Manipulate vehicle functionality\n- Enable remote control of the vehicle"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_11", "label": "Physical Access to OBD-II Port", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker uses physical access to connect to the OBD-II port with a malicious device to exploit vehicle vulnerabilities.", "threat": "Exploitation of vulnerabilities", "vector": "Physical Access to OBD-II Port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_12", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker uses physical access to connect to the OBD-II port with a malicious device to exploit vehicle vulnerabilities."}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker uses a USB device containing malware plugged into the OBD-II port to gain control over the vehicle\u0027s electronic systems.", "threat": "Exploitation of vulnerabilities", "vector": "Physical Access to OBD-II Port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_13", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker uses a USB device containing malware plugged into the OBD-II port to gain control over the vehicle\u0027s electronic systems."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_14", "label": "Wireless Exploitation via Mobile Devices", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker connects a smartphone to the OBD-II port that has been previously compromised, allowing the attacker to remotely exploit vulnerabilities in vehicle networks.", "threat": "Exploitation of vulnerabilities", "vector": "Wireless Exploitation via Mobile Devices"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_15", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker connects a smartphone to the OBD-II port that has been previously compromised, allowing the attacker to remotely exploit vulnerabilities in vehicle networks."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_16", "label": "Malicious Software Update", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker forges a software update to be introduced through the OBD-II port, which contains backdoors to the vehicle\u0027s systems.", "threat": "Exploitation of vulnerabilities", "vector": "Malicious Software Update"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_17", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker forges a software update to be introduced through the OBD-II port, which contains backdoors to the vehicle\u0027s systems."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Malware injection", "label": "Malware injection", "shape": "diamond", "title": "Attacker Objectives:\n- Gain unauthorized access to vehicle systems\n- Manipulate vehicle functions\n- Steal sensitive data\n- Disable security features"}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_18", "label": "Physical access via OBD-II port", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker connects a malicious device to the OBD-II port, which installs malware onto the vehicle\u0027s electronic control unit (ECU) for control over vehicle functions.", "threat": "Malware injection", "vector": "Physical access via OBD-II port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_19", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker connects a malicious device to the OBD-II port, which installs malware onto the vehicle\u0027s electronic control unit (ECU) for control over vehicle functions."}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "Using a custom OBD-II adapter that contains preinstalled malware, an attacker collects sensitive data such as VIN, speed, and diagnostic information, then exfiltrates it via LTE or Wi-Fi.", "threat": "Malware injection", "vector": "Physical access via OBD-II port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_20", "label": "Scenario 2", "shape": "ellipse", "title": "Using a custom OBD-II adapter that contains preinstalled malware, an attacker collects sensitive data such as VIN, speed, and diagnostic information, then exfiltrates it via LTE or Wi-Fi."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_21", "label": "Remote exploitation through software updates", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker compromises the software update mechanism of the vehicle\u0027s ECU via the OBD-II port, injecting malware during a legitimate update process.", "threat": "Malware injection", "vector": "Remote exploitation through software updates"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_22", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker compromises the software update mechanism of the vehicle\u0027s ECU via the OBD-II port, injecting malware during a legitimate update process."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_23", "label": "Malicious mobile applications", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker develops a rogue mobile application that claims to provide vehicle diagnostics and encourages users to connect their phone to the OBD-II port, which in turn uploads malware to the vehicle.", "threat": "Malware injection", "vector": "Malicious mobile applications"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_24", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker develops a rogue mobile application that claims to provide vehicle diagnostics and encourages users to connect their phone to the OBD-II port, which in turn uploads malware to the vehicle."}, {"color": "#ff0000", "font": {"color": "white"}, "hidden": true, "id": "Interception of vehicle diagnostics", "label": "Interception of vehicle diagnostics", "shape": "diamond", "title": "Attacker Objectives:\n- Obtain sensitive vehicle diagnostic data\n- Manipulate vehicle performance parameters\n- Gain unauthorized access to vehicle systems"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker physically connects a rogue device to the OBD-II port to capture real-time diagnostic information.", "threat": "Interception of vehicle diagnostics", "vector": "Physical Access to OBD-II Port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_25", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker physically connects a rogue device to the OBD-II port to capture real-time diagnostic information."}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker uses a laptop with malicious software to connect to the OBD-II port and retrieve vehicle data.", "threat": "Interception of vehicle diagnostics", "vector": "Physical Access to OBD-II Port"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_26", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker uses a laptop with malicious software to connect to the OBD-II port and retrieve vehicle data."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_27", "label": "Wireless Interception", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker sets up a rogue Bluetooth device that initiates a connection to the vehicle\u0027s onboard system while in proximity.", "threat": "Interception of vehicle diagnostics", "vector": "Wireless Interception"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_28", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker sets up a rogue Bluetooth device that initiates a connection to the vehicle\u0027s onboard system while in proximity."}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker captures data transmitted between the vehicle and diagnostic tools over Wi-Fi using a man-in-the-middle attack.", "threat": "Interception of vehicle diagnostics", "vector": "Wireless Interception"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_29", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker captures data transmitted between the vehicle and diagnostic tools over Wi-Fi using a man-in-the-middle attack."}, {"color": "#ff8080", "font": {"color": "white"}, "hidden": true, "id": "vector_30", "label": "Malicious Software Exploitation", "shape": "dot"}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker deploys malware on a diagnostic tool used by technicians that records and sends vehicle data to an external server.", "threat": "Interception of vehicle diagnostics", "vector": "Malicious Software Exploitation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_31", "label": "Scenario 1", "shape": "ellipse", "title": "An attacker deploys malware on a diagnostic tool used by technicians that records and sends vehicle data to an external server."}, {"color": "#ffa500", "data": {"asset": "OBD-II Port", "scenario_desc": "An attacker sends a malicious update to the vehicle\u0027s software that creates a backdoor to intercept diagnostic data.", "threat": "Interception of vehicle diagnostics", "vector": "Malicious Software Exploitation"}, "font": {"color": "white"}, "hidden": true, "id": "scenario_32", "label": "Scenario 2", "shape": "ellipse", "title": "An attacker sends a malicious update to the vehicle\u0027s software that creates a backdoor to intercept diagnostic data."}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#ffff00", "from": "OBD-II Port", "hidden": true, "title": "Threat", "to": "Unauthorized access"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized access", "hidden": true, "label": "Attack Vector 1", "to": "vector_1"}, {"arrows": "to", "color": "#ffa500", "from": "vector_1", "hidden": true, "title": "Leads to", "to": "scenario_2"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized access", "hidden": true, "label": "Attack Vector 2", "to": "vector_3"}, {"arrows": "to", "color": "#ffa500", "from": "vector_3", "hidden": true, "title": "Leads to", "to": "scenario_4"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized access", "hidden": true, "label": "Attack Vector 3", "to": "vector_5"}, {"arrows": "to", "color": "#ffa500", "from": "vector_5", "hidden": true, "title": "Leads to", "to": "scenario_6"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized access", "hidden": true, "label": "Attack Vector 4", "to": "vector_7"}, {"arrows": "to", "color": "#ffa500", "from": "vector_7", "hidden": true, "title": "Leads to", "to": "scenario_8"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Unauthorized access", "hidden": true, "label": "Attack Vector 5", "to": "vector_9"}, {"arrows": "to", "color": "#ffa500", "from": "vector_9", "hidden": true, "title": "Leads to", "to": "scenario_10"}, {"arrows": "to", "color": "#ffff00", "from": "OBD-II Port", "hidden": true, "title": "Threat", "to": "Exploitation of vulnerabilities"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Exploitation of vulnerabilities", "hidden": true, "label": "Attack Vector 1", "to": "vector_11"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_12"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_13"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Exploitation of vulnerabilities", "hidden": true, "label": "Attack Vector 2", "to": "vector_14"}, {"arrows": "to", "color": "#ffa500", "from": "vector_14", "hidden": true, "title": "Leads to", "to": "scenario_15"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Exploitation of vulnerabilities", "hidden": true, "label": "Attack Vector 3", "to": "vector_16"}, {"arrows": "to", "color": "#ffa500", "from": "vector_16", "hidden": true, "title": "Leads to", "to": "scenario_17"}, {"arrows": "to", "color": "#ffff00", "from": "OBD-II Port", "hidden": true, "title": "Threat", "to": "Malware injection"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware injection", "hidden": true, "label": "Attack Vector 1", "to": "vector_18"}, {"arrows": "to", "color": "#ffa500", "from": "vector_18", "hidden": true, "title": "Leads to", "to": "scenario_19"}, {"arrows": "to", "color": "#ffa500", "from": "vector_18", "hidden": true, "title": "Leads to", "to": "scenario_20"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware injection", "hidden": true, "label": "Attack Vector 2", "to": "vector_21"}, {"arrows": "to", "color": "#ffa500", "from": "vector_21", "hidden": true, "title": "Leads to", "to": "scenario_22"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Malware injection", "hidden": true, "label": "Attack Vector 3", "to": "vector_23"}, {"arrows": "to", "color": "#ffa500", "from": "vector_23", "hidden": true, "title": "Leads to", "to": "scenario_24"}, {"arrows": "to", "color": "#ffff00", "from": "OBD-II Port", "hidden": true, "title": "Threat", "to": "Interception of vehicle diagnostics"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Interception of vehicle diagnostics", "hidden": true, "label": "Attack Vector 1", "to": "vector_11"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_25"}, {"arrows": "to", "color": "#ffa500", "from": "vector_11", "hidden": true, "title": "Leads to", "to": "scenario_26"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Interception of vehicle diagnostics", "hidden": true, "label": "Attack Vector 2", "to": "vector_27"}, {"arrows": "to", "color": "#ffa500", "from": "vector_27", "hidden": true, "title": "Leads to", "to": "scenario_28"}, {"arrows": "to", "color": "#ffa500", "from": "vector_27", "hidden": true, "title": "Leads to", "to": "scenario_29"}, {"arrows": "to", "color": "red", "font_color": "white", "from": "Interception of vehicle diagnostics", "hidden": true, "label": "Attack Vector 3", "to": "vector_30"}, {"arrows": "to", "color": "#ffa500", "from": "vector_30", "hidden": true, "title": "Leads to", "to": "scenario_31"}, {"arrows": "to", "color": "#ffa500", "from": "vector_30", "hidden": true, "title": "Leads to", "to": "scenario_32"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    
+    <div id="buttons-container" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+        <button onclick="zoomIn()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom In</button>
+        <button onclick="zoomOut()" style="background-color: #444; color: white; border: none; padding: 10px;">Zoom Out</button>
+        <button onclick="maximize()" style="background-color: #444; color: white; border: none; padding: 10px;">Maximize</button>
+        <button onclick="saveAsPNG()" style="background-color: #444; color: white; border: none; padding: 10px;">Save as PNG</button>
+    </div>
+    
+    <style>
+    .toast {{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0.5rem 1rem;
+        margin: 1rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border-radius: 0.25rem;
+        max-width: 100%;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 0.05s ease-in-out;
+    }}
+
+    .toast.show {{
+        opacity: 1;
+    }}
+    </style>
+    
+    <div id="legend-container" style="position: absolute; bottom: 10px; left: 10px; z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray;">
+        <h4>Legend</h4>
+        <p><span style="color: #0000ff;">&#x25A0;</span> Asset</p>
+        <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
+        <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
+        <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+    </div>
+    <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
+        <h4>Scenario Details</h4>
+        <p id="scenario-asset"><strong>Asset:</strong> N/A</p>
+        <p id="scenario-threat"><strong>Threat:</strong> N/A</p>
+        <p id="scenario-vector"><strong>Attack Vector:</strong> N/A</p>
+        <p id="scenario-desc"><strong>Scenario Description:</strong> N/A</p>
+        <button id="add-scenario-button" onclick="addScenario()" style="background-color: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer;">+</button>
+        <button id="remove-scenario-button" onclick="removeScenario()" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer;">-</button>
+        <button id="selection-completed-button" onclick="saveSelection()" style="background-color: #17a2b8; color: white; border: none; padding: 5px 10px; cursor: pointer; margin-left: 10px;">Selection Completed</button>
+
+    </div>
+    
+    <div id="toast-container" style="position: fixed; bottom: 60px; left: 250px; z-index: 100;">
+        <div id="toast-message" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body"></div>
+        </div>
+    </div>
+    </body>
+</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+    var lastClickedNode = null;
+    var asset_name = 'OBD-II Port';
+    var selected_scenarios = [];
+    console.log("Interaction script loaded");
+
+    network.on("dragEnd", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            console.log("Node dragged and fixed:", nodeId);
+            network.body.data.nodes.update({id: nodeId, fixed: {x: true, y: true}});
+        }
+    });
+
+    network.on("click", function (params) {
+        var nodeId = params.nodes[0];
+        if (nodeId) {
+            console.log("Node clicked:", nodeId);
+            lastClickedNode = nodeId;
+            var connectedEdges = network.getConnectedEdges(nodeId);
+
+            connectedEdges.forEach(function (edgeId) {
+                console.log("Connected edge shown:", edgeId);
+                network.body.data.edges.update({id: edgeId, hidden: false});
+            
+                var connectedNodeId = network.getConnectedNodes(edgeId);
+                for (var i = 0; i < connectedNodeId.length; i++){
+                    if(connectedNodeId[i] != nodeId){
+                        console.log("Connected node shown:", connectedNodeId[i]);
+                        network.body.data.nodes.update({id: connectedNodeId[i], hidden: false});
+                    }
+                }
+            });
+
+            var nodeData = network.body.data.nodes.get(nodeId);
+            console.log("Node data:", nodeData);
+            if (nodeData.data) {
+                const scenarioDetails = nodeData.data;
+                document.getElementById("scenario-asset").innerText = "Asset: " + scenarioDetails.asset;
+                document.getElementById("scenario-threat").innerText = "Threat: " + scenarioDetails.threat;
+                document.getElementById("scenario-vector").innerText = "Attack Vector: " + scenarioDetails.vector;
+                document.getElementById("scenario-desc").innerText = "Scenario Description: " + scenarioDetails.scenario_desc;
+                document.getElementById("scenario-details").style.display = "block";
+            }
+        }
+    });
+
+    function zoomIn() {
+        var scale = network.getScale();
+        console.log("Zooming in, scale:", scale);
+        network.moveTo({ scale: scale + 0.1 });
+    }
+
+    function zoomOut() {
+        var scale = network.getScale();
+        console.log("Zooming out, scale:", scale);
+        network.moveTo({ scale: scale - 0.1 });
+    }
+
+    function maximize() {
+        var container = document.getElementById('graph-legend-container');
+        if (container.requestFullscreen) {
+            console.log("Maximizing");
+            container.requestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            console.log("Maximizing with mozRequestFullScreen");
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            console.log("Maximizing with webkitRequestFullscreen");
+            container.webkitRequestFullscreen();
+        } else if (container.msRequestFullscreen) {
+            console.log("Maximizing with msRequestFullscreen");
+            container.msRequestFullscreen();
+        }
+    }
+
+    function saveAsPNG() {
+        var buttons = document.getElementById('buttons-container');
+        buttons.style.display = 'none';
+        html2canvas(document.getElementById('graph-legend-container')).then(canvas => {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = 'OBD-II Port-Attack-graph.png';
+            console.log("Saving as PNG");
+            link.click();
+            buttons.style.display = 'block';
+        });
+    }
+
+    //add toast message
+    function showToast(message) {
+        var toast = document.getElementById("toast-message");
+        var toastBody = toast.querySelector(".toast-body");
+        toastBody.textContent = message;
+        toast.classList.remove("hide");
+        toast.classList.add("show");
+        setTimeout(function () {
+            toast.classList.remove("show");
+            toast.classList.add("hide");
+        }, 500);
+    }
+
+    function addScenario() {
+        if (lastClickedNode && selected_scenarios.indexOf(lastClickedNode) === -1) {
+            selected_scenarios.push(lastClickedNode);
+            console.log("Scenario added:", lastClickedNode);
+            showToast("Scenario added.");
+        }
+    }
+
+    function removeScenario() {
+        if (lastClickedNode && selected_scenarios.indexOf(lastClickedNode) !== -1) {
+            selected_scenarios.splice(selected_scenarios.indexOf(lastClickedNode), 1);
+            console.log("Scenario removed:", lastClickedNode);
+            showToast("Scenario removed.");
+        }
+    }
+
+    function saveSelection() { 
+        if (selected_scenarios.length === 0) {
+            showToast("No scenarios selected.");
+        return;
+        }
+        var scenarios_data = [];
+        selected_scenarios.forEach(function (scenario_id) {
+            var scenario_data = network.body.data.nodes.get(scenario_id).data;
+            scenarios_data.push(scenario_data);
+        });
+        
+        var threats = [];
+        var vectors = [];
+        
+        scenarios_data.forEach(function (scenario) {
+            var threat = threats.find(t => t.name === scenario.threat);
+            if (!threat) {
+                threat = {
+                    name: scenario.threat,
+                    vectors: []
+                };
+                threats.push(threat);
+            }
+            
+            var vector = vectors[scenario.vector];
+            if (!vector) {
+                vector = {
+                    vector_name: scenario.vector,
+                    scenarios: []
+                };
+                vectors[scenario.vector] = vector;
+                threat.vectors.push(vector);
+            }
+            
+            vector.scenarios.push({
+                scenario_id: scenario.scenario_id,
+                scenario_description: scenario.scenario_desc
+            });
+        });
+
+        var selected_asset = {
+            name: asset_name,
+            threats: threats
+        };
+        
+        var json_data = JSON.stringify(selected_asset, null, 2);
+        var blob = new Blob([json_data], { type: "application/json" });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = "OBD-II Port_selected_scenarios.json";
+        link.click();
+        showToast("Scenarios saved.");
+    }
+    </script>
+    

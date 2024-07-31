@@ -4,50 +4,61 @@
             "name": "Braking System",
             "threats": [
                 {
-                    "name": "Unauthorized Access via Mobile App Integration",
+                    "name": "Unauthorized access",
                     "objectives": [
-                        "Manipulate braking system",
-                        "Cause vehicle malfunction",
-                        "Exfiltrate sensitive data"
+                        "Gain control of infotainment system features",
+                        "Access sensitive vehicle data",
+                        "Inject malicious software",
+                        "Spy on users through installed applications"
                     ],
                     "vectors": [
                         {
                             "vector_id": "vector_1",
-                            "vector_name": "Mobile App Spoofing",
+                            "vector_name": "Wi-Fi network intrusion",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_1",
-                                    "scenario_description": "An attacker creates a fake or malicious mobile app that mimics the legitimate app, tricking users into installing it. Once installed, the malicious app can gain control over the vehicle's braking system."
+                                    "scenario_description": "An attacker connects to the vehicle's Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_2",
-                            "vector_name": "Man-in-the-Middle (MitM) Attack",
+                            "vector_name": "Bluetooth exploitation",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_2",
-                                    "scenario_description": "An attacker intercepts the communication between the mobile app and the vehicle's braking system, modifying commands or injecting malicious code to control the braking functionality."
+                                    "scenario_description": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_3",
-                            "vector_name": "Exploiting App Vulnerabilities",
+                            "vector_name": "Malicious app installation",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_3",
-                                    "scenario_description": "An attacker exploits a vulnerability in the mobile app's code or its communication protocol to gain unauthorized access to the braking system."
+                                    "scenario_description": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_4",
-                            "vector_name": "Social Engineering",
+                            "vector_name": "Physical access manipulation",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_4",
-                                    "scenario_description": "An attacker uses social engineering tactics to convince the vehicle owner to share login credentials or install malicious updates, thereby gaining access to the braking system via the mobile app."
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_5",
+                            "vector_name": "Insider Threats",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."
                                 }
                             ]
                         }
@@ -55,41 +66,138 @@
                     "controls": []
                 },
                 {
-                    "name": "Malware Injection via USB Ports",
+                    "name": "Malware infection",
                     "objectives": [
-                        "Disrupt vehicle operations",
                         "Gain unauthorized control of the braking system",
-                        "Extract sensitive data from the vehicle's system",
-                        "Install persistent malware for future attacks"
+                        "Cause braking failure or unresponsive behavior",
+                        "Steal sensitive vehicle data",
+                        "Create safety hazards for users"
                     ],
                     "vectors": [
                         {
                             "vector_id": "vector_1",
-                            "vector_name": "Physical Access to USB Ports",
+                            "vector_name": "Remote Exploitation via Internet",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_1",
-                                    "scenario_description": "An attacker gains physical access to an unattended vehicle and plugs in a USB device containing malicious software designed to compromise the braking system."
+                                    "scenario_description": "An attacker exploits a vulnerability in the vehicle's firmware update mechanism accessed through the Internet to inject malware into the braking system."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_2",
-                            "vector_name": "Maintenance or Service Compromise",
+                            "vector_name": "Physical Access to Onboard Diagnostics Port",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_2",
-                                    "scenario_description": "An attacker infiltrates the maintenance staff or poses as a service technician to introduce a compromised USB device during routine maintenance or repairs."
+                                    "scenario_description": "An attacker connects a malicious device to the car's OBD-II port, uploading malware that targets the braking system's software."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_3",
-                            "vector_name": "Social Engineering",
+                            "vector_name": "Infected Mobile Application",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_3",
-                                    "scenario_description": "An attacker uses social engineering techniques to trick the vehicle owner into plugging in a malicious USB device disguised as a useful tool or update."
+                                    "scenario_description": "An attacker distributes a compromised mobile app that, once installed, communicates with the vehicle and deploys malware targeting the braking control system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Supply Chain Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker infiltrates the supply chain of the vehicle manufacturers, introducing malware into components that later compromise the braking system once installed in vehicles."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Denial of service",
+                    "objectives": [
+                        "Interrupt braking functionality",
+                        "Create chaos and potential accidents",
+                        "Damage the reputation of the automotive manufacturer"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Network Flooding",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker uses a distributed denial-of-service (DDoS) attack to overwhelm the communication network of the braking system, causing delays or failures in brake signal processing."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Firmware Corruption",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker exploits a vulnerability in the vehicle's software update mechanism to upload a malicious firmware that disables the braking system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Physical Tampering",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and disables the brake system by severing crucial wiring, causing a complete loss of braking capability."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Physical tampering",
+                    "objectives": [
+                        "Disrupt vehicle operation",
+                        "Cause an accident",
+                        "Steal sensitive data or components",
+                        "Manipulate vehicle behavior"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Unauthorized access to brake system components",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker gains access to the undercarriage of a vehicle and physically alters brake lines to reduce brake effectiveness."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker removes the wheel from a car and tamper with the brake caliper to prevent proper braking, leading to potential accidents."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Use of counterfeit parts",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker replaces original brake pads with counterfeit, substandard parts which wear out quickly, causing brake failure."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Tampering during maintenance",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker posing as a service technician gains temporary access to modify braking system calibration settings during routine maintenance."
                                 }
                             ]
                         }
@@ -98,9 +206,1091 @@
                 }
             ],
             "consequences": [
-                "Loss of control",
+                "Loss of vehicle control",
                 "Increased risk of accidents",
-                "Physical harm to driver and passengers"
+                "Liability issues",
+                "Damage to brand reputation",
+                "Financial losses due to recalls"
+            ]
+        },
+        {
+            "name": "Infotainment System",
+            "threats": [
+                {
+                    "name": "Unauthorized access",
+                    "objectives": [
+                        "Gain control of infotainment system features",
+                        "Access sensitive vehicle data",
+                        "Inject malicious software",
+                        "Spy on users through installed applications"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Wi-Fi network intrusion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects to the vehicle's Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Bluetooth exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious app installation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Physical access manipulation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_5",
+                            "vector_name": "Insider Threats",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Data leakage",
+                    "objectives": [
+                        "Access sensitive user information",
+                        "Extract navigation history and preferences",
+                        "Gather personal or financial data for identity theft"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Unauthorized Access via Malware",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker installs malware on the infotainment system through a compromised USB drive, allowing unauthorized access to personal data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Remote Exploitation via Wi-Fi",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker exploits vulnerabilities in the infotainment system's Wi-Fi module to remotely access user data transmitted over the network."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Phishing through Bluetooth",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker sends a phishing message to the infotainment system via Bluetooth, tricking the user into providing sensitive information."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Privacy invasion",
+                    "objectives": [
+                        "Steal personal data from users",
+                        "Monitor user behavior and preferences",
+                        "Intercept communications within the infotainment system",
+                        "Manipulate user settings for malicious purposes"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Malicious Mobile Application",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker creates a legitimate-looking mobile app that, once installed, harvests data from the vehicle's infotainment system by exploiting vulnerabilities in the app's permissions."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Bluetooth Exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker connects to the car's infotainment system via Bluetooth, using a previously compromised smartphone to siphon data such as call logs, messages, and location history."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Wi-Fi Network Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "A rogue Wi-Fi hotspot mimics a legitimate network, luring the car's infotainment system to connect and allowing the attacker to intercept data and inject malicious commands."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Malicious Software Update",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "The attacker manages to push a counterfeit software update to the infotainment system, which embeds spyware into the system, allowing continuous data collection and remote monitoring."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Malware infection",
+                    "objectives": [
+                        "Gain unauthorized control of the braking system",
+                        "Cause braking failure or unresponsive behavior",
+                        "Steal sensitive vehicle data",
+                        "Create safety hazards for users"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Remote Exploitation via Internet",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker exploits a vulnerability in the vehicle's firmware update mechanism accessed through the Internet to inject malware into the braking system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Physical Access to Onboard Diagnostics Port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker connects a malicious device to the car's OBD-II port, uploading malware that targets the braking system's software."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Infected Mobile Application",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker distributes a compromised mobile app that, once installed, communicates with the vehicle and deploys malware targeting the braking control system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Supply Chain Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker infiltrates the supply chain of the vehicle manufacturers, introducing malware into components that later compromise the braking system once installed in vehicles."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Personal data exposure",
+                "Loss of driver trust",
+                "Compromise of critical system functionality",
+                "Disruption of user experience",
+                "Legal repercussions"
+            ]
+        },
+        {
+            "name": "Location Data",
+            "threats": [
+                {
+                    "name": "Unauthorized sharing",
+                    "objectives": [
+                        "Gain access to sensitive location data",
+                        "Sell location data on the dark web",
+                        "Use location data to track individuals",
+                        "Manipulate location data for fraudulent purposes"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Phishing Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "The attacker sends a fraudulent email disguised as a legitimate request for location data, tricking the recipient into clicking a malicious link that compromises their credentials."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Malware Infection",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "The attacker distributes malware that infiltrates devices storing location data, allowing unauthorized access and transfer of sensitive information."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Network Eavesdropping",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "The attacker intercepts communications on an unsecured network, capturing location data as it is transmitted between devices."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Insider Threat",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "A disgruntled employee with access to location data decides to share sensitive information with external parties for monetary gain."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Data integrity alteration",
+                    "objectives": [
+                        "Disrupt navigation systems",
+                        "Manipulate vehicle routing",
+                        "Create safety hazards",
+                        "Steal sensitive location data"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "malicious software injection",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker deploys malware to manipulate the location data stored in the vehicle's navigation system, leading to incorrect routing information."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "man-in-the-middle attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "During a data transmission between the vehicle and the cloud, an attacker intercepts and alters the location data in real-time."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "GPS signal spoofing",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker uses a GPS signal generator to send false location data to the vehicle, causing it to misinterpret its actual position."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "social engineering for access",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker poses as a trusted service technician to gain physical access to the vehicle and manually alter the location data settings."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Location spoofing",
+                    "objectives": [
+                        "Manipulate vehicle navigation",
+                        "Deceive location-based services",
+                        "Evade law enforcement tracking",
+                        "Facilitate vehicle theft"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "GPS signal jamming",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker uses a GPS jamming device to disrupt the GPS signals received by the vehicle, causing the navigation system to fail. In the absence of accurate location data, the attacker then uses a spoofed GPS signal to redirect the vehicle to a predetermined location."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "GPS spoofing",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "The attacker transmits counterfeit GPS signals that appear legitimate to the vehicle's navigation system, tricking it into believing it is at an alternate location. This could enable the attacker to reroute the vehicle or deceive location services regarding its true whereabouts."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Mobile app exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker exploits vulnerabilities in a vehicle's companion mobile application that utilizes location data. By leveraging these exploits, they manipulate the app to display false location information, affecting the vehicle's operational decisions based on this flawed data."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Privacy violations",
+                "Targeting of users for malicious purposes",
+                "Misleading navigation results",
+                "Compounded security risks during high-profile travels"
+            ]
+        },
+        {
+            "name": "Driving Habits Data",
+            "threats": [
+                {
+                    "name": "Data theft",
+                    "objectives": [
+                        "Unauthorized access to sensitive data",
+                        "Exfiltration of proprietary information",
+                        "Installation of malicious software"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical USB Device Insertion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects a compromised USB flash drive to the vehicle's data port, which automatically executes malware designed to extract data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Maliciously Crafted USB Device",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker creates a fake USB device that appears legitimate but is rigged to siphon sensitive data from the vehicle's system upon connection."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Social Engineering for USB Access",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker uses social engineering tactics to convince an employee to insert a USB drive containing malware into the vehicle's system."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized access",
+                    "objectives": [
+                        "Gain control of infotainment system features",
+                        "Access sensitive vehicle data",
+                        "Inject malicious software",
+                        "Spy on users through installed applications"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Wi-Fi network intrusion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects to the vehicle's Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Bluetooth exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious app installation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Physical access manipulation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_5",
+                            "vector_name": "Insider Threats",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Compromised user privacy",
+                "Risk of adverse actions based on driving history",
+                "Targeted phishing attacks",
+                "Damage to customer trust and loyalty"
+            ]
+        },
+        {
+            "name": "In-Vehicle Storage",
+            "threats": [
+                {
+                    "name": "Unauthorized access to stored data",
+                    "objectives": [
+                        "Steal sensitive personal information",
+                        "Manipulate stored data for fraudulent purposes",
+                        "Gain access to user accounts linked with the vehicle",
+                        "Create unauthorized access points for further attacks"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical Access",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses a device to connect to the in-vehicle storage, extracting data directly."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Malicious Software",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker installs malware through an unsecured vehicle entertainment system, allowing remote access to the in-vehicle storage."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Wireless Exploits",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker exploits weaknesses in Bluetooth or Wi-Fi connectivity to intercept communications with the in-vehicle storage, obtaining sensitive data."
+                                },
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker sets up a rogue access point that the vehicle connects to, allowing them to intercept and access stored data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Social Engineering",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An attacker impersonates a vehicle service technician to trick the owner into providing access credentials for the in-vehicle system, allowing unauthorized data access."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Malware infection",
+                    "objectives": [
+                        "Gain unauthorized control of the braking system",
+                        "Cause braking failure or unresponsive behavior",
+                        "Steal sensitive vehicle data",
+                        "Create safety hazards for users"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Remote Exploitation via Internet",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker exploits a vulnerability in the vehicle's firmware update mechanism accessed through the Internet to inject malware into the braking system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Physical Access to Onboard Diagnostics Port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker connects a malicious device to the car's OBD-II port, uploading malware that targets the braking system's software."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Infected Mobile Application",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker distributes a compromised mobile app that, once installed, communicates with the vehicle and deploys malware targeting the braking control system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Supply Chain Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker infiltrates the supply chain of the vehicle manufacturers, introducing malware into components that later compromise the braking system once installed in vehicles."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Exploitation of storage vulnerabilities",
+                    "objectives": [
+                        "Gain unauthorized access to stored data",
+                        "Inject malicious software",
+                        "Corrupt or delete critical data",
+                        "Surveillance and data exfiltration"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical Access Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and connects a device to the storage unit, allowing them to extract or tamper with data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Remote Access Attack",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "The attacker exploits vulnerabilities in the vehicle's wireless communication protocols to gain remote access to the storage system and extract sensitive data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious Software Injection",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "Through a compromised software update, the attacker injects malware into the vehicle's storage, allowing them to gain persistent access to the vehicle's systems."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Insider Threat",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An employee with access to the vehicle's internal systems exploits their privilege to access and manipulate the storage for malicious purposes."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Loss of critical data",
+                "Breach of confidentiality",
+                "Legal liabilities",
+                "Impact on vehicle operations and safety features"
+            ]
+        },
+        {
+            "name": "OBD-II Port",
+            "threats": [
+                {
+                    "name": "Unauthorized access",
+                    "objectives": [
+                        "Gain control of infotainment system features",
+                        "Access sensitive vehicle data",
+                        "Inject malicious software",
+                        "Spy on users through installed applications"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Wi-Fi network intrusion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects to the vehicle's Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Bluetooth exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious app installation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Physical access manipulation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_5",
+                            "vector_name": "Insider Threats",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Exploitation of vulnerabilities",
+                    "objectives": [
+                        "Gain unauthorized access to vehicle systems",
+                        "Steal sensitive vehicle data",
+                        "Manipulate vehicle functionality",
+                        "Enable remote control of the vehicle"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical Access to OBD-II Port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker uses physical access to connect to the OBD-II port with a malicious device to exploit vehicle vulnerabilities."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker uses a USB device containing malware plugged into the OBD-II port to gain control over the vehicle's electronic systems."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Wireless Exploitation via Mobile Devices",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker connects a smartphone to the OBD-II port that has been previously compromised, allowing the attacker to remotely exploit vulnerabilities in vehicle networks."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious Software Update",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker forges a software update to be introduced through the OBD-II port, which contains backdoors to the vehicle's systems."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Malware injection",
+                    "objectives": [
+                        "Gain unauthorized access to vehicle systems",
+                        "Manipulate vehicle functions",
+                        "Steal sensitive data",
+                        "Disable security features"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical access via OBD-II port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects a malicious device to the OBD-II port, which installs malware onto the vehicle's electronic control unit (ECU) for control over vehicle functions."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "Using a custom OBD-II adapter that contains preinstalled malware, an attacker collects sensitive data such as VIN, speed, and diagnostic information, then exfiltrates it via LTE or Wi-Fi."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Remote exploitation through software updates",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker compromises the software update mechanism of the vehicle's ECU via the OBD-II port, injecting malware during a legitimate update process."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious mobile applications",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker develops a rogue mobile application that claims to provide vehicle diagnostics and encourages users to connect their phone to the OBD-II port, which in turn uploads malware to the vehicle."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Interception of vehicle diagnostics",
+                    "objectives": [
+                        "Obtain sensitive vehicle diagnostic data",
+                        "Manipulate vehicle performance parameters",
+                        "Gain unauthorized access to vehicle systems"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical Access to OBD-II Port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker physically connects a rogue device to the OBD-II port to capture real-time diagnostic information."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker uses a laptop with malicious software to connect to the OBD-II port and retrieve vehicle data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Wireless Interception",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker sets up a rogue Bluetooth device that initiates a connection to the vehicle's onboard system while in proximity."
+                                },
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker captures data transmitted between the vehicle and diagnostic tools over Wi-Fi using a man-in-the-middle attack."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious Software Exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An attacker deploys malware on a diagnostic tool used by technicians that records and sends vehicle data to an external server."
+                                },
+                                {
+                                    "scenario_id": "scenario_6",
+                                    "scenario_description": "An attacker sends a malicious update to the vehicle's software that creates a backdoor to intercept diagnostic data."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Compromise of vehicle performance",
+                "Risk of hacking by malicious parties",
+                "Threats to user privacy and safety",
+                "Liability for failure to secure vehicle systems"
+            ]
+        },
+        {
+            "name": "USB Ports",
+            "threats": [
+                {
+                    "name": "Malware injection",
+                    "objectives": [
+                        "Gain unauthorized access to vehicle systems",
+                        "Manipulate vehicle functions",
+                        "Steal sensitive data",
+                        "Disable security features"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical access via OBD-II port",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects a malicious device to the OBD-II port, which installs malware onto the vehicle's electronic control unit (ECU) for control over vehicle functions."
+                                },
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "Using a custom OBD-II adapter that contains preinstalled malware, an attacker collects sensitive data such as VIN, speed, and diagnostic information, then exfiltrates it via LTE or Wi-Fi."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Remote exploitation through software updates",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker compromises the software update mechanism of the vehicle's ECU via the OBD-II port, injecting malware during a legitimate update process."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious mobile applications",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker develops a rogue mobile application that claims to provide vehicle diagnostics and encourages users to connect their phone to the OBD-II port, which in turn uploads malware to the vehicle."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Data theft",
+                    "objectives": [
+                        "Unauthorized access to sensitive data",
+                        "Exfiltration of proprietary information",
+                        "Installation of malicious software"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical USB Device Insertion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects a compromised USB flash drive to the vehicle's data port, which automatically executes malware designed to extract data."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Maliciously Crafted USB Device",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker creates a fake USB device that appears legitimate but is rigged to siphon sensitive data from the vehicle's system upon connection."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Social Engineering for USB Access",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker uses social engineering tactics to convince an employee to insert a USB drive containing malware into the vehicle's system."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Unauthorized access",
+                    "objectives": [
+                        "Gain control of infotainment system features",
+                        "Access sensitive vehicle data",
+                        "Inject malicious software",
+                        "Spy on users through installed applications"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Wi-Fi network intrusion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker connects to the vehicle's Wi-Fi network and exploits weaknesses in the security protocol to access the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Bluetooth exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker pairs a malicious device with the infotainment system via Bluetooth to gain unauthorized access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malicious app installation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker tricks the user into installing a malicious application on the infotainment system that grants the attacker remote access."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Physical access manipulation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker gains physical access to the vehicle and uses an USB device to exploit vulnerabilities in the infotainment system."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_5",
+                            "vector_name": "Insider Threats",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_5",
+                                    "scenario_description": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                },
+                {
+                    "name": "Device hijacking",
+                    "objectives": [
+                        "Gain unauthorized access to vehicle systems",
+                        "Manipulate vehicle operations",
+                        "Extract sensitive data from the vehicle"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Malicious USB device",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker plugs a compromised USB device into the vehicle's port, which installs malware that allows remote access to the vehicle's systems."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Software exploit via USB",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker uses a vulnerability in the vehicle's USB control software, utilizing a specially crafted USB device to execute arbitrary code on the vehicle's embedded systems."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Logging keystrokes via USB",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker connects a keylogger USB device that records events and credentials entered through the vehicle's control interface, allowing the attacker to exploit the vehicle later."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": []
+                }
+            ],
+            "consequences": [
+                "Corrupted vehicle systems",
+                "Unauthorized control of vehicle functions",
+                "Personal data loss",
+                "Potential for further network propagation"
             ]
         }
     ]

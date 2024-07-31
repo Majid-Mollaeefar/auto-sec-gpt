@@ -1,32 +1,37 @@
 [
     {
         "Asset": "Braking System",
-        "Threats": "Unauthorized Access, Sensor Manipulation, Software Vulnerabilities, Denial of Service (DoS)",
-        "Potential Consequences": "Loss of Vehicle Control, Accidents/Injuries, Increased Liability, Damage to Vehicle"
+        "Threats": "Unauthorized access, Malware infection, Supply chain attacks, Denial of service, Physical tampering",
+        "Potential Consequences": "Loss of vehicle control, Increased risk of accidents, Liability issues, Damage to brand reputation, Financial losses due to recalls"
     },
     {
         "Asset": "Infotainment System",
-        "Threats": "Malware Infections, Data Breaches, Phishing Attacks, Unauthorized Data Access",
-        "Potential Consequences": "Privacy Violations, Theft of Personal Information, Disruption of Services, Potential Cyber Attacks on Other Systems"
+        "Threats": "Unauthorized access, Data leakage, Privacy invasion, Malware infection, Man-in-the-middle attacks",
+        "Potential Consequences": "Personal data exposure, Loss of driver trust, Compromise of critical system functionality, Disruption of user experience, Legal repercussions"
     },
     {
         "Asset": "Location Data",
-        "Threats": "Data Interception, Spoofing, Unauthorized Tracking, Misuse of Location Information",
-        "Potential Consequences": "Privacy Breaches, Stalking or Harassment, Increased Vulnerability to Physical Attacks, Erosion of Trust with Customers"
+        "Threats": "Data interception, Unauthorized sharing, Data integrity alteration, Location spoofing",
+        "Potential Consequences": "Privacy violations, Targeting of users for malicious purposes, Misleading navigation results, Compounded security risks during high-profile travels"
     },
     {
-        "Asset": "V2X Communication",
-        "Threats": "Message Tampering, Replay Attacks, Eavesdropping, Firmware Attacks",
-        "Potential Consequences": "Miscommunication with Other Vehicles, Traffic Accidents, Compromised Traffic Efficiency, Loss of Critical Data Integrity"
-    },
-    {
-        "Asset": "Cloud Services",
-        "Threats": "Data Breaches, Misconfiguration, Insider Threats, Distributed Denial of Service (DDoS)",
-        "Potential Consequences": "Loss of Sensitive Data, Service Downtime, Reputational Damage, Financial Loss"
+        "Asset": "Driving Habits Data",
+        "Threats": "Data theft, Unauthorized access, Data manipulation, Profiling by malicious actors",
+        "Potential Consequences": "Compromised user privacy, Risk of adverse actions based on driving history, Targeted phishing attacks, Damage to customer trust and loyalty"
     },
     {
         "Asset": "In-Vehicle Storage",
-        "Threats": "Data Theft, Physical Tampering, Logical Attacks, Malware Installation",
-        "Potential Consequences": "Loss of Critical Vehicle Data, Compromise of User Privacy, Data Integrity Issues, Unauthorized Vehicle Control"
+        "Threats": "Data corruption, Unauthorized access to stored data, Malware infection, Exploitation of storage vulnerabilities",
+        "Potential Consequences": "Loss of critical data, Breach of confidentiality, Legal liabilities, Impact on vehicle operations and safety features"
+    },
+    {
+        "Asset": "OBD-II Port",
+        "Threats": "Unauthorized access, Exploitation of vulnerabilities, Malware injection, Interception of vehicle diagnostics",
+        "Potential Consequences": "Compromise of vehicle performance, Risk of hacking by malicious parties, Threats to user privacy and safety, Liability for failure to secure vehicle systems"
+    },
+    {
+        "Asset": "USB Ports",
+        "Threats": "Malware injection, Data theft, Unauthorized access, Device hijacking",
+        "Potential Consequences": "Corrupted vehicle systems, Unauthorized control of vehicle functions, Personal data loss, Potential for further network propagation"
     }
 ]

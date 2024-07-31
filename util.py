@@ -2,6 +2,8 @@
 
 import streamlit as st
 import time
+
+# Define the likelihood levels for each factor
 levels = {
     "Elapsed Time": ["less than 1 day", "less than 1 week", "less than 1 month", "less than 3 months", "less than 6 months", "more than 6 months", "not practical"],
     "Expertise": ["Layman", "Proficient", "Expert", "Multiple experts"],
@@ -49,9 +51,50 @@ values = {
     "Equipment": [0, 4, 6, 9]
 }
 
-def reset_risk_assessment_state():
+def reset_likelihood_assessment_state():
     """Resets session state variables for risk assessment."""
     for key in ["risk_assessment_tab", "selected_scenario", "selected_levels",
                 "submitted_scenarios", "available_scenarios", "update_scenario"]:
+        if key in st.session_state:
+            del st.session_state[key]
+
+# Define the impact levels for each factor
+impact_levels = {
+    "Safety": [
+        "No injuries.",
+        "Light or moderate injuries.",
+        "Severe injuries (survival probable).",
+        "Life threatening (survival uncertain) or fatal injuries.",
+        "Life threatening or fatal injuries for multiple vehicles."
+    ],
+    "Privacy": [
+        "No unauthorized access to data.",
+        "Anonymous data only (no specific driver of vehicle data).",
+        "Identification of vehicle or driver.",
+        "Driver or vehicle tracking.",
+        "Driver or vehicle tracking for multiple vehicles."
+    ],
+    "Financial": [
+        "No financial loss.",
+        "Low-level loss (about 10 euros).",
+        "Moderate loss (about €100 euros).",
+        "Heavy loss (about €1000 euros).",
+        "Heavy losses for multiple vehicles."
+    ],
+    "Operational": [
+        "No impact on operational performance.",
+        "Impact not discernible to driver.",
+        "Driver aware of performance degradation. Indiscernible impacts for multiple vehicles.",
+        "Significant impact on performance. Noticeable impact for multiple vehicles.",
+        "Significant impact for multiple vehicles."
+    ]
+}
+
+def reset_impact_assessment_state():
+    keys_to_remove = [
+        key for key in st.session_state if key.startswith("impact_assessment_")
+    ]
+    keys_to_remove.extend(["submitted_impact_assessments", "impact_assessment_ready", "impact_assessment_complete"])
+    for key in keys_to_remove:
         if key in st.session_state:
             del st.session_state[key]

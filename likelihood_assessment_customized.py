@@ -1,9 +1,11 @@
+# likelihood_assessment_customized.py 
+
 import streamlit as st
 import pandas as pd
 import json
 import os
 import time
-from util import levels, comments, values, reset_risk_assessment_state
+from util import levels, comments, values, reset_likelihood_assessment_state
 
 def extract_and_merge_scenarios(files):
     merged_data = {"assets": []}
@@ -60,7 +62,7 @@ def integrate_likelihood(scenario_details, selected_levels, comments, values):
     scenario_details['Likelihood'] = likelihood
     return scenario_details
 
-def risk_assessment_customized(key):
+def likelihood_assessment_customized(key):
     st.subheader("Upload JSON Files")
     uploaded_files = st.file_uploader("Choose JSON files", accept_multiple_files=True, type="json", key=key)
     
@@ -80,7 +82,7 @@ def risk_assessment_customized(key):
             if "update_scenario" not in st.session_state:
                 st.session_state.update_scenario = False
 
-            st.title("Threat Evaluation Form")
+            st.title("Threat Likelihood Evaluation Form")
 
             # Select scenario
             if st.session_state.update_scenario:
@@ -89,7 +91,7 @@ def risk_assessment_customized(key):
                 else:
                     st.session_state.selected_scenario = None
                 st.session_state.update_scenario = False
-                st.experimental_rerun()
+                st.rerun()
 
             st.subheader("Select Attack Scenario")
             if st.session_state.available_scenarios:
@@ -161,7 +163,7 @@ def risk_assessment_customized(key):
                 st.session_state.submitted_scenarios.append(evaluated_scenario)
                 st.session_state.available_scenarios.remove(selected_scenario)
                 time.sleep(0.1)
-                st.experimental_rerun()  # Refresh the page to update scenario selection
+                st.rerun()  # Refresh the page to update scenario selection
 
             # Handle removal of a submitted scenario
             if remove_button:
@@ -172,7 +174,7 @@ def risk_assessment_customized(key):
                     st.session_state.available_scenarios = sorted(st.session_state.available_scenarios)
                     st.session_state.update_scenario = True
                     time.sleep(0.1)
-                    st.experimental_rerun()  # Refresh the page to update scenario selection
+                    st.rerun()  # Refresh the page to update scenario selection
 
             # Handle final likelihood assessment
             if finalize_button:
@@ -184,8 +186,10 @@ def risk_assessment_customized(key):
                     with open(file_path, "w") as f:
                         json.dump(final_result, f, indent=4)
                     st.write(f"Final Likelihood Assessment submitted and JSON file saved to {file_path}")
-                    reset_risk_assessment_state()  # Reset session state
+                    reset_likelihood_assessment_state()  # Reset session state
+                    st.session_state.likelihood_assessment_complete = True
                     time.sleep(0.1)
-                    st.experimental_rerun()
+                    # st.query_params = {"tab": "Likelihood Assessment"}
+                    # st.rerun()
                 else:
                     st.error("No scenarios submitted. Please submit at least one scenario before finalizing.")

@@ -1,13 +1,13 @@
-#risk_assessment_full.py
+#likelihood_assessment_full.py
 
 import streamlit as st
 import pandas as pd
 import json
 import os
 import time
-from util import levels, comments, values, reset_risk_assessment_state
+from util import levels, comments, values, reset_likelihood_assessment_state
 
-def risk_assessment_full():
+def likelihood_assessment_full():
     base_path = os.getcwd()
     file_path = os.path.join(base_path, ".files\\unified_attack_model.json")
     with open(file_path, 'r') as file:
@@ -47,7 +47,7 @@ def risk_assessment_full():
         if "update_scenario" not in st.session_state:
             st.session_state.update_scenario = False
 
-    st.title("Threat Evaluation Form")
+    st.title("Threat Likelihood Evaluation Form")
 
     if st.session_state.update_scenario:
         if st.session_state.available_scenarios:
@@ -55,7 +55,7 @@ def risk_assessment_full():
         else:
             st.session_state.selected_scenario = None
         st.session_state.update_scenario = False
-        st.experimental_rerun()
+        st.rerun()
 
     st.subheader("Select Attack Scenario")
     if st.session_state.available_scenarios:
@@ -156,9 +156,10 @@ def risk_assessment_full():
             with open(file_path, "w") as f:
                 json.dump(final_result, f, indent=4)
             st.write(f"Final Likelihood Assessment submitted and JSON file saved to {file_path}")
-            reset_risk_assessment_state()  # Reset session state
+            reset_likelihood_assessment_state()  # Reset session state
+            st.session_state.likelihood_assessment_complete = True
             time.sleep(0.1)
-            st.query_params = {"tab": "Risk Assessment"}
+            # st.query_params = {"tab": "Risk Assessment"}
             # st.rerun()  # Refresh the page
         else:
             st.error("No scenarios submitted. Please submit at least one scenario before finalizing.")
