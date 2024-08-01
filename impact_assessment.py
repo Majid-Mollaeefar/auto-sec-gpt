@@ -161,7 +161,7 @@ def impact_assessment():
             st.session_state.impact_available_scenarios.append(scenario_key)
             st.session_state.impact_available_scenarios = sorted(st.session_state.impact_available_scenarios)
             st.session_state.impact_update_scenario = True
-            st.warning(f"Impact Assessment for {last_submitted['scenario_id']} removed.")
+            # st.warning(f"Impact Assessment for {last_submitted['scenario_id']} removed.")
             time.sleep(0.1)
             st.rerun()
 
