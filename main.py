@@ -27,7 +27,8 @@ import likelihood_assessment_customized as customized
 import likelihood_assessment_full as full
 # from impact_assessment import impact_assessment, load_likelihood_assessment, likelihood_assessment_file_exists
 import impact_assessment
-from impact_assessment import likelihood_assessment_file_exists
+# from impact_assessment import likelihood_assessment_file_exists
+from risk_computation import risk_evaluation, display_prioritized_risks, load_impact_assessment
 # ------------------ Helper Functions ------------------ #
 
 
@@ -535,14 +536,26 @@ with tab4:
 
     # Risk Evaluation Tab
     with tabs[2]:
-        st.header("Risk Evaluation")
-        if st.session_state.impact_assessment_ready:
-            st.write("You can now perform the Risk Evaluation based on the completed assessments.")
-            # Risk Evaluation code goes here
-        else:
+        st.markdown(
+        """
+        The third step is to evaluate the risk levels. Click the button below to compute the risk evaluation.
+        """
+        )
+
+        st.markdown("---")
+        impact_data = load_impact_assessment()
+        if impact_data is None:
             st.write("Complete the Likelihood and Impact Assessments first.")
+        else:
+            st.write("You can now perform the Risk Evaluation based on the completed assessments.")
+            if st.button("Risk Computation"):
+                st.spinner("The risk is computing...")
+                risk_evaluation()
+                display_prioritized_risks()
 
-
+        # st.markdown("---")
+        # if st.button("Show Prioritized Risks"):
+        #     display_prioritized_risks()
 
 
 

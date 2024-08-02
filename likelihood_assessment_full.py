@@ -155,7 +155,7 @@ def likelihood_assessment_full():
             file_path = os.path.join(json_path, ".files\\final_likelihood_assessment.json")
             with open(file_path, "w") as f:
                 json.dump(final_result, f, indent=4)
-            st.write(f"Final Likelihood Assessment submitted and JSON file saved to {file_path}")
+            st.success(f"Likelihood Assessment successfully submitted.")
             reset_likelihood_assessment_state()  # Reset session state
             st.session_state.likelihood_assessment_complete = True
             time.sleep(0.1)

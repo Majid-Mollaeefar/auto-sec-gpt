@@ -173,11 +173,11 @@ def impact_assessment():
             file_path = os.path.join(json_path, ".files\\final_impact_assessment.json")
             with open(file_path, "w") as f:
                 json.dump(final_result, f, indent=4)
-            st.success(f"Impact Assessment submitted and JSON file saved to {file_path}")
+            st.success(f"Impact Assessment successfully submitted.")
             reset_impact_assessment_state()  # Reset session state
             st.session_state.impact_assessment_complete = True
             time.sleep(0.1)
             st.query_params = {"tab": "Risk Evaluation"}  # Move to the Risk Evaluation tab
-            st.rerun()
+            # st.rerun()
         else:
             st.error("No scenarios submitted. Please submit at least one scenario before finalizing.")

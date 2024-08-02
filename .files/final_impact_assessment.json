@@ -37,6 +37,28 @@
                     "Value": 0,
                     "Comment": "Readily available to the attacker"
                 }
+            ],
+            "Impact": [
+                {
+                    "Factor": "Safety",
+                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
+                    "Severity": 4
+                },
+                {
+                    "Factor": "Privacy",
+                    "Level": "Anonymous data only (no specific driver of vehicle data).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Financial",
+                    "Level": "Low-level loss (about 10 euros).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Operational",
+                    "Level": "No impact on operational performance.",
+                    "Severity": 0
+                }
             ]
         },
         {
@@ -76,6 +98,28 @@
                     "Value": 9,
                     "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
                 }
+            ],
+            "Impact": [
+                {
+                    "Factor": "Safety",
+                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
+                    "Severity": 4
+                },
+                {
+                    "Factor": "Privacy",
+                    "Level": "Anonymous data only (no specific driver of vehicle data).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Financial",
+                    "Level": "Low-level loss (about 10 euros).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Operational",
+                    "Level": "Driver aware of performance degradation. Indiscernible impacts for multiple vehicles.",
+                    "Severity": 2
+                }
             ]
         },
         {
@@ -114,6 +158,28 @@
                     "Level": "Multiple bespoke",
                     "Value": 9,
                     "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                }
+            ],
+            "Impact": [
+                {
+                    "Factor": "Safety",
+                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
+                    "Severity": 4
+                },
+                {
+                    "Factor": "Privacy",
+                    "Level": "Anonymous data only (no specific driver of vehicle data).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Financial",
+                    "Level": "Low-level loss (about 10 euros).",
+                    "Severity": 1
+                },
+                {
+                    "Factor": "Operational",
+                    "Level": "Driver aware of performance degradation. Indiscernible impacts for multiple vehicles.",
+                    "Severity": 2
                 }
             ]
         }
