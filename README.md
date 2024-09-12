@@ -53,6 +53,12 @@ To get started, you'll need an API key from one of these providers. OpenAI is th
    - **Impact Assessment**: Evaluate the impact level of each attack scenario using predefined impact factors.
    - **Risk Evaluation**: Finally, compute the risk levels based on the combination of likelihood and impact. Click the 'Risk Evaluation' button to generate the risk assessment.
 
+## Demo
+
+For a detailed demonstration of the tool, watch the video below:
+
+- [Demo Video](https://majidml.com/assets/tool/long-demo.mp4)
+
 ## Contacts
 
 AutoSecGPT is developed by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/). For any questions, feature requests, or feedback, feel free to contact me directly via LinkedIn or submit an issue on the GitHub repository.
