@@ -111,9 +111,9 @@ with st.sidebar:
         # Add model selection input field to the sidebar
         selected_model = st.selectbox(
             "Select the model you would like to use:",
-            ["gpt-4o-mini","gpt-4o", "gpt-4-turbo", "gpt-4", "gpt-3.5-turbo"],
+            ["gpt-4o-mini","gpt-4o", "gpt-4-turbo", "gpt-4"],
             key="selected_model",
-            help="OpenAI have moved to continuous model upgrades so `gpt-3.5-turbo`, `gpt-4` and `gpt-4-turbo` point to the latest available version of each model.",
+            help="OpenAI have moved to continuous model upgrades so `gpt-4`, `gpt-4-turbo`, `gpt-4o` point to the latest available version of each model.",
         )
 
     if model_provider == "Google AI API":

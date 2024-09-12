@@ -1,37 +1,37 @@
 [
     {
-        "Asset": "Braking System",
-        "Threats": "Unauthorized access, Malware infection, Supply chain attacks, Denial of service, Physical tampering",
-        "Potential Consequences": "Loss of vehicle control, Increased risk of accidents, Liability issues, Damage to brand reputation, Financial losses due to recalls"
+        "Asset": "Vehicle Control Systems (ADAS)",
+        "Threats": "Unauthorized Access, Spoofing of Sensor Data, Eavesdropping on Control Commands, Manipulation of Vehicle Dynamics",
+        "Potential Consequences": "Loss of vehicle control, Safety risks to occupants and pedestrians, Legal ramifications, Financial loss from accidents"
     },
     {
         "Asset": "Infotainment System",
-        "Threats": "Unauthorized access, Data leakage, Privacy invasion, Malware infection, Man-in-the-middle attacks",
-        "Potential Consequences": "Personal data exposure, Loss of driver trust, Compromise of critical system functionality, Disruption of user experience, Legal repercussions"
+        "Threats": "Malware Injection, Data Breach, Phishing Attacks via Mobile Apps, Exploitation of Vulnerabilities in Software",
+        "Potential Consequences": "Compromise of personal data, Unauthorized data access, Disruption of infotainment services, Potential vehicle system manipulation"
     },
     {
-        "Asset": "Location Data",
-        "Threats": "Data interception, Unauthorized sharing, Data integrity alteration, Location spoofing",
-        "Potential Consequences": "Privacy violations, Targeting of users for malicious purposes, Misleading navigation results, Compounded security risks during high-profile travels"
+        "Asset": "Cloud Storage",
+        "Threats": "Data Breaches, Denial of Service Attacks, Insider Threats, Data Loss due to Hardware Failure",
+        "Potential Consequences": "Exposure of sensitive driving habits, Legal consequences due to data loss, Loss of customer trust, Financial penalties"
     },
     {
-        "Asset": "Driving Habits Data",
-        "Threats": "Data theft, Unauthorized access, Data manipulation, Profiling by malicious actors",
-        "Potential Consequences": "Compromised user privacy, Risk of adverse actions based on driving history, Targeted phishing attacks, Damage to customer trust and loyalty"
-    },
-    {
-        "Asset": "In-Vehicle Storage",
-        "Threats": "Data corruption, Unauthorized access to stored data, Malware infection, Exploitation of storage vulnerabilities",
-        "Potential Consequences": "Loss of critical data, Breach of confidentiality, Legal liabilities, Impact on vehicle operations and safety features"
+        "Asset": "Mobile App Integration",
+        "Threats": "API Vulnerabilities, Insecure Data Storage, Man-in-the-Middle Attacks, Social Engineering",
+        "Potential Consequences": "Unauthorized commands sent to the vehicle, Exposure of user credentials, Loss of user privacy, Financial fraud"
     },
     {
         "Asset": "OBD-II Port",
-        "Threats": "Unauthorized access, Exploitation of vulnerabilities, Malware injection, Interception of vehicle diagnostics",
-        "Potential Consequences": "Compromise of vehicle performance, Risk of hacking by malicious parties, Threats to user privacy and safety, Liability for failure to secure vehicle systems"
+        "Threats": "Physical Tampering, Unauthorized Diagnostic Access, Malicious Firmware Update, Injection of Malicious Commands",
+        "Potential Consequences": "Vehicle malfunction, Theft of sensitive information, Compromised operation of safety-critical systems"
     },
     {
-        "Asset": "USB Ports",
-        "Threats": "Malware injection, Data theft, Unauthorized access, Device hijacking",
-        "Potential Consequences": "Corrupted vehicle systems, Unauthorized control of vehicle functions, Personal data loss, Potential for further network propagation"
+        "Asset": "Connectivity Features (Wi-Fi)",
+        "Threats": "Man-in-the-Middle Attacks, Unauthorized Network Access, Packet Sniffing, Rogue Hotspot Simulation",
+        "Potential Consequences": "Compromised communications, Unauthorized control over vehicle systems, Data interception, Service degradation"
+    },
+    {
+        "Asset": "Driving Habits Data",
+        "Threats": "Data Theft, Unauthorized Use of Data, Re-identification of Anonymous Data, Data Manipulation",
+        "Potential Consequences": "Privacy violations, Misuse of data for targeted advertising or discrimination, Loss of customer trust"
     }
 ]

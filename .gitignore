@@ -1,4 +1,5 @@
 .venv
 .data
 .test
+.files
 __pycache__
