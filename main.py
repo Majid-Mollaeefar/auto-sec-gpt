@@ -147,7 +147,7 @@ with st.sidebar:
         "Welcome to AutoSecGPT, an AI-powered tool designed to help teams produce better threat models for their applications."
     )
     st.markdown(
-        "The ISO/SAE 21434 Road Vehicles—Cybersecurity Engineering standard defines the responsibilities for various groups during different stages of automotive product development. The standard requires a commitment from executive management to product development with a focus on cybersecurity engineering"            
+        "The ISO/SAE 21434 Road Vehicles—Cybersecurity Engineering standard defines the responsibilities for various groups during different stages of automotive product development. The standard requires a commitment from executive management to product development with a focus on cybersecurity engineering."            
     )
     st.markdown(
         "ISO ISO/SAE emphasizes identifying and assessing cybersecurity risks, helping to anticipate and prepare for potential attack scenarios. Threat modelling is a key activity in the software development lifecycle, but is often overlooked or poorly executed. AutoSecGPT aims to help security teams."
@@ -499,7 +499,7 @@ with tab4:
     with tabs[0]:
         st.markdown(
         """
-        First step of our risk assessment is to detemine the likelihood level of each attack scenario, based on defined a set of likelihood factors.
+        First step of our risk assessment is to determine the likelihood level of each attack scenario, based on defined a set of likelihood factors.
         """
          )
 
@@ -524,7 +524,7 @@ with tab4:
     with tabs[1]:
         st.markdown(
         """
-        Second step is to detemine the impact level of each attack scenario, based on defined a set of impact factors.
+        Second step is to determine the impact level of each attack scenario, based on defined a set of impact factors.
         """
          )
 
