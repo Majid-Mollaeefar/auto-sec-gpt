@@ -13,7 +13,7 @@ from mitigations import (
     get_mitigations,
     get_mitigations_google,
 )
-from test_cases import create_test_cases_prompt, get_test_cases, get_test_cases_google
+# from test_cases import create_test_cases_prompt, get_test_cases, get_test_cases_google
 from threat_model import (
     create_threat_model_prompt,
     get_threat_model,
@@ -622,39 +622,6 @@ with tab4:
 #             st.write("Complete the Likelihood and Impact Assessments first.")
 
 
-
-
-# # ------------------ Risk Assessment old------------------- #
-# with tab4:
-#     st.markdown(
-#         """
-#         This tab performs a risk assessment. Choose one of the options below to proceed.
-#         """
-#     )
-
-#     st.markdown("---")
-    
-#     if "likelihood_assessment_tab" not in st.session_state:
-#         st.session_state.likelihood_assessment_tab = False
-
-#     # Add a key to the radio button
-#     likelihood_assessment_option = st.radio("Select Risk Assessment Option:", ["Customized Scenario Selection", "Full Scenario"], key="likelihood_assessment_radio")  
-
-#     if likelihood_assessment_option == "Customized Scenario Selection":
-#         customized.likelihood_assessment_customized(key="customized")
-#         st.session_state.likelihood_assessment_tab = True
-#     elif likelihood_assessment_option == "Full Scenario":
-#         full.likelihood_assessment_full()
-#         st.session_state.likelihood_assessment_tab = True
-    
-#     st.session_state.likelihood_assessment_tab = False
-
-# if st.session_state.likelihood_assessment_tab:
-#     st.session_state.query_params = {"tab": "Risk Assessment", "#": "risk-assessment"}
-
-
-
-
 # ------------------ Mitigations Generation ------------------ #
 
 # with tab3:
@@ -713,61 +680,3 @@ with tab4:
 #             st.error("Please generate a threat model first before suggesting mitigations.")
 
 
-# ------------------ Test Cases Generation ------------------ #
-
-# with tab5:
-#     st.markdown("""
-# Test cases are used to validate the security of an application and ensure that potential vulnerabilities are identified and
-# addressed. This tab allows you to generate test cases using Gherkin syntax. Gherkin provides a structured way to describe application
-# behaviours in plain text, using a simple syntax of Given-When-Then statements. This helps in creating clear and executable test
-# scenarios.
-# """)
-#     st.markdown("""---""")
-
-#     # Create a submit button for Test Cases
-#     test_cases_submit_button = st.button(label="Generate Test Cases")
-
-#     # If the Generate Test Cases button is clicked and the user has identified threats
-#     if test_cases_submit_button:
-#         # Check if threat_model data exists
-#         if 'threat_model' in st.session_state and st.session_state['threat_model']:
-#             # Convert the threat_model data into a Markdown list
-#             threats_markdown = json_to_markdown(st.session_state['threat_model'], [])
-#             # Generate the prompt using the create_test_cases_prompt function
-#             test_cases_prompt = create_test_cases_prompt(threats_markdown)
-
-#             # Show a spinner while generating test cases
-#             with st.spinner("Generating test cases..."):
-#                 max_retries = 3
-#                 retry_count = 0
-#                 while retry_count < max_retries:
-#                     try:
-#                         # Call to the relevant get_test_cases function with the generated prompt
-#                         if model_provider == "Google AI API":
-#                             test_cases_markdown = get_test_cases_google(google_api_key, google_model, test_cases_prompt)
-#                         elif model_provider == "OpenAI API":
-#                             test_cases_markdown = get_test_cases(openai_api_key, selected_model, test_cases_prompt)
-
-
-#                         # Display the suggested mitigations in Markdown
-#                         st.markdown(test_cases_markdown)
-#                         break  # Exit the loop if successful
-#                     except Exception as e:
-#                         retry_count += 1
-#                         if retry_count == max_retries:
-#                             st.error(f"Error generating test cases after {max_retries} attempts: {e}")
-#                             test_cases_markdown = ""
-#                         else:
-#                             st.warning(f"Error generating test cases. Retrying attempt {retry_count+1}/{max_retries}...")
-
-#             st.markdown("")
-
-#             # Add a button to allow the user to download the test cases as a Markdown file
-#             st.download_button(
-#                 label="Download Test Cases",
-#                 data=test_cases_markdown,
-#                 file_name="test_cases.md",
-#                 mime="text/markdown",
-#             )
-#         else:
-#             st.error("Please generate a threat model first before requesting test cases.")
