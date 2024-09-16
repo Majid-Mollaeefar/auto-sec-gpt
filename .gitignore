@@ -2,5 +2,5 @@
 .data
 .test
 .files
-.lib
+lib
 __pycache__
