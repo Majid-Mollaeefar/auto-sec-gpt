@@ -622,61 +622,6 @@ with tab4:
 #             st.write("Complete the Likelihood and Impact Assessments first.")
 
 
-# ------------------ Mitigations Generation ------------------ #
 
-# with tab3:
-#     st.markdown("""
-# Use this tab to generate potential mitigations for the threats identified in the threat model. Mitigations are security controls or
-# countermeasures that can help reduce the likelihood or impact of a security threat. The generated mitigations can be used to enhance
-# the security posture of the application and protect against potential attacks.
-# """)
-#     st.markdown("""---""")
-
-#     # Create a submit button for Mitigations
-#     mitigations_submit_button = st.button(label="Suggest Mitigations")
-
-#     # If the Suggest Mitigations button is clicked and the user has identified threats
-#     if mitigations_submit_button:
-#         # Check if threat_model data exists
-#         if 'threat_model' in st.session_state and st.session_state['threat_model']:
-#             # Convert the threat_model data into a Markdown list
-#             threats_markdown = json_to_markdown(st.session_state['threat_model'], [])
-#             # Generate the prompt using the create_mitigations_prompt function
-#             mitigations_prompt = create_mitigations_prompt(threats_markdown)
-
-#             # Show a spinner while suggesting mitigations
-#             with st.spinner("Suggesting mitigations..."):
-#                 max_retries = 3
-#                 retry_count = 0
-#                 while retry_count < max_retries:
-#                     try:
-#                         # Call the relevant get_mitigations function with the generated prompt
-#                         if model_provider == "Google AI API":
-#                             mitigations_markdown = get_mitigations_google(google_api_key, google_model, mitigations_prompt)
-#                         elif model_provider == "OpenAI API":
-#                             mitigations_markdown = get_mitigations(openai_api_key, selected_model, mitigations_prompt)
-
-#                         # Display the suggested mitigations in Markdown
-#                         st.markdown(mitigations_markdown)
-#                         break  # Exit the loop if successful
-#                     except Exception as e:
-#                         retry_count += 1
-#                         if retry_count == max_retries:
-#                             st.error(f"Error suggesting mitigations after {max_retries} attempts: {e}")
-#                             mitigations_markdown = ""
-#                         else:
-#                             st.warning(f"Error suggesting mitigations. Retrying attempt {retry_count+1}/{max_retries}...")
-
-#             st.markdown("")
-
-#             # Add a button to allow the user to download the mitigations as a Markdown file
-#             st.download_button(
-#                 label="Download Mitigations",
-#                 data=mitigations_markdown,
-#                 file_name="mitigations.md",
-#                 mime="text/markdown",
-#             )
-#         else:
-#             st.error("Please generate a threat model first before suggesting mitigations.")
 
 
