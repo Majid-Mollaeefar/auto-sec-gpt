@@ -1,6 +1,6 @@
 # AutoSecGPT
 
-AutoSecGPT is an AI-powered tool designed to help teams produce better threat models for their automotive applications. Aligned with the ISO/SAE 21434 standard, AutoSecGPT supports security teams by facilitating the entire cybersecurity engineering process—from threat identification to risk assessment. It helps anticipate and prepare for potential attack scenarios by emphasizing the identification and assessment of cybersecurity risks, a key aspect of ISO/SAE 21434. The tool addresses gaps in threat modeling, a critical activity in the automotive software development lifecycle that is often overlooked or poorly executed.
+AutoSecGPT is an AI-powered tool designed to help security teams produce better threat models for their automotive applications. Aligned with the ISO/SAE 21434 standard, AutoSecGPT supports security teams by facilitating the entire cybersecurity engineering process—from threat identification to risk assessment. It helps anticipate and prepare for potential attack scenarios by emphasizing the identification and assessment of cybersecurity risks, a key aspect of ISO/SAE 21434. The tool addresses gaps in threat modeling, a critical activity in the automotive software development lifecycle that is often overlooked or poorly executed.
 
 ## Features
 - **Works with various LLMs**: Leverage OpenAI and other large language models to analyze automotive threat scenarios.
