@@ -4,8 +4,10 @@ AutoSecGPT is an AI-powered tool designed to help security teams produce better 
 
 ## Features
 - **Works with various LLMs**: Leverage OpenAI and other large language models to analyze automotive threat scenarios.
+- **Works with LM Studio**: The newly added functionality to use local models by using LM Studio.
 - **Automotive-specific threat identification**: Recognize and assess security threats unique to automotive systems.
 - **Generate detailed threat scenarios**: Automatically generate scenarios and descriptions to enhance risk understanding.
+- **Identify security controls**: List relevant security controls for mitigating identified threats based on NIST SP 800-53.
 - **Visualize attack graphs**: Understand the root causes of threats through detailed attack graphs.
 - **Conduct risk assessments**: Perform likelihood and impact assessments to prioritize threats and propose mitigation strategies.
 - **TARA support**: Supports Threat Analysis and Risk Assessment (TARA) as defined by ISO/SAE 21434 for the automotive industry.
@@ -31,6 +33,27 @@ After installation, simply run the tool by following the instructions on the web
 
 To get started, you'll need an API key from one of these providers. OpenAI is the most widely supported provider at the moment, with some features being exclusive to OpenAI's API. To request support for additional LLM providers, please submit an issue or open a pull request.
 
+## Local LLM Integration with LM Studio
+
+If you prefer using local LLMs rather than cloud-based services, LM Studio is a powerful solution that allows you to run and manage LLMs on your own hardware. 
+We recommend using **qwen2.5-7b-instruct** as a reliable and efficient choice for local deployments with AutoSecGPT.
+
+### To Use LM Studio with AutoSecGPT:
+
+1. **Install LM Studio:**  
+   Download and install LM Studio from the official website.
+
+2. **Enable Developer Mode and Load Models:**  
+   Switch to Developer mode within LM Studio and load the available models. 
+
+3. **Fetch and Select a Local Model:**  
+   AutoSecGPT will connect to your LM Studio instance (using the specified port, default is **7860**) to retrieve the list of installed models.  
+   - If no models are found or LM Studio is not running, an error message will be displayed.
+   - If models are available, select the model you wish to use (e.g., **qwen2.5-7b-instruct**) from the provided list.
+
+4. **Proceed with Your Application:**  
+   Once the model is selected, continue by providing the application details and generating threat lists, attack models, and visualizing asset-based attack graphs for your application.
+
 
 ## Example Workflow
 
@@ -40,14 +63,17 @@ To get started, you'll need an API key from one of these providers. OpenAI is th
 2. **Attack Model**  
    Based on the identified threats, this tab provides a detailed attack model for each asset, investigating scenarios of how attacks might occur in the system. The attack model includes a comprehensive breakdown of each threat, specifying attack vectors and scenarios. Each identified threat outlines attacker objectives, along with possible attack vectors.
 
-3. **Attack Graph**  
+3. **Security Controls**  
+   It enables you to complete and validate the countermeasures associated with each threat. You can map identified threats and attack vectors to a set of recommended security controls based on NIST SP 800-53. Each control comes with detailed information—such as its ID, name, description, type, and implementation priority—ensuring that your risk mitigation strategy is robust and comprehensive. 
+
+4. **Attack Graph**  
    This tab visualizes the attack graph for each asset, presenting the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, helping to understand the progression from initial threats to potential attack scenarios and corresponding controls. To use this tab:
    - Select an asset from the dropdown list.
    - Click on nodes to explore related threats, attack vectors, and scenarios.
    - In the "Scenario Detail" box, you can add or remove scenarios for further risk assessment.
    - After selecting scenarios for each asset, click 'Selection Completed'. This will generate a downloadable JSON file for use in the Risk Assessment process.
 
-4. **Risk Assessment**  
+5. **Risk Assessment**  
    In this tab, you can perform a comprehensive risk assessment. You must first complete the **Likelihood Assessment**, followed by the **Impact Assessment**:
    - **Likelihood Assessment**: Determine the likelihood level of each attack scenario based on a set of predefined likelihood factors.
    - **Impact Assessment**: Evaluate the impact level of each attack scenario using predefined impact factors.
