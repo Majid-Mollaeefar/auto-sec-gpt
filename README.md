@@ -64,7 +64,8 @@ We recommend using **qwen2.5-7b-instruct** as a reliable and efficient choice fo
    Based on the identified threats, this tab provides a detailed attack model for each asset, investigating scenarios of how attacks might occur in the system. The attack model includes a comprehensive breakdown of each threat, specifying attack vectors and scenarios. Each identified threat outlines attacker objectives, along with possible attack vectors.
 
 3. **Security Controls**  
-   It enables you to complete and validate the countermeasures associated with each threat. You can map identified threats and attack vectors to a set of recommended security controls based on NIST SP 800-53. Each control comes with detailed information—such as its ID, name, description, type, and implementation priority—ensuring that your risk mitigation strategy is robust and comprehensive. 
+   It identifies appropriate security controls for each identified threat based on ISO/SAE 21434 and NIST SP 800-53 standards. 
+   The controls are categorized by type (Preventive, Detective, and Corrective) and prioritized for implementation. Each control includes a detailed description and implementation priority to help guide the security hardening process. 
 
 4. **Attack Graph**  
    This tab visualizes the attack graph for each asset, presenting the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, helping to understand the progression from initial threats to potential attack scenarios and corresponding controls. To use this tab:
