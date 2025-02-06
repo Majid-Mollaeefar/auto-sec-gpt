@@ -1,35 +1,35 @@
 {
     "Scenarios": [
         {
-            "asset": "Braking System",
-            "threat": "Physical tampering",
-            "vector": "Unauthorized access to brake system components",
+            "asset": "Infotainment System",
+            "threat": "Denial of Service",
+            "vector": "Resource Exhaustion",
             "scenario_id": "scenario_1",
-            "scenario_desc": "An attacker gains access to the undercarriage of a vehicle and physically alters brake lines to reduce brake effectiveness.",
+            "scenario_desc": "An attacker exploits known vulnerabilities in the infotainment software to send continuous updates or notifications, which consume excessive bandwidth and processing power.",
             "Likelihood": [
                 {
                     "Factor": "Elapsed Time",
-                    "Level": "less than 3 months",
-                    "Value": 7,
+                    "Level": "less than 1 month",
+                    "Value": 4,
                     "Comment": "no comment"
                 },
                 {
                     "Factor": "Expertise",
-                    "Level": "Expert",
-                    "Value": 6,
-                    "Comment": "Familiar with the underlying algorithms, protocols, hardware, structures, security behaviour, principles and concepts of security employed, techniques and tools for the definition of new attacks, cryptography, classical attacks for the product type, attack methods, etc."
+                    "Level": "Layman",
+                    "Value": 0,
+                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
                 },
                 {
                     "Factor": "Knowledge of system",
-                    "Level": "Sensitive",
-                    "Value": 7,
-                    "Comment": "e.g. knowledge that is shared between discreet teams within the developer organisation, access to which is constrained only to team members"
+                    "Level": "Public",
+                    "Value": 0,
+                    "Comment": "e.g. as gained from the Internet"
                 },
                 {
                     "Factor": "Window of Opportunity",
-                    "Level": "Difficult",
-                    "Value": 10,
-                    "Comment": "Access is required for more than 1 month or number of targets required to perform the attack more than 100."
+                    "Level": "Unnecessary/unlimited",
+                    "Value": 0,
+                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
                 },
                 {
                     "Factor": "Equipment",
@@ -41,80 +41,18 @@
             "Impact": [
                 {
                     "Factor": "Safety",
-                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
-                    "Severity": 4
+                    "Level": "Life threatening (survival uncertain) or fatal injuries.",
+                    "Severity": 3
                 },
                 {
                     "Factor": "Privacy",
-                    "Level": "Anonymous data only (no specific driver of vehicle data).",
-                    "Severity": 1
+                    "Level": "Identification of vehicle or driver.",
+                    "Severity": 2
                 },
                 {
                     "Factor": "Financial",
-                    "Level": "Low-level loss (about 10 euros).",
-                    "Severity": 1
-                },
-                {
-                    "Factor": "Operational",
-                    "Level": "No impact on operational performance.",
-                    "Severity": 0
-                }
-            ],
-            "Risk Level": 9.0
-        },
-        {
-            "asset": "Braking System",
-            "threat": "Physical tampering",
-            "vector": "Use of counterfeit parts",
-            "scenario_id": "scenario_1",
-            "scenario_desc": "An attacker replaces original brake pads with counterfeit, substandard parts which wear out quickly, causing brake failure.",
-            "Likelihood": [
-                {
-                    "Factor": "Elapsed Time",
-                    "Level": "less than 3 months",
-                    "Value": 7,
-                    "Comment": "no comment"
-                },
-                {
-                    "Factor": "Expertise",
-                    "Level": "Expert",
-                    "Value": 6,
-                    "Comment": "Familiar with the underlying algorithms, protocols, hardware, structures, security behaviour, principles and concepts of security employed, techniques and tools for the definition of new attacks, cryptography, classical attacks for the product type, attack methods, etc."
-                },
-                {
-                    "Factor": "Knowledge of system",
-                    "Level": "Critical",
-                    "Value": 11,
-                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
-                },
-                {
-                    "Factor": "Window of Opportunity",
-                    "Level": "None",
-                    "Value": -1,
-                    "Comment": "The opportunity window is not sufficient to perform the attack (the access to the target is too short to perform the attack, or a sufficient number of targets is not accessible to the attacker)."
-                },
-                {
-                    "Factor": "Equipment",
-                    "Level": "Multiple bespoke",
-                    "Value": 9,
-                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
-                }
-            ],
-            "Impact": [
-                {
-                    "Factor": "Safety",
-                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
-                    "Severity": 4
-                },
-                {
-                    "Factor": "Privacy",
-                    "Level": "Anonymous data only (no specific driver of vehicle data).",
-                    "Severity": 1
-                },
-                {
-                    "Factor": "Financial",
-                    "Level": "Low-level loss (about 10 euros).",
-                    "Severity": 1
+                    "Level": "Heavy loss (about \u20ac1000 euros).",
+                    "Severity": 3
                 },
                 {
                     "Factor": "Operational",
@@ -122,56 +60,56 @@
                     "Severity": 2
                 }
             ],
-            "Risk Level": "Not Applicable"
+            "Risk Level": 2.0
         },
         {
-            "asset": "Braking System",
-            "threat": "Unauthorized access",
-            "vector": "Insider Threats",
+            "asset": "Infotainment System",
+            "threat": "Denial of Service",
+            "vector": "Malware Infection",
             "scenario_id": "scenario_1",
-            "scenario_desc": "An employee with access to the driving habits data misuses their privileges to sell sensitive information to third parties.",
+            "scenario_desc": "A malicious payload is delivered through the infotainment system's software updates, causing it to run unnecessary processes and consume CPU and memory resources.",
             "Likelihood": [
                 {
                     "Factor": "Elapsed Time",
-                    "Level": "less than 3 months",
-                    "Value": 7,
+                    "Level": "less than 1 month",
+                    "Value": 4,
                     "Comment": "no comment"
                 },
                 {
                     "Factor": "Expertise",
-                    "Level": "Expert",
-                    "Value": 6,
-                    "Comment": "Familiar with the underlying algorithms, protocols, hardware, structures, security behaviour, principles and concepts of security employed, techniques and tools for the definition of new attacks, cryptography, classical attacks for the product type, attack methods, etc."
+                    "Level": "Layman",
+                    "Value": 0,
+                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
                 },
                 {
                     "Factor": "Knowledge of system",
-                    "Level": "Critical",
-                    "Value": 11,
-                    "Comment": "e.g. knowledge that is known by only a few individuals, access to which is very tightly controlled on a strict need-to-know basis and individual undertaking"
+                    "Level": "Sensitive",
+                    "Value": 7,
+                    "Comment": "e.g. knowledge that is shared between discreet teams within the developer organisation, access to which is constrained only to team members"
                 },
                 {
                     "Factor": "Window of Opportunity",
-                    "Level": "Easy",
-                    "Value": 1,
-                    "Comment": "Access is required for less than 1 day and number of targets required performing the attack less than 10."
+                    "Level": "Unnecessary/unlimited",
+                    "Value": 0,
+                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
                 },
                 {
                     "Factor": "Equipment",
-                    "Level": "Multiple bespoke",
-                    "Value": 9,
-                    "Comment": "Different types of bespoke equipment are required for distinct steps of an attack."
+                    "Level": "Standard",
+                    "Value": 0,
+                    "Comment": "Readily available to the attacker"
                 }
             ],
             "Impact": [
                 {
                     "Factor": "Safety",
-                    "Level": "Life threatening or fatal injuries for multiple vehicles.",
-                    "Severity": 4
+                    "Level": "Life threatening (survival uncertain) or fatal injuries.",
+                    "Severity": 3
                 },
                 {
                     "Factor": "Privacy",
-                    "Level": "Anonymous data only (no specific driver of vehicle data).",
-                    "Severity": 1
+                    "Level": "Driver or vehicle tracking.",
+                    "Severity": 3
                 },
                 {
                     "Factor": "Financial",
@@ -180,11 +118,11 @@
                 },
                 {
                     "Factor": "Operational",
-                    "Level": "Driver aware of performance degradation. Indiscernible impacts for multiple vehicles.",
-                    "Severity": 2
+                    "Level": "Impact not discernible to driver.",
+                    "Severity": 1
                 }
             ],
-            "Risk Level": 13.6
+            "Risk Level": 4.4
         }
     ]
 }

@@ -76,8 +76,8 @@ impact_levels = {
     "Financial": [
         "No financial loss.",
         "Low-level loss (about 10 euros).",
-        "Moderate loss (about €100 euros).",
-        "Heavy loss (about €1000 euros).",
+        "Moderate loss (about 100 euros).",
+        "Heavy loss (about 1000 euros).",
         "Heavy losses for multiple vehicles."
     ],
     "Operational": [

@@ -78,10 +78,30 @@ def create_attack_graph(asset_data, output_dir):
                 scenario_counter += 1
 
             vector_counter += 1
-
         for control in threat_data["controls"]:
-            net.add_node(control, label=control, color="#00ff00", shape="box", hidden=True)  # Green square
-            net.add_edge(threat_name, control, title="Control", hidden=True)
+            # For instance, get a unique ID for each control node
+            ctrl_id = get_unique_node_id("control", control["control_id"])
+            # Build a concise title (tooltip) for the control
+            ctrl_title = (
+                f"Control ID: {control['control_id']}\n"
+                f"Name: {control['control_name']}\n"
+                f"Type: {control['control_type']}\n"
+                f"Priority: {control['implementation_priority']}\n"
+                f"Description: {control['control_description']}"
+            )
+            net.add_node(
+                ctrl_id,
+                label=control["control_name"],
+                title=ctrl_title,
+                color="#00A300",
+                shape="box",
+                hidden=True,
+            )
+            # Add edge from Threat -> Control
+            net.add_edge(threat_name, ctrl_id, color='blue', font_color='white', arrows="to", title="Mitigate by", hidden=True)
+        # for control in threat_data["controls"]:
+        #     net.add_node(control, label=control, color="#00ff00", shape="box", hidden=True)  # Green square
+        #     net.add_edge(threat_name, control, title="Control", hidden=True)
 
     for threat in asset_data["threats"]:
         add_threat_nodes(threat)
@@ -96,6 +116,8 @@ def create_attack_graph(asset_data, output_dir):
         <p><span style="color: #ff0000;">&#x25C6;</span> Threat</p>
         <p><span style="color: #ff8080;">&#x25CF;</span> Attack Vector</p>
         <p><span style="color: #ffa500;">&#x2B2C;</span> Scenario</p>
+        <p><span style="color: #00A300;">&#x25A0;</span> Control</p>
+
     </div>
     <div id="scenario-details" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); z-index: 10; background-color: #444; color: white; padding: 10px; border: 2px dashed gray; width: 60%; font-size: 12px; display: none;">
         <h4>Scenario Details</h4>
@@ -120,7 +142,7 @@ def create_attack_graph(asset_data, output_dir):
 
     toast_css = """
     <style>
-    .toast {{
+    .toast {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -133,11 +155,11 @@ def create_attack_graph(asset_data, output_dir):
         z-index: 100;
         opacity: 0;
         transition: opacity 0.05s ease-in-out;
-    }}
+    }
 
-    .toast.show {{
+    .toast.show {
         opacity: 1;
-    }}
+    }
     </style>
     """
     legend_html = f"{toast_css}{legend_html}{toast_html}"
@@ -339,6 +361,8 @@ def create_attack_graph(asset_data, output_dir):
 
     with open(output_path, "w") as file:
         file.write(filedata)
+    
+    return output_path
 
 
 

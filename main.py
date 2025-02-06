@@ -20,9 +20,12 @@ from threat_model import (
     get_threat_model_google,
     json_to_markdown,
     save_json_to_file,
+    get_installed_models,
+    get_threat_model_llmlocal,
 )
-from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_threat_model
+from attack_model import create_attack_model_prompt, json_to_markdown_model, create_unified_threat_model, create_attack_model_prompt_local_llm
 from attack_graph import create_attack_graph, display_attackgraph_html_files
+from controls import create_controls_prompt, json_to_markdown_controls, create_controls_prompt_local_llm
 import likelihood_assessment_customized as customized
 import likelihood_assessment_full as full
 # from impact_assessment import impact_assessment, load_likelihood_assessment, likelihood_assessment_file_exists
@@ -88,7 +91,7 @@ with st.sidebar:
     # Add model selection input field to the sidebar
     model_provider = st.selectbox(
         "Select your preferred model provider:",
-        ["OpenAI API", "Google AI API"],
+        ["Local LLM","OpenAI API", "Google AI API"],
         key="model_provider",
         help="Select the model provider you would like to use. This will determine the models available for selection.",
     )
@@ -138,6 +141,33 @@ with st.sidebar:
             key="selected_model",
         )
 
+    elif model_provider == "Local LLM":
+        st.markdown(
+            """
+            1. Enter the port for your local LMstudio instance below 🔑
+            2. Provide details of the application that you would like to model together with additional determined information  📝
+            3. Generate a threat list, model attacks, generate and visualize asset-based attack graphs for your application 🚀
+            """
+        )
+        # Add LMstudio port input field to the sidebar
+        lmstudio_port = st.text_input(
+            "Enter the LMstudio port:",
+            "7860",
+            help="Enter the port number where your local LMstudio instance is running.",
+        )
+
+        # Fetch the list of installed models
+        lmstudio_url = f"http://127.0.0.1:{lmstudio_port}"
+        installed_models = get_installed_models(lmstudio_url)
+
+        if not installed_models:
+            st.error("No models found or LMstudio is not running. Please check LMstudio and try again.")
+        else:
+            # Display the list of installed models
+            model_names = [model["id"] for model in installed_models]
+            selected_model = st.selectbox("Select the model you would like to use:", model_names)
+        
+    
     st.markdown("""---""")
 
 # Add "About" section to the sidebar
@@ -186,7 +216,7 @@ with st.sidebar:
 
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["Threat Model", "Attack Model", "Attack Graph", "Risk Assessment"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Threat Model", "Attack Model", "Security Controls", "Attack Graph", "Risk Assessment"])
 
 with tab1:
     st.markdown(
@@ -321,6 +351,10 @@ with tab1:
                         model_output = get_threat_model(
                             openai_api_key, selected_model, threat_model_prompt
                         )
+                    elif model_provider == "Local LLM":
+                        model_output = get_threat_model_llmlocal (
+                            lmstudio_url, selected_model, threat_model_prompt
+                        )
 
                     # Access the threat model from the parsed content
                     threat_model = model_output.get("threat_model")
@@ -368,7 +402,8 @@ if threat_model_submit_button and not st.session_state.get("app_input"):
 with tab2:
     st.markdown(
         """
-        This tab provides an attack model based on identified threats for each asset and investigates scenarios of how the attacks might happen in the system. The structure of the attack model includes a detailed breakdown of each threat, specifying the attack vectors and scenarios. Each identified threat lists the attacker objectives, followed by various attack vectors.
+        This tab provides an attack model based on identified threats for each asset and investigates scenarios of how the attacks might happen in the system. 
+        The structure of the attack model includes a detailed breakdown of each threat, specifying the attack vectors and scenarios. Each identified threat lists the attacker objectives, followed by various attack vectors.
         """
     )
     st.markdown("""---""")
@@ -380,9 +415,9 @@ with tab2:
     if attack_model_submit_button or st.session_state.attack_model_generated:
         base_path = os.getcwd()
         input_file_name = os.path.join(base_path, ".files\\threats.json")
-        api_key = openai_api_key  
+        # api_key = openai_api_key  
         output_file_name = os.path.join(base_path, ".files\\attack_model.json")
-        model_name = selected_model  
+        # model_name = selected_model  
 
         if not os.path.exists(output_file_name):
             with st.spinner("Analyzing potential attacks..."):
@@ -390,10 +425,20 @@ with tab2:
                 retry_count = 0
                 while retry_count < max_retries:
                     try:
-                        create_attack_model_prompt(
-                            api_key, model_name, input_file_name, output_file_name
-                        )
-                        break
+                        if model_provider == "OpenAI API":
+                            api_key = openai_api_key 
+                            model_name = selected_model
+                            create_attack_model_prompt(
+                                api_key, model_name, input_file_name, output_file_name
+                            )
+                            break
+                        elif model_provider == "Local LLM":
+                            lmstudio_url = lmstudio_url
+                            model_name = selected_model
+                            create_attack_model_prompt_local_llm(
+                                lmstudio_url, model_name, input_file_name, output_file_name
+                                )
+                            break
                     except Exception as e:
                         retry_count += 1
                         if retry_count == max_retries:
@@ -407,15 +452,84 @@ with tab2:
                             )
 
         st.session_state.attack_model_generated = True
-        unified_output_file_name= os.path.join(base_path, ".files\\unified_attack_model.json")
-        create_unified_threat_model(input_file_name, output_file_name, unified_output_file_name)
+        # unified_output_file_name = os.path.join(base_path, ".files\\unified_attack_model.json")
+        # create_unified_threat_model(input_file_name, output_file_name, unified_output_file_name)
         # Convert the threat model JSON to Markdown
         markdown_output_attack_model = json_to_markdown_model(output_file_name)
         # Display the attack model in Markdown
         st.markdown(markdown_output_attack_model, unsafe_allow_html=True)
 
-# ------------------ Attack Graph ------------------- #
+# ------------------ Security Controls ------------------- #
 with tab3:
+    st.markdown(
+        """
+        This tab identifies appropriate security controls for each identified threat based on ISO/SAE 21434 and NIST SP 800-53 standards. 
+        The controls are categorized by type (Preventive, Detective, and Corrective) and prioritized for implementation.
+        Each control includes a detailed description and implementation priority to help guide the security hardening process.
+        """
+    )
+    st.markdown("""---""")
+
+    if "controls_generated" not in st.session_state:
+        st.session_state.controls_generated = False
+
+    controls_submit_button = st.button(label="Generate Security Controls")
+    if controls_submit_button or st.session_state.controls_generated:
+        base_path = os.getcwd()
+        input_file_name = os.path.join(base_path, ".files\\threats.json")
+        output_file_name = os.path.join(base_path, ".files\\controls.json")
+        unified_output_file_name = os.path.join(base_path, ".files\\unified_attack_model.json")
+
+        if not os.path.exists(output_file_name):
+            with st.spinner("Analyzing and generating security controls..."):
+                max_retries = 5
+                retry_count = 0
+                while retry_count < max_retries:
+                    try:
+                        if model_provider == "OpenAI API":
+                            api_key = openai_api_key 
+                            model_name = selected_model
+                            create_controls_prompt(
+                                api_key, model_name, input_file_name, output_file_name
+                            )
+                            break
+                        elif model_provider == "Local LLM":
+                            create_controls_prompt_local_llm(
+                                lmstudio_url, selected_model, input_file_name, output_file_name
+                            )
+                            break
+                    except Exception as e:
+                        retry_count += 1
+                        if retry_count == max_retries:
+                            st.error(
+                                f"Error generating security controls after {max_retries} attempts: {e}"
+                            )
+                            break
+                        else:
+                            st.warning(
+                                f"Error generating security controls. Retrying attempt {retry_count}/{max_retries}..."
+                            )
+
+        st.session_state.controls_generated = True
+
+        # Create unified model with controls
+        attack_model_file = os.path.join(base_path, ".files\\attack_model.json")
+        create_unified_threat_model(input_file_name, attack_model_file, output_file_name, unified_output_file_name)
+
+        # Convert the controls to Markdown and display
+        markdown_output_controls = json_to_markdown_controls(output_file_name)
+        st.markdown(markdown_output_controls, unsafe_allow_html=True)
+
+        # Add download button for the controls
+        st.download_button(
+            label="Download Security Controls",
+            data=markdown_output_controls,
+            file_name="security_controls.md",
+            mime="text/markdown",
+        )
+
+# ------------------ Attack Graph ------------------- #
+with tab4:
     st.markdown(
         """
         This tab visualizes the attack graph for each asset, illustrating the relationships between assets, threats, attack vectors, and scenarios. The graph dynamically displays interconnected nodes, detailing the progression from initial threats to potential attack scenarios and corresponding controls. This enables a comprehensive analysis of potential attack paths.
@@ -436,7 +550,7 @@ with tab3:
 
     if generate_graphs_button:
         if not os.path.exists(unified_attack_model_path):
-            st.error("Unified attack model JSON file does not exist. Please generate the attack model first in the 'Attack Model' tab.")
+            st.error("Unified attack model JSON file does not exist. Please generate the controls first in the 'Security Controls' tab.")
         else:
             # Load data directly from the JSON file
             try:
@@ -485,7 +599,7 @@ def check_likelihood_assessment_complete():
     else:
         st.session_state.impact_assessment_ready = False
 
-with tab4:
+with tab5:
     st.markdown(
         """
         This tab performs a risk assessment. You must first complete the likelihood assessment, and then proceed to the impact assessment.
@@ -556,72 +670,6 @@ with tab4:
         # st.markdown("---")
         # if st.button("Show Prioritized Risks"):
         #     display_prioritized_risks()
-
-
-
-
-
-
-
-# # Initialize session state for the tabs and assessments
-# if "likelihood_assessment_complete" not in st.session_state:
-#     st.session_state.likelihood_assessment_complete = False
-# if "impact_assessment_ready" not in st.session_state:
-#     st.session_state.impact_assessment_ready = False
-# if "impact_assessment_complete" not in st.session_state:
-#     st.session_state.impact_assessment_complete = False
-
-
-# with tab4:
-#     st.markdown(
-#         """
-#         This tab performs a risk assessment. You must first complete the likelihood assessment, and then proceed to the impact assessment.
-#         """
-#     )
-
-#     st.markdown("---")
-
-#     sub_tabs = st.tabs(["Likelihood Assessment", "Impact Assessment", "Risk Evaluation"])
-
-#    # Likelihood Assessment Tab
-#     with sub_tabs[0]:
-#         st.markdown("### Likelihood Assessment")
-#         likelihood_assessment_option = st.radio(
-#             "Select Likelihood Assessment Option:",
-#             ["Customized Scenario Selection", "Full Scenario"],
-#             key="likelihood_assessment_radio"
-#         )
-
-#         if likelihood_assessment_option == "Customized Scenario Selection":
-#             customized.likelihood_assessment_customized(key="customized")
-#         elif likelihood_assessment_option == "Full Scenario":
-#             full.likelihood_assessment_full()
-
-#         if st.session_state.likelihood_assessment_complete:
-#             st.success("Likelihood Assessment is complete. You can now proceed to Impact Assessment.")
-
-#     # Impact Assessment Tab
-#     with sub_tabs[1]:
-#         st.markdown("### Impact Assessment")
-#         if st.session_state.likelihood_assessment_complete:
-#             st.session_state.impact_assessment_ready = impact_assessment.likelihood_assessment_file_exists()
-#             if st.session_state.impact_assessment_ready:
-#                 impact_assessment.impact_assessment()
-#             else:
-#                 st.write("No Likelihood Assessment data found. Complete the Likelihood Assessment first.")
-#         else:
-#             st.write("Complete the Likelihood Assessment first.")
-
-#     # Risk Evaluation Tab
-#     with sub_tabs[2]:
-#         st.markdown("### Risk Evaluation")
-#         if st.session_state.impact_assessment_complete:
-#             st.write("You can now perform the Risk Evaluation based on the completed assessments.")
-#             # Risk Evaluation code goes here
-#         else:
-#             st.write("Complete the Likelihood and Impact Assessments first.")
-
-
 
 
 

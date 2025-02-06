@@ -2,5 +2,6 @@
 .data
 .test
 .files
+.files\.attackgraph
 lib
 __pycache__

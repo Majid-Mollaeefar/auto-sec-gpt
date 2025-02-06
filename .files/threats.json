@@ -1,37 +1,12 @@
 [
     {
-        "Asset": "Vehicle Control Systems (ADAS)",
-        "Threats": "Unauthorized Access, Spoofing of Sensor Data, Eavesdropping on Control Commands, Manipulation of Vehicle Dynamics",
-        "Potential Consequences": "Loss of vehicle control, Safety risks to occupants and pedestrians, Legal ramifications, Financial loss from accidents"
+        "Asset": "Autonomous Driving System",
+        "Threats": "Unauthorized access",
+        "Potential Consequences": "Loss of vehicle control, Accident or collision, Compromise of passenger safety, Liability issues"
     },
     {
         "Asset": "Infotainment System",
-        "Threats": "Malware Injection, Data Breach, Phishing Attacks via Mobile Apps, Exploitation of Vulnerabilities in Software",
-        "Potential Consequences": "Compromise of personal data, Unauthorized data access, Disruption of infotainment services, Potential vehicle system manipulation"
-    },
-    {
-        "Asset": "Cloud Storage",
-        "Threats": "Data Breaches, Denial of Service Attacks, Insider Threats, Data Loss due to Hardware Failure",
-        "Potential Consequences": "Exposure of sensitive driving habits, Legal consequences due to data loss, Loss of customer trust, Financial penalties"
-    },
-    {
-        "Asset": "Mobile App Integration",
-        "Threats": "API Vulnerabilities, Insecure Data Storage, Man-in-the-Middle Attacks, Social Engineering",
-        "Potential Consequences": "Unauthorized commands sent to the vehicle, Exposure of user credentials, Loss of user privacy, Financial fraud"
-    },
-    {
-        "Asset": "OBD-II Port",
-        "Threats": "Physical Tampering, Unauthorized Diagnostic Access, Malicious Firmware Update, Injection of Malicious Commands",
-        "Potential Consequences": "Vehicle malfunction, Theft of sensitive information, Compromised operation of safety-critical systems"
-    },
-    {
-        "Asset": "Connectivity Features (Wi-Fi)",
-        "Threats": "Man-in-the-Middle Attacks, Unauthorized Network Access, Packet Sniffing, Rogue Hotspot Simulation",
-        "Potential Consequences": "Compromised communications, Unauthorized control over vehicle systems, Data interception, Service degradation"
-    },
-    {
-        "Asset": "Driving Habits Data",
-        "Threats": "Data Theft, Unauthorized Use of Data, Re-identification of Anonymous Data, Data Manipulation",
-        "Potential Consequences": "Privacy violations, Misuse of data for targeted advertising or discrimination, Loss of customer trust"
+        "Threats": "Malicious app installation, Denial of Service",
+        "Potential Consequences": "Exposure of personal data, Disruption of services, Unauthorized access to vehicle controls, Damage to user experience and trust"
     }
 ]
