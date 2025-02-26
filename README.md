@@ -11,6 +11,13 @@ AutoSecGPT is an AI-powered tool designed to help security teams produce better 
 - **Visualize attack graphs**: Understand the root causes of threats through detailed attack graphs.
 - **Conduct risk assessments**: Perform likelihood and impact assessments to prioritize threats and propose mitigation strategies.
 - **TARA support**: Supports Threat Analysis and Risk Assessment (TARA) as defined by ISO/SAE 21434 for the automotive industry.
+- **CAPEC Analysis**: Leverage MITRE CAPEC (Common Attack Pattern Enumeration and Classification) to enhance threat scenarios through using an NLP technique to match them with CAPEC. 
+- **Comprehensive Report Generation**: Generate detailed PDF reports including:
+  - Threat model analysis
+  - Security controls recommendations
+  - Risk assessment results
+  - Attack graphs visualization
+  - CAPEC-based generated threat scenarios
 
 ## Installation
 
@@ -28,8 +35,6 @@ streamlit run main.py
 After installation, simply run the tool by following the instructions on the web interface. The tool is API-driven and works with multiple LLM providers, including:
 
 - **OpenAI** (API key required for full functionality)
-- **MistralAI**
-- **Google Gemini**
 
 To get started, you'll need an API key from one of these providers. OpenAI is the most widely supported provider at the moment, with some features being exclusive to OpenAI's API. To request support for additional LLM providers, please submit an issue or open a pull request.
 
@@ -80,11 +85,36 @@ We recommend using **qwen2.5-7b-instruct** as a reliable and efficient choice fo
    - **Impact Assessment**: Evaluate the impact level of each attack scenario using predefined impact factors.
    - **Risk Evaluation**: Finally, compute the risk levels based on the combination of likelihood and impact. Click the 'Risk Evaluation' button to generate the risk assessment.
 
+6. **CAPEC Analysis**  
+   This tab enhances your threat scenarios by mapping them to MITRE's Common Attack Pattern Enumeration and Classification (CAPEC):
+   - Select specific scenarios from your threat model for CAPEC analysis
+   - The system uses NLP to match your scenarios with relevant CAPEC patterns
+   - Review matched patterns and their detailed descriptions
+   - Generate updated threat scenarios incorporating CAPEC insights
+   - View execution flow and attack steps for each pattern
+   - Export the enhanced scenarios for inclusion in the final report
+
+7. **Report**  
+   Generate comprehensive security assessment reports in this tab:
+   - Enter basic application information (name, version, author)
+   - Upload and manage attack graph screenshots using the built-in viewer
+   - Preview available report components before generation
+   - Customize report appearance (font, size)
+   - Generate a PDF report including:
+     - Application details
+     - Attack model analysis
+     - Security controls recommendations
+     - Risk assessment results
+     - CAPEC-based threat scenarios
+     - Attack graph visualizations
+   - Download the final report for documentation and sharing
+
+
 ## Demo
 
 For a detailed demonstration of the tool, watch the video below:
 
-- [Demo Video](https://majidml.com/assets/tool/long-demo.mp4)
+- [Demo Video](https://majidml.com/assets/tool/long-demo.mp4) (version 1.0.0)
 
 ## Contacts
 
