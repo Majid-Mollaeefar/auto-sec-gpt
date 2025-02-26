@@ -11,7 +11,7 @@ AutoSecGPT is an AI-powered tool designed to help security teams produce better 
 - **Visualize attack graphs**: Understand the root causes of threats through detailed attack graphs.
 - **Conduct risk assessments**: Perform likelihood and impact assessments to prioritize threats and propose mitigation strategies.
 - **TARA support**: Supports Threat Analysis and Risk Assessment (TARA) as defined by ISO/SAE 21434 for the automotive industry.
-- **CAPEC Analysis**: Leverage MITRE CAPEC (Common Attack Pattern Enumeration and Classification) to enhance threat scenarios through using an NLP technique to match them with CAPEC. 
+- **CAPEC Analysis**: Leverage MITRE CAPEC (Common Attack Pattern Enumeration and Classification) to enhance threat scenario generation by using an NLP technique to conduct a similarity check with CAPEC. 
 - **Comprehensive Report Generation**: Generate detailed PDF reports including:
   - Threat model analysis
   - Security controls recommendations
