@@ -38,6 +38,8 @@ After installation, simply run the tool by following the instructions on the web
 
 To get started, you'll need an API key from one of these providers. OpenAI is the most widely supported provider at the moment, with some features being exclusive to OpenAI's API. To request support for additional LLM providers, please submit an issue or open a pull request.
 
+> **Note:** The data in the `/.files` directory contains example outputs. Please clean this directory before starting your own threat modeling process to ensure accurate results.
+
 ## Local LLM Integration with LM Studio
 
 If you prefer using local LLMs rather than cloud-based services, LM Studio is a powerful solution that allows you to run and manage LLMs on your own hardware. 
