@@ -5,7 +5,7 @@ import pandas as pd
 import json
 import os
 import time
-from util import levels, comments, values, reset_likelihood_assessment_state
+from util.util import levels, comments, values, reset_likelihood_assessment_state
 
 def extract_and_merge_scenarios(files):
     merged_data = {"assets": []}

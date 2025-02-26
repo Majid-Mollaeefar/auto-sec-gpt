@@ -1,12 +1,7 @@
 [
     {
-        "Asset": "Autonomous Driving System",
-        "Threats": "Unauthorized access",
-        "Potential Consequences": "Loss of vehicle control, Accident or collision, Compromise of passenger safety, Liability issues"
-    },
-    {
-        "Asset": "Infotainment System",
-        "Threats": "Malicious app installation, Denial of Service",
-        "Potential Consequences": "Exposure of personal data, Disruption of services, Unauthorized access to vehicle controls, Damage to user experience and trust"
+        "Asset": "Braking System",
+        "Threats": "Unauthorized access to braking control, Tampering with braking system commands",
+        "Potential Consequences": "Loss of vehicle control, Increased risk of accidents, Potential injuries or fatalities"
     }
 ]

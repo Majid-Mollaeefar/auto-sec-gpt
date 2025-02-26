@@ -1,5 +1,5 @@
 streamlit
 openai
-google.generativeai
 pyvis 
 pandas
+SentenceTransformer

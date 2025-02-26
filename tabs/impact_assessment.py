@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import json
 import time
-from util import impact_levels, reset_impact_assessment_state
+from util.util import impact_levels, reset_impact_assessment_state
 
 # Function to check if the final likelihood assessment file exists
 def likelihood_assessment_file_exists():

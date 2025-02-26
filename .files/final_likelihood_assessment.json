@@ -1,23 +1,23 @@
 {
     "Scenarios": [
         {
-            "asset": "Infotainment System",
-            "threat": "Denial of Service",
-            "vector": "Resource Exhaustion",
+            "asset": "Braking System",
+            "threat": "Unauthorized access to braking control",
+            "vector": "Remote exploitation of wireless communication",
             "scenario_id": "scenario_1",
-            "scenario_desc": "An attacker exploits known vulnerabilities in the infotainment software to send continuous updates or notifications, which consume excessive bandwidth and processing power.",
+            "scenario_desc": "An attacker uses a spoofed wireless signal to connect to the vehicle's braking system, overriding normal controls.",
             "Likelihood": [
                 {
                     "Factor": "Elapsed Time",
-                    "Level": "less than 1 month",
-                    "Value": 4,
+                    "Level": "less than 1 day",
+                    "Value": 0,
                     "Comment": "no comment"
                 },
                 {
                     "Factor": "Expertise",
-                    "Level": "Layman",
-                    "Value": 0,
-                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
+                    "Level": "Expert",
+                    "Value": 6,
+                    "Comment": "Familiar with the underlying algorithms, protocols, hardware, structures, security behaviour, principles and concepts of security employed, techniques and tools for the definition of new attacks, cryptography, classical attacks for the product type, attack methods, etc."
                 },
                 {
                     "Factor": "Knowledge of system",
@@ -27,54 +27,15 @@
                 },
                 {
                     "Factor": "Window of Opportunity",
-                    "Level": "Unnecessary/unlimited",
-                    "Value": 0,
-                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
-                },
-                {
-                    "Factor": "Equipment",
-                    "Level": "Standard",
-                    "Value": 0,
-                    "Comment": "Readily available to the attacker"
-                }
-            ]
-        },
-        {
-            "asset": "Infotainment System",
-            "threat": "Denial of Service",
-            "vector": "Malware Infection",
-            "scenario_id": "scenario_1",
-            "scenario_desc": "A malicious payload is delivered through the infotainment system's software updates, causing it to run unnecessary processes and consume CPU and memory resources.",
-            "Likelihood": [
-                {
-                    "Factor": "Elapsed Time",
-                    "Level": "less than 1 month",
+                    "Level": "Moderate",
                     "Value": 4,
-                    "Comment": "no comment"
-                },
-                {
-                    "Factor": "Expertise",
-                    "Level": "Layman",
-                    "Value": 0,
-                    "Comment": "Unknowledgeable compared to experts or proficient persons, with no particular expertise"
-                },
-                {
-                    "Factor": "Knowledge of system",
-                    "Level": "Sensitive",
-                    "Value": 7,
-                    "Comment": "e.g. knowledge that is shared between discreet teams within the developer organisation, access to which is constrained only to team members"
-                },
-                {
-                    "Factor": "Window of Opportunity",
-                    "Level": "Unnecessary/unlimited",
-                    "Value": 0,
-                    "Comment": "The attack does not need any kind of opportunity to be realized because there is no risk of being detected during access to the target of the attack and it is no problem to access the required number of targets for the attack."
+                    "Comment": "Access is required for less than 1 month and number of targets required to perform the attack less than 100."
                 },
                 {
                     "Factor": "Equipment",
-                    "Level": "Standard",
-                    "Value": 0,
-                    "Comment": "Readily available to the attacker"
+                    "Level": "Specialised",
+                    "Value": 4,
+                    "Comment": "Not readily available to the attacker, but acquirable without undue effort. This could include purchase of moderate amounts of equipment or development of more extensive attack scripts or programs."
                 }
             ]
         }

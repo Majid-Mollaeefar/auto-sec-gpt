@@ -1,54 +1,58 @@
 {
     "assets": [
         {
-            "name": "Autonomous Driving System",
+            "name": "Braking System",
             "threats": [
                 {
-                    "name": "Unauthorized access",
+                    "name": "Unauthorized access to braking control",
                     "objectives": [
-                        "Gain control over the vehicle",
-                        "Steal sensitive data"
+                        "Gain control over braking system",
+                        "Disrupt vehicle's safety mechanisms",
+                        "Steal sensitive data related to vehicle operations",
+                        "Cause accidents or harm to occupants"
                     ],
                     "vectors": [
                         {
                             "vector_id": "vector_1",
-                            "vector_name": "Wireless Intrusion via CAN Bus",
+                            "vector_name": "Remote exploitation of wireless communication",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_1",
-                                    "scenario_description": "The attacker uses a device to send malicious signals through the Controller Area Network (CAN) bus, overriding control systems such as braking or steering."
+                                    "scenario_description": "An attacker uses a spoofed wireless signal to connect to the vehicle's braking system, overriding normal controls."
                                 },
                                 {
                                     "scenario_id": "scenario_2",
-                                    "scenario_description": "Exploiting vulnerabilities in the CAN protocol to inject false commands that could lead to critical system failures."
+                                    "scenario_description": "An attacker intercepts communications between the vehicle and its connected infrastructure to send erroneous braking commands."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_2",
-                            "vector_name": "Remote Exploit via Infotainment System",
+                            "vector_name": "Physical access to the vehicle",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_3",
-                                    "scenario_description": "The attacker exploits a zero-day vulnerability in the infotainment system to gain remote access, potentially enabling them to control vehicle functions or extract sensitive data."
-                                },
-                                {
-                                    "scenario_id": "scenario_4",
-                                    "scenario_description": "Performing social engineering attacks to trick users into downloading malicious software onto their mobile devices connected to the car's network."
+                                    "scenario_description": "An attacker gains physical access to the vehicle and connects a malicious device to the OBD-II port to manipulate the braking system."
                                 }
                             ]
                         },
                         {
                             "vector_id": "vector_3",
-                            "vector_name": "Phishing Attacks on Maintenance Personnel",
+                            "vector_name": "Exploitation of software vulnerabilities",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker takes advantage of a vulnerability in the vehicle's braking control software to gain unauthorized access and control."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Social engineering and phishing",
                             "scenarios": [
                                 {
                                     "scenario_id": "scenario_5",
-                                    "scenario_description": "The attacker sends phishing emails to maintenance staff, tricking them into clicking on malicious links or downloading malware that could compromise the vehicle's systems."
-                                },
-                                {
-                                    "scenario_id": "scenario_6",
-                                    "scenario_description": "Using social engineering tactics to obtain login credentials for maintenance and diagnostic tools used by service centers."
+                                    "scenario_description": "An attacker sends a phishing email to vehicle manufacturers or service providers to obtain login credentials for accessing the braking system remotely."
                                 }
                             ]
                         }
@@ -57,36 +61,131 @@
                         {
                             "control_id": "AC-1",
                             "control_name": "Access Control Policy",
-                            "control_description": "Defines roles and permissions for system users to ensure that only authorized personnel can access the autonomous driving system.",
+                            "control_description": "Establishes a policy to limit access to braking control systems based on user roles and responsibilities.",
                             "control_type": "Preventive",
                             "implementation_priority": "High"
                         },
                         {
                             "control_id": "SC-1",
-                            "control_name": "Secure Communication Protocols",
-                            "control_description": "Utilizes secure communication protocols such as TLS/SSL to protect data in transit and prevent unauthorized access.",
+                            "control_name": "Secure Software Development Lifecycle",
+                            "control_description": "Ensures that all software for braking control is developed following secure coding practices to mitigate vulnerabilities.",
                             "control_type": "Preventive",
                             "implementation_priority": "High"
                         },
                         {
-                            "control_id": "SC-2",
-                            "control_name": "Encryption of Sensitive Data",
-                            "control_description": "Encrypts sensitive data both at rest and in transit to prevent unauthorized access or modification.",
+                            "control_id": "IA-1",
+                            "control_name": "User Identification and Authentication",
+                            "control_description": "Requires all users to be uniquely identified and authenticated before gaining access to the braking control system.",
                             "control_type": "Preventive",
                             "implementation_priority": "High"
                         },
                         {
-                            "control_id": "AU-1",
-                            "control_name": "Audit Logs and Monitoring",
-                            "control_description": "Maintains comprehensive logs of system activities for monitoring and detecting unauthorized access attempts.",
+                            "control_id": "SI-1",
+                            "control_name": "Security Alert and Incident Management",
+                            "control_description": "Implements monitoring and alerting mechanisms to detect unauthorized attempts to access braking controls.",
                             "control_type": "Detective",
                             "implementation_priority": "Medium"
                         },
                         {
                             "control_id": "CM-1",
-                            "control_name": "Continuous Software Updates",
-                            "control_description": "Ensures timely updates and patches are applied to the autonomous driving system to fix known vulnerabilities.",
+                            "control_name": "Change Control Management",
+                            "control_description": "Ensures that all changes to the braking system are tracked and authorized to prevent unauthorized modifications.",
+                            "control_type": "Preventive",
+                            "implementation_priority": "Medium"
+                        },
+                        {
+                            "control_id": "CP-1",
+                            "control_name": "Incident Response Plan",
+                            "control_description": "Develops and maintains a plan to promptly respond to and mitigate incidents of unauthorized access to the braking system.",
                             "control_type": "Corrective",
+                            "implementation_priority": "Medium"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tampering with braking system commands",
+                    "objectives": [
+                        "Disable the braking system",
+                        "Cause a vehicle collision",
+                        "Manipulate vehicle speed",
+                        "Compromise driver safety"
+                    ],
+                    "vectors": [
+                        {
+                            "vector_id": "vector_1",
+                            "vector_name": "Physical Intrusion",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_1",
+                                    "scenario_description": "An attacker gains unauthorized access to the vehicle by using a physical key or bypassing the keyless entry system, allowing them to access the vehicle's electronic control unit (ECU) and tamper with braking commands."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_2",
+                            "vector_name": "Remote Exploitation",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_2",
+                                    "scenario_description": "An attacker remotely exploits vulnerabilities in the vehicle's telematics system to send malicious commands to the braking system, effectively overriding driver inputs."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_3",
+                            "vector_name": "Malware Injection",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_3",
+                                    "scenario_description": "An attacker injects malware into the vehicle's onboard computers via a compromised mobile app or USB connection, allowing unauthorized control over the braking commands."
+                                }
+                            ]
+                        },
+                        {
+                            "vector_id": "vector_4",
+                            "vector_name": "Wireless Signal Interception",
+                            "scenarios": [
+                                {
+                                    "scenario_id": "scenario_4",
+                                    "scenario_description": "An attacker uses sophisticated equipment to intercept and spoof communication between the vehicle's braking system and its control commands, leading to unauthorized adjustments of brake functions."
+                                }
+                            ]
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "control_id": "AC-1",
+                            "control_name": "Access Control Policy",
+                            "control_description": "Establishes policies to restrict access to braking system commands only to authorized personnel and systems.",
+                            "control_type": "Preventive",
+                            "implementation_priority": "High"
+                        },
+                        {
+                            "control_id": "SC-1",
+                            "control_name": "Cryptographic Protection",
+                            "control_description": "Utilizes cryptographic techniques to secure communication and command integrity within the braking system.",
+                            "control_type": "Preventive",
+                            "implementation_priority": "High"
+                        },
+                        {
+                            "control_id": "DE-1",
+                            "control_name": "Anomaly Detection Mechanism",
+                            "control_description": "Implements detection mechanisms to identify and alert on unauthorized or anomalous commands to the braking system.",
+                            "control_type": "Detective",
+                            "implementation_priority": "Medium"
+                        },
+                        {
+                            "control_id": "IR-1",
+                            "control_name": "Incident Response Plan",
+                            "control_description": "Develops and maintains an incident response plan to address incidents related to tampering with the braking system.",
+                            "control_type": "Corrective",
+                            "implementation_priority": "Medium"
+                        },
+                        {
+                            "control_id": "AU-1",
+                            "control_name": "Audit Logging",
+                            "control_description": "Records all access and commands related to the braking system for review and analysis to detect unauthorized tampering attempts.",
+                            "control_type": "Detective",
                             "implementation_priority": "High"
                         }
                     ]
@@ -94,161 +193,8 @@
             ],
             "consequences": [
                 "Loss of vehicle control",
-                "Accident or collision",
-                "Compromise of passenger safety",
-                "Liability issues"
-            ]
-        },
-        {
-            "name": "Infotainment System",
-            "threats": [
-                {
-                    "name": "Malicious app installation",
-                    "objectives": [
-                        "Gain unauthorized access to vehicle data",
-                        "Control infotainment system functions"
-                    ],
-                    "vectors": [
-                        {
-                            "vector_id": "vector_1",
-                            "vector_name": "Exploit Vulnerabilities in App Store",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_1",
-                                    "scenario_description": "Attacker develops a malicious app and uploads it to an unsecured or compromised app store. When the infotainment system checks for updates, it downloads and installs this app without proper validation."
-                                },
-                                {
-                                    "scenario_id": "scenario_2",
-                                    "scenario_description": "Attacker exploits known vulnerabilities in the app store's authentication or update mechanisms to bypass security checks and push the malicious app directly to the infotainment system."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_2",
-                            "vector_name": "Phishing Users into Installing Malware",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_3",
-                                    "scenario_description": "Attacker creates a phishing campaign targeting users. The campaign includes misleading advertisements or emails that trick users into downloading and installing the malicious app from an untrusted source."
-                                },
-                                {
-                                    "scenario_id": "scenario_4",
-                                    "scenario_description": "Attacker uses social engineering techniques to convince infotainment system administrators to manually install a malicious app, bypassing automated vetting processes."
-                                }
-                            ]
-                        }
-                    ],
-                    "controls": [
-                        {
-                            "control_id": "AC-1",
-                            "control_name": "Access Control Policy for App Stores",
-                            "control_description": "Implement a strict policy to validate and approve apps before they are made available in the infotainment system's app store.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-1",
-                            "control_name": "Real-time Monitoring for Malware Detection",
-                            "control_description": "Deploy real-time monitoring tools to detect and prevent the installation of malicious apps on the infotainment system.",
-                            "control_type": "Detective",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "CM-1",
-                            "control_name": "Secure Software Update Mechanism",
-                            "control_description": "Ensure that software updates for the infotainment system are securely delivered and installed, preventing unauthorized installations.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "PE-1",
-                            "control_name": "Physical Security Controls for SD Cards",
-                            "control_description": "Implement physical security measures to control access to SD cards and other media used for app installation.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        }
-                    ]
-                },
-                {
-                    "name": "Denial of Service",
-                    "objectives": [
-                        "Disrupt vehicle functionality",
-                        "Cause inconvenience to passengers"
-                    ],
-                    "vectors": [
-                        {
-                            "vector_id": "vector_1",
-                            "vector_name": "Resource Exhaustion",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_1",
-                                    "scenario_description": "The attacker sends a high volume of invalid requests to the infotainment system, overwhelming its processing capabilities and leading to system crashes or unresponsiveness."
-                                },
-                                {
-                                    "scenario_id": "scenario_2",
-                                    "scenario_description": "An attacker exploits known vulnerabilities in the infotainment software to send continuous updates or notifications, which consume excessive bandwidth and processing power."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_2",
-                            "vector_name": "Malware Infection",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_3",
-                                    "scenario_description": "A malicious payload is delivered through the infotainment system's software updates, causing it to run unnecessary processes and consume CPU and memory resources."
-                                },
-                                {
-                                    "scenario_id": "scenario_4",
-                                    "scenario_description": "The attacker injects a virus that continuously scans for available network connections, leading to increased data usage and potential denial of service by exhausting the vehicle's internet connection."
-                                }
-                            ]
-                        }
-                    ],
-                    "controls": [
-                        {
-                            "control_id": "AC-1",
-                            "control_name": "Access Control Policy",
-                            "control_description": "Implement and maintain an access control policy that restricts unauthorized access to the infotainment system.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-1",
-                            "control_name": "Software Integrity Checks",
-                            "control_description": "Ensure all software components of the infotainment system undergo regular integrity checks to prevent tampering and unauthorized access.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-2",
-                            "control_name": "Intrusion Detection System (IDS)",
-                            "control_description": "Deploy an IDS that monitors network traffic for signs of Denial of Service attacks and triggers alerts or responses as necessary.",
-                            "control_type": "Detective",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-3",
-                            "control_name": "Rate Limiting Mechanisms",
-                            "control_description": "Implement rate limiting to prevent excessive requests that could lead to a Denial of Service condition.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-4",
-                            "control_name": "Fail-Safe Mechanisms",
-                            "control_description": "Design and implement fail-safe mechanisms that can automatically recover from or mitigate Denial of Service attacks.",
-                            "control_type": "Corrective",
-                            "implementation_priority": "High"
-                        }
-                    ]
-                }
-            ],
-            "consequences": [
-                "Exposure of personal data",
-                "Disruption of services",
-                "Unauthorized access to vehicle controls",
-                "Damage to user experience and trust"
+                "Increased risk of accidents",
+                "Potential injuries or fatalities"
             ]
         }
     ]

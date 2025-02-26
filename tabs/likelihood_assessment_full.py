@@ -5,7 +5,7 @@ import pandas as pd
 import json
 import os
 import time
-from util import levels, comments, values, reset_likelihood_assessment_state
+from util.util import levels, comments, values, reset_likelihood_assessment_state
 
 def likelihood_assessment_full():
     base_path = os.getcwd()

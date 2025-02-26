@@ -244,14 +244,25 @@ def create_attack_graph(asset_data, output_dir):
 
     function saveAsPNG() {{
         var buttons = document.getElementById('buttons-container');
+        var scenarioDetails = document.getElementById('scenario-details');
+        
+        // Store current display state
+        var scenarioDisplayState = scenarioDetails.style.display;
+        
+        // Hide buttons and scenario details
         buttons.style.display = 'none';
+        scenarioDetails.style.display = 'none';
+        
         html2canvas(document.getElementById('graph-legend-container')).then(canvas => {{
             var link = document.createElement('a');
             link.href = canvas.toDataURL();
             link.download = '{asset_name}-Attack-graph.png';
             console.log("Saving as PNG");
             link.click();
+            
+            // Restore the original display states
             buttons.style.display = 'block';
+            scenarioDetails.style.display = scenarioDisplayState;
         }});
     }}
 
