@@ -118,6 +118,11 @@ For a detailed demonstration of the tool, watch the video below:
 
 - [Demo Video](https://majidml.com/assets/tool/long-demo.mp4) (version 1.0.0)
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt)
+file for details.
+
 ## Contacts
 
 AutoSecGPT is developed by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/). For any questions, feature requests, or feedback, feel free to contact me directly via LinkedIn or submit an issue on the GitHub repository.
