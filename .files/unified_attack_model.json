@@ -1,200 +1,21 @@
 {
     "assets": [
         {
-            "name": "Braking System",
-            "threats": [
-                {
-                    "name": "Unauthorized access to braking control",
-                    "objectives": [
-                        "Gain control over braking system",
-                        "Disrupt vehicle's safety mechanisms",
-                        "Steal sensitive data related to vehicle operations",
-                        "Cause accidents or harm to occupants"
-                    ],
-                    "vectors": [
-                        {
-                            "vector_id": "vector_1",
-                            "vector_name": "Remote exploitation of wireless communication",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_1",
-                                    "scenario_description": "An attacker uses a spoofed wireless signal to connect to the vehicle's braking system, overriding normal controls."
-                                },
-                                {
-                                    "scenario_id": "scenario_2",
-                                    "scenario_description": "An attacker intercepts communications between the vehicle and its connected infrastructure to send erroneous braking commands."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_2",
-                            "vector_name": "Physical access to the vehicle",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_3",
-                                    "scenario_description": "An attacker gains physical access to the vehicle and connects a malicious device to the OBD-II port to manipulate the braking system."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_3",
-                            "vector_name": "Exploitation of software vulnerabilities",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_4",
-                                    "scenario_description": "An attacker takes advantage of a vulnerability in the vehicle's braking control software to gain unauthorized access and control."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_4",
-                            "vector_name": "Social engineering and phishing",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_5",
-                                    "scenario_description": "An attacker sends a phishing email to vehicle manufacturers or service providers to obtain login credentials for accessing the braking system remotely."
-                                }
-                            ]
-                        }
-                    ],
-                    "controls": [
-                        {
-                            "control_id": "AC-1",
-                            "control_name": "Access Control Policy",
-                            "control_description": "Establishes a policy to limit access to braking control systems based on user roles and responsibilities.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-1",
-                            "control_name": "Secure Software Development Lifecycle",
-                            "control_description": "Ensures that all software for braking control is developed following secure coding practices to mitigate vulnerabilities.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "IA-1",
-                            "control_name": "User Identification and Authentication",
-                            "control_description": "Requires all users to be uniquely identified and authenticated before gaining access to the braking control system.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SI-1",
-                            "control_name": "Security Alert and Incident Management",
-                            "control_description": "Implements monitoring and alerting mechanisms to detect unauthorized attempts to access braking controls.",
-                            "control_type": "Detective",
-                            "implementation_priority": "Medium"
-                        },
-                        {
-                            "control_id": "CM-1",
-                            "control_name": "Change Control Management",
-                            "control_description": "Ensures that all changes to the braking system are tracked and authorized to prevent unauthorized modifications.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "Medium"
-                        },
-                        {
-                            "control_id": "CP-1",
-                            "control_name": "Incident Response Plan",
-                            "control_description": "Develops and maintains a plan to promptly respond to and mitigate incidents of unauthorized access to the braking system.",
-                            "control_type": "Corrective",
-                            "implementation_priority": "Medium"
-                        }
-                    ]
-                },
-                {
-                    "name": "Tampering with braking system commands",
-                    "objectives": [
-                        "Disable the braking system",
-                        "Cause a vehicle collision",
-                        "Manipulate vehicle speed",
-                        "Compromise driver safety"
-                    ],
-                    "vectors": [
-                        {
-                            "vector_id": "vector_1",
-                            "vector_name": "Physical Intrusion",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_1",
-                                    "scenario_description": "An attacker gains unauthorized access to the vehicle by using a physical key or bypassing the keyless entry system, allowing them to access the vehicle's electronic control unit (ECU) and tamper with braking commands."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_2",
-                            "vector_name": "Remote Exploitation",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_2",
-                                    "scenario_description": "An attacker remotely exploits vulnerabilities in the vehicle's telematics system to send malicious commands to the braking system, effectively overriding driver inputs."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_3",
-                            "vector_name": "Malware Injection",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_3",
-                                    "scenario_description": "An attacker injects malware into the vehicle's onboard computers via a compromised mobile app or USB connection, allowing unauthorized control over the braking commands."
-                                }
-                            ]
-                        },
-                        {
-                            "vector_id": "vector_4",
-                            "vector_name": "Wireless Signal Interception",
-                            "scenarios": [
-                                {
-                                    "scenario_id": "scenario_4",
-                                    "scenario_description": "An attacker uses sophisticated equipment to intercept and spoof communication between the vehicle's braking system and its control commands, leading to unauthorized adjustments of brake functions."
-                                }
-                            ]
-                        }
-                    ],
-                    "controls": [
-                        {
-                            "control_id": "AC-1",
-                            "control_name": "Access Control Policy",
-                            "control_description": "Establishes policies to restrict access to braking system commands only to authorized personnel and systems.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "SC-1",
-                            "control_name": "Cryptographic Protection",
-                            "control_description": "Utilizes cryptographic techniques to secure communication and command integrity within the braking system.",
-                            "control_type": "Preventive",
-                            "implementation_priority": "High"
-                        },
-                        {
-                            "control_id": "DE-1",
-                            "control_name": "Anomaly Detection Mechanism",
-                            "control_description": "Implements detection mechanisms to identify and alert on unauthorized or anomalous commands to the braking system.",
-                            "control_type": "Detective",
-                            "implementation_priority": "Medium"
-                        },
-                        {
-                            "control_id": "IR-1",
-                            "control_name": "Incident Response Plan",
-                            "control_description": "Develops and maintains an incident response plan to address incidents related to tampering with the braking system.",
-                            "control_type": "Corrective",
-                            "implementation_priority": "Medium"
-                        },
-                        {
-                            "control_id": "AU-1",
-                            "control_name": "Audit Logging",
-                            "control_description": "Records all access and commands related to the braking system for review and analysis to detect unauthorized tampering attempts.",
-                            "control_type": "Detective",
-                            "implementation_priority": "High"
-                        }
-                    ]
-                }
-            ],
+            "name": "Autonomous Driving System",
+            "threats": [],
             "consequences": [
                 "Loss of vehicle control",
-                "Increased risk of accidents",
-                "Potential injuries or fatalities"
+                "accidents leading to injury or fatalities",
+                "unauthorized remote control of vehicle functions"
+            ]
+        },
+        {
+            "name": "Infotainment System",
+            "threats": [],
+            "consequences": [
+                "Personal data leakage",
+                "unauthorized access to sensitive information",
+                "compromised integrated services"
             ]
         }
     ]

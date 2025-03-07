@@ -123,6 +123,10 @@ For a detailed demonstration of the tool, watch the video below:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt)
 file for details.
 
+## Support
+
+If you find AutoSecGPT helpful and would like to support the project, please consider [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/default-orange.png)](https://buymeacoffee.com/majidml). Your support helps me continue improving this tool and working on future enhancements. 
+
 ## Contacts
 
 AutoSecGPT is developed by [Majid Mollaeefar](https://www.linkedin.com/in/majid-mollaeefar/). For any questions, feature requests, or feedback, feel free to contact me directly via LinkedIn or submit an issue on the GitHub repository.

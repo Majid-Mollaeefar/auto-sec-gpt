@@ -1,7 +1,12 @@
 [
     {
-        "Asset": "Braking System",
-        "Threats": "Unauthorized access to braking control, Tampering with braking system commands",
-        "Potential Consequences": "Loss of vehicle control, Increased risk of accidents, Potential injuries or fatalities"
+        "Asset": "Autonomous Driving System",
+        "Threats": "Malware Injection, Sensor Spoofing, Denial of Service (DoS) Attack, Unauthorized Access",
+        "Potential Consequences": "Loss of vehicle control, accidents leading to injury or fatalities, unauthorized remote control of vehicle functions"
+    },
+    {
+        "Asset": "Infotainment System",
+        "Threats": "Data Theft, Malware Infection, Unauthorized Access, Information Disclosure",
+        "Potential Consequences": "Personal data leakage, unauthorized access to sensitive information, compromised integrated services"
     }
 ]
