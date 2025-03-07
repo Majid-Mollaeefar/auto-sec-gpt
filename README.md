@@ -125,8 +125,8 @@ file for details.
 
 ## Support
 
-AutoSecGPT made by 💖.  
-You can support the project by 
+If you find AutoSecGPT is helpful and would like to support the project: 
+
 <a href="https://buymeacoffee.com/majidml" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="width:120px;"></a> 
 
 ## Contacts
